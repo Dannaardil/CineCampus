@@ -12,6 +12,9 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
 1. **Selección de Películas:**
    - **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
+
+
+   
    - **API para Obtener Detalles de Película:** Permitir la consulta de información detallada sobre una película específica, incluyendo sinopsis.
 2. **Compra de Boletos:**
    - **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.

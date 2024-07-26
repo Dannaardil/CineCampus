@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "669feb75a7ccc1eb86e589c6"
+  },
+  "boleto_id": {
+    "$oid": "669feb64a7ccc1eb86e589c5"
+  },
+  "monto": {
+    "$numberDecimal": "25.00"
+  },
+  "metodo_pago": "tarjeta",
+  "estado": "completado",
+  "fecha_pago": {
+    "$date": "2024-07-23T17:42:13.444Z"
+  }
+}]

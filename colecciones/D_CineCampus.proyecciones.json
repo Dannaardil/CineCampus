@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "66a131b41f7dbb3a9422baa8"
+  },
+  "pelicula_id": {
+    "$oid": "669feaf0a7ccc1eb86e589be"
+  },
+  "sala_id": {
+    "$oid": "669feb25a7ccc1eb86e589c0"
+  },
+  "inicio": {
+    "$date": "2024-07-24T20:00:00.000Z"
+  },
+  "fin": {
+    "$date": "2024-07-24T22:00:00.000Z"
+  },
+  "precio": {
+    "$numberDecimal": "12.50"
+  },
+  "formato": "2D"
+},
+{
+  "_id": {
+    "$oid": "66a132791f7dbb3a9422baa9"
+  },
+  "pelicula_id": {
+    "$oid": "669feaf0a7ccc1eb86e589bf"
+  },
+  "sala_id": {
+    "$oid": "669feb25a7ccc1eb86e589c0"
+  },
+  "inicio": {
+    "$date": "2024-08-24T20:00:00.000Z"
+  },
+  "fin": {
+    "$date": "2024-08-24T22:00:00.000Z"
+  },
+  "precio": {
+    "$numberDecimal": "13.50"
+  },
+  "formato": "3D"
+}]

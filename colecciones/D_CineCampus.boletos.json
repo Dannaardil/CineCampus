@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "669feb64a7ccc1eb86e589c5"
+  },
+  "proyeccion_id": {
+    "$oid": "669feb3ca7ccc1eb86e589c1"
+  },
+  "usuario_id": {
+    "$oid": "669feb50a7ccc1eb86e589c2"
+  },
+  "asientos": {
+    "fila": "A",
+    "numero": 1
+  },
+  "precio_total": {
+    "$numberDecimal": "25.00"
+  },
+  "descuento_aplicado": {
+    "$numberDecimal": "0.00"
+  },
+  "fecha_compra": {
+    "$date": "2024-07-23T17:41:56.806Z"
+  }
+}]

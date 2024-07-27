@@ -175,7 +175,28 @@ export class usersService {
         return ''
 
     }
+    async getUsersByRol(rol) {
+        try {
+            const db = await this.connection.connect();
 
+
+            const usuarios = db.collection('usuarios');
+
+           
+            let operacion1 = await usuarios.find({ rol: rol }).toArray();
+
+            
+                console.log(operacion1)
+           
+
+
+
+        } catch (error) {
+            console.error('Error ', error);
+
+        }
+        return ''
+    }
     async close() {
         await this.connection.close();
     }

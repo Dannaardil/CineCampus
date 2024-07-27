@@ -57,20 +57,20 @@ export class usersService {
                 console.log(' el usuario ya existe o el correo ya fue registrado.')
             }
 
-            else{
+            else {
                 if (rol == 'vip') {
                     await usuarios.insertOne(dataInsertVip)
                     console.log('el usuario vip se ha registrado correctamente', dataInsertVip)
                     console.log('se le ha generado un numero de tarjeta vip activa su numero es ' + numero)
                 }
                 if (rol === 'usuario' || rol === 'administrador') {
-                           await usuarios.insertOne(dataInsertUser)
-                           console.log(' se ha registrado correctamente', dataInsertUser)
+                    await usuarios.insertOne(dataInsertUser)
+                    console.log(' se ha registrado correctamente', dataInsertUser)
 
-           
-                       }
-            }  
- 
+
+                }
+            }
+
 
 
 
@@ -79,6 +79,34 @@ export class usersService {
 
         }
         return ''
+    }
+
+    async getUser(id) {
+        try {
+            const db = await this.connection.connect();
+
+
+            const usuarios = db.collection('usuarios');
+
+
+            let operacion1 = await usuarios.find({ id: id }).toArray();
+
+            if (operacion1.length == 0) {
+                console.log(' el usuario no existe')
+            }else{
+
+                console.log('el usuario que buscas es: ')
+                console.log(operacion1[0])
+            }
+
+
+
+        } catch (error) {
+            console.error('Error ', error);
+
+        }
+        return ''
+
     }
 
     async close() {

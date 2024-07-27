@@ -248,9 +248,9 @@ export class ticketService {
             let operacion10 = await pagos.find({id:numero1}).toArray()
             
             console.log('Reserva realizada con exito!-------------------------------')
-            console.log('recibo-------------------------------', operacion10)
+            console.log('recibo (con el id podra cancelarlo) -------------------------------', operacion10)
             
-            console.log('Tienes plazo hasta: ', fecha_pago, ' para realizar el pago del boleto o sera cancelado')
+            console.log('Tienes plazo hasta un dia antes del: ', fecha_pago, ' para realizar el pago o se le cancelara el boleto.')
         }
  
 
@@ -262,12 +262,39 @@ export class ticketService {
     return ''
 
 }
-     
+async cancelAReservation(id) {
 
-    
+    const db = await this.connection.connect();
+    try{
+        const pagos = db.collection('pagos');
+        const boletos = db.collection('boletos');
+ // verificar el pago si exista osea que el boleto ya esta reservado y que sea  una reserva
+ // verificar el boleto si ya ha sido cancelado
+ // si ya paso la fecha para cancelar
+
+        operacion1 = await pagos.find({id: id}).toArray
+
+        if 
+
+
+
+
+
+
+    }catch{
+        console.log('Error con la operacion', error)
+    }
+
+
+}
+
+
+
 
 
 
 
 
 }
+
+

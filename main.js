@@ -22,8 +22,10 @@ let obj2 = new ticketService
 //     'tipo': 'vip'
 // }, 'efectivo' )) //proyeccion_id, usuario_id, asiento, metodo_pago
 
-console.log(await obj2.bookATicket(2, 2, {
-    'fila': 'B',
-    'numero': 1,
-    'tipo': 'vip'
-}, 'efectivo' ))
+// console.log(await obj2.bookATicket(2, 2, {
+//     'fila': 'B',
+//     'numero': 1,
+//     'tipo': 'vip'
+// }, 'efectivo' ))
+
+console.log(await obj2.cancelAReservation(8))

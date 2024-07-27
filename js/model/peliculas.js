@@ -26,6 +26,10 @@ export class MovieService {
             titulo: 1,
             fechaEstreno: 1,
             fechaRetiro: 1,
+            sipnosis: 1,
+            genero: 1,
+            clasificacion: 1, 
+            duracion: 1, 
             estaDisponible: {
               $and: [
                 { $lte: ["$fechaEstreno", "$$NOW"] },
@@ -46,7 +50,7 @@ export class MovieService {
       return availableMovies;
     } catch (error) {
       console.error('Error checking movie availability:', error);
-      throw error;
+     
     }
   }
 

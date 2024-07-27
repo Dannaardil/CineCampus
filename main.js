@@ -27,4 +27,5 @@ let obj3 = new usersService
 
 // console.log(await obj3.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
 
-console.log(await obj3.getUser(2))
+// console.log(await obj3.getUser(2))
+console.log(await obj3.updateUser(2, 'estandar'))

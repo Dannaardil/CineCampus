@@ -11,8 +11,14 @@ import { ObjectId } from 'mongodb';
 
 let obj2 = new ticketService
 
-console.log(await obj2.setTicket(2, 2, {
+// console.log(await obj2.setTicket(2, 2, {
+//     'fila': 'B',
+//     'numero': 1,
+//     'tipo': 'vip'
+// }, 'efectivo' )) //proyeccion_id, usuario_id, asiento, metodo_pago
+
+console.log(await obj2.bookATicket(2, 2, {
     'fila': 'B',
     'numero': 1,
     'tipo': 'vip'
-}, 'efectivo' )) //proyeccion_id, usuario_id, asiento, metodo_pago
+}, 'efectivo' ))

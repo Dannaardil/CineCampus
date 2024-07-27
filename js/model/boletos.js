@@ -270,21 +270,37 @@ async cancelAReservation(id) {
         const boletos = db.collection('boletos');
  // verificar el pago si exista osea que el boleto ya esta reservado y que sea  una reserva
  // verificar el boleto si ya ha sido cancelado
- // si ya paso la fecha para cancelar
-
-        operacion1 = await pagos.find({id: id}).toArray
-
-        if 
 
 
+        let operacion1 = await pagos.find({id: id}).toArray()
+     
+        if (operacion1 === 0){
+            console.log('este boleto no existe ')
+        }else if(operacion1[0].estado === 'cancelado'){
+            console.log('este boleto ya fue cancelado')
+        }else if(operacion1[0].tipo_transaccion !== 'Reserva'){
+            console.log('este boleto no es una reserva')
+        }else{
+            
+            await pagos.updateOne({id: id}, {$set: {estado: 'cancelado'}})
+            await boletos.deleteOne({codigo: operacion1[0].boleto_cod})
+            // se elimina el boleto para que no aparezca el asiento ocupado
+
+            console.log(' El boleto fue cancelado exitosamente')
+            let info = await pagos.find({id: id}).toArray()
+            console.log(' Esta es la informacion del boleto cancelado: ',  info)
+        }
 
 
 
 
-    }catch{
+
+
+    }catch(error){
         console.log('Error con la operacion', error)
     }
 
+    return ''
 
 }
 

@@ -30,4 +30,6 @@ let peliculas = new MovieService
 // console.log(await obj2.cancelAReservation(8))
 let obj3 = new usersService
 
-console.log(await obj3.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
+// console.log(await obj3.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
+
+console.log(await obj3.getUser(2))

@@ -3,6 +3,7 @@
 import{MovieService} from './js/model/peliculas.js';
 import{ticketService} from './js/model/boletos.js';
 import {usersService} from './js/model/usuarios.js'
+import { payService } from './js/model/pagos.js';
 // console.log(await testConnection())
 
 // let obj = new MovieService
@@ -30,4 +31,11 @@ let obj3 = new usersService
 // console.log(await obj3.getUser(2))
 // console.log(await obj3.updateUser(2, 'estandar')) / 5.3
 
-console.log(await obj3.getUsersByRol('vip'))
+// console.log(await obj3.getUsersByRol('vip'))
+
+let obj4 = new payService
+console.log(await obj4.payOnline(2, 2, {
+    'fila': 'B',
+    'numero': 2,
+    'tipo': 'vip'
+}, 'tarjeta' )) //proyeccion_id, usuario_id, asiento, metodo_pago

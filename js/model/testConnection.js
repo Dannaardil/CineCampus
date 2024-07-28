@@ -1,6 +1,10 @@
 import Connection from '../../db/connect/connect.js';
 
-
+/**
+ * Tests the connection to the MongoDB database.
+ *
+ * @returns {string} A string indicating whether the test connection was successful or not.
+ */
 
 export async function testConnection() {
   try {

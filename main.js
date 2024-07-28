@@ -14,33 +14,49 @@ let peliculas = new MovieService
 
 // console.log(await peliculas.getAllMovies())
 
-// let obj2 = new ticketService
+let boletos = new ticketService
 
-// console.log(await obj2.setTicket(2, 2, {
+//QUERY 2 y QUERY  4 (comprar boletos y verificar tarjetas vip)
+
+// console.log(await boletos.setTicket(2, 2, {
 //     'fila': 'B',
 //     'numero': 1,
 //     'tipo': 'vip'
 // }, 'efectivo' )) //proyeccion_id, usuario_id, asiento, metodo_pago
 
-// console.log(await obj2.bookATicket(2, 2, {
+// ---------------------------------------------------------------
+
+// QUERY #3.1 #3.2 (reservar asientos y cancelar la reserva)
+
+// console.log(await boletos.bookATicket(2, 2, {
 //     'fila': 'B',
-//     'numero': 1,
+//     'numero': 2,
 //     'tipo': 'vip'
 // }, 'efectivo' ))
+ 
+// console.log(await boletos.cancelAReservation(41)) //cancelar reserva
 
-// console.log(await obj2.cancelAReservation(8))
-let obj3 = new usersService
+// --------------------------------------------------------------------------
 
-// console.log(await obj3.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
 
-// console.log(await obj3.getUser(2))
-// console.log(await obj3.updateUser(2, 'estandar')) / 5.3
+//USUARIOS---------------------
 
-// console.log(await obj3.getUsersByRol('vip'))
+let usuarios = new usersService
 
-let obj4 = new payService
-console.log(await obj4.payOnline(2, 2, {
-    'fila': 'B',
-    'numero': 2,
-    'tipo': 'vip'
-}, 'tarjeta' )) //proyeccion_id, usuario_id, asiento, metodo_pago
+// console.log(await usuarios.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
+
+// console.log(await usuarios.getUser(2))
+// console.log(await usuarios.updateUser(2, 'estandar')) 
+
+// console.log(await usuarios.getUsersByRol('vip'))
+
+let pagos = new payService
+
+// QUERY #6 (Realizar compra de boletos en linea y ademas dar confirmacion)
+
+// ------------------------------------------------------------------
+// console.log(await pagos.payOnline(2, 2, {
+//     'fila': 'A',
+//     'numero': 2,
+//     'tipo': 'regular'
+// }, 'tarjeta' )) //proyeccion_id, usuario_id, asiento, metodo_pago

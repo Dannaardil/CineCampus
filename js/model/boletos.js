@@ -4,7 +4,19 @@ export class ticketService {
     constructor() {
         this.connection = Connection;
     }
-
+    /**
+ * @description This function sets a ticket for a user in a specific seat.
+ * @param {string} proyeccion_id - The ID of the movie projection.
+ * @param {string} usuario_id - The ID of the user.
+ * @param {string} asiento - The seat number.
+ * @param {string} metodo_pago - The payment method.
+ * @returns {string} - Returns an empty string after setting the ticket.
+ * @throws {Error} - Throws an error if there's an issue with the database connection or operation.
+ * @docParam {string} proyeccion_id - The ID of the movie projection.
+ * @docParam {string} usuario_id - The ID of the user.
+ * @docParam {string} asiento - The seat number.
+ * @docParam {string} metodo_pago - The payment method.
+ */
 
     async setTicket(proyeccion_id, usuario_id, asiento, metodo_pago) {
 
@@ -133,6 +145,19 @@ export class ticketService {
         return ''
 
     }
+    /**
+ * @description This function sets a ticket for a user in a specific seat.
+ * @param {string} proyeccion_id - The ID of the movie projection.
+ * @param {string} usuario_id - The ID of the user.
+ * @param {string} asiento - The seat number.
+ * @param {string} metodo_pago - The payment method.
+ * @returns {string} - Returns an empty string after setting the ticket.
+ * @throws {Error} - Throws an error if there's an issue with the database connection or operation.
+ * @docParam {string} proyeccion_id - The ID of the movie projection.
+ * @docParam {string} usuario_id - The ID of the user.
+ * @docParam {string} asiento - The seat number.
+ * @docParam {string} metodo_pago - The payment method.
+ */
 
     async bookATicket(proyeccion_id, usuario_id, asiento, metodo_pago){
         const db = await this.connection.connect();
@@ -262,6 +287,13 @@ export class ticketService {
     return ''
 
 }
+/**
+ * @description This function cancels a reservation for a user in a specific seat.
+ * @param {string} id - The ID of the reservation to be cancelled.
+ * @returns {string} - Returns an empty string after cancelling the reservation.
+ * @throws {Error} - Throws an error if there's an issue with the database connection or operation.
+ * @docParam {string} id - The ID of the reservation to be cancelled.
+ */
 async cancelAReservation(id) {
 
     const db = await this.connection.connect();

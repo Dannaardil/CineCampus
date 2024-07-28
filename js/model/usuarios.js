@@ -108,6 +108,73 @@ export class usersService {
         return ''
 
     }
+    async updateUser(id, rol) {
+        try {
+            const db = await this.connection.connect();
+   
+
+            const usuarios = db.collection('usuarios');
+            function generar_tarjeta() {
+
+                return Math.floor(Math.random() * 99) + 1;
+
+            }
+            let numero_f = generar_tarjeta()
+
+
+            let numero = 'VIP12345' + numero_f.toString()
+
+
+            let operacion1 = await usuarios.find({ id: id }).toArray();
+            let operacion2 = await usuarios.find({ "tarjeta_vip.numero": numero }).toArray();
+            if (operacion2.length != 0) {
+                numero_f = generar_tarjeta()
+                numero = 'VIP12345' + numero_f.toString()
+            }
+
+
+            if (operacion1[0].rol === rol){
+                console.log('el usuario ya es: ' + rol)
+            }
+
+            else if (operacion1.length == 0) {
+                console.log(' el usuario no existe')
+            }else if (rol === 'vip') {
+
+                await usuarios.updateOne({ id: id }, { $set: { rol: rol, 'tarjeta_vip.estado': 'Activa', 'tarjeta_vip.numero': numero } })
+                let info = await usuarios.find({ id: id }).toArray();
+                console.log('el usuario vip se ha actualizado correctamente a vip y se le ha generado una tarjeta activa con este num: '+numero )
+            }else if (rol === 'estandar' || rol === 'administrador') {
+                if (operacion1[0].rol == 'vip') {
+                    await usuarios.updateOne(
+                        { id: id},
+                        { $unset: { tarjeta_vip: "" } }
+                    )
+                    await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
+                    let info2 = await usuarios.find({ id: id }).toArray();
+                    console.log('el usuario se ha actualizado correctamente ')
+                } else {
+
+                    await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
+                    
+                    let info3 = await usuarios.find({ id: id }).toArray();
+                    console.log('el usuario se ha actualizado correctamentep')
+                }
+            }
+                
+            
+              
+            
+
+
+
+        } catch (error) {
+            console.error('Error ', error);
+
+        }
+        return ''
+
+    }
 
     async close() {
         await this.connection.close();

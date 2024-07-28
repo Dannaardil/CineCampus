@@ -35,7 +35,7 @@ export class ticketService {
             let operacion1 = await proyecciones.find({ id: proyeccion_id }).toArray();
             let operacion2 = await usuarios.find({ id: usuario_id }).toArray();
             let operacion5 = await boletos.find({ asiento: asiento }).toArray();
-            let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activo" }).toArray()
+            let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activa" }).toArray()
 
             let operacion7 = await boletos.find({ "codigo": numero }).toArray();
 

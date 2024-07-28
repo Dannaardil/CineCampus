@@ -15,7 +15,7 @@ export class MovieService {
         {
           $lookup: {
             from: "proyecciones",
-            localField: "_id",
+            localField: "id",
             foreignField: "pelicula_id",
             as: "proyecciones"
           }

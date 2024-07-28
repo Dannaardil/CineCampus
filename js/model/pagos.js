@@ -4,6 +4,17 @@ export class payService {
     constructor() {
         this.connection = Connection;
     }
+    /**
+ * @description This function is responsible for processing an online payment for a movie ticket.
+ * @param {number} proyeccion_id - The ID of the movie projection.
+ * @param {number} usuario_id - The ID of the user.
+ * @param {string} asiento - The seat number for the ticket.
+ * @param {string} metodo_pago - The payment method used.
+ * @returns {string} An empty string upon successful execution.
+ * @throws {Error} If there is an error during the execution of the function.
+ * @example
+ * payOnline(123, 456, 'A1', 'Credit Card');
+ */
     async payOnline(proyeccion_id, usuario_id, asiento, metodo_pago) {
 
 

@@ -22,6 +22,7 @@ let peliculas = new MovieService
 let boletos = new ticketService
 
 //QUERY 2 y QUERY  4 (comprar boletos y verificar tarjetas vip)
+
 // console.log(await boletos.setTicket(2, 2, {
 //     'fila': 'B',
 //     'numero': 1,
@@ -33,12 +34,12 @@ let boletos = new ticketService
 // QUERY #3.1 #3.2 (reservar asientos y cancelar la reserva)
 
 // console.log(await boletos.bookATicket(2, 2, {
-//     'fila': 'A',
-//     'numero': 1,
-//     'tipo': 'regular'
+//     'fila': 'B',
+//     'numero': 2,
+//     'tipo': 'vip'
 // }, 'efectivo' ))
  
-// console.log(await boletos.cancelAReservation(74)) //cancelar reserva
+// console.log(await boletos.cancelAReservation(41)) //cancelar reserva
 
 // --------------------------------------------------------------------------
 
@@ -76,7 +77,7 @@ let pagos = new payService
 
 // ------------------------------------------------------------------
 // console.log(await pagos.payOnline(2, 2, {
-//     'fila': 'B',
+//     'fila': 'A',
 //     'numero': 2,
-//     'tipo': 'vip'
+//     'tipo': 'regular'
 // }, 'tarjeta' )) //proyeccion_id, usuario_id, asiento, metodo_pago

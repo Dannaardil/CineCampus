@@ -4,7 +4,18 @@ export class usersService {
     constructor() {
         this.connection = Connection;
     }
-
+    /**
+ * @description This function creates a new user in the database.
+ * @param {string} id - The unique identifier for the user.
+ * @param {string} nombre - The user's full name.
+ * @param {string} email - The user's email address.
+ * @param {string} rol - The user's role, can be 'vip', 'usuario', or 'administrador'.
+ * @returns {string} Returns an empty string upon successful execution.
+ * @throws {Error} Throws an error if the user already exists, the email is already registered, or the VIP card number already exists.
+ * @example
+ * const usersService = new usersService();
+ * const result = await usersService.createAUser('123', 'John Doe', 'john.doe@example.com', 'vip');
+ */
     async createAUser(id, nombre, email, rol) {
         try {
             const db = await this.connection.connect();
@@ -80,7 +91,15 @@ export class usersService {
         }
         return ''
     }
-
+  /**
+ * @description This function retrieves a user by their unique id from the database.
+ * @param {string} id - The unique identifier for the user.
+ * @returns {Promise<string>} Returns an empty string upon successful execution.
+ * @throws {Error} Throws an error if the user does not exist.
+ * @example
+ * const usersService = new usersService();
+ * const result = await usersService.getUser('123');
+ */
     async getUser(id) {
         try {
             const db = await this.connection.connect();
@@ -108,6 +127,16 @@ export class usersService {
         return ''
 
     }
+    /**
+ * @description This function updates a user's role in the database.
+ * @param {string} id - The unique identifier for the user.
+ * @param {string} rol - The new role for the user. Can be 'vip', 'estandar', or 'administrador'.
+ * @returns {Promise<string>} Returns an empty string upon successful execution.
+ * @throws {Error} Throws an error if the user does not exist or if the new role is not valid.
+ * @example
+ * const usersService = new usersService();
+ * const result = await usersService.updateUser('123', 'vip');
+ */
     async updateUser(id, rol) {
         try {
             const db = await this.connection.connect();
@@ -175,6 +204,15 @@ export class usersService {
         return ''
 
     }
+    /**
+ * @description This function retrieves all users with a specific role from the database.
+ * @param {string} rol - The role of the users to be retrieved.
+ * @returns {Promise<string>} Returns an empty string upon successful execution.
+ * @throws {Error} Throws an error if the role is not valid.
+ * @example
+ * const usersService = new usersService();
+ * const result = await usersService.getUsersByRol('vip');
+ */
     async getUsersByRol(rol) {
         try {
             const db = await this.connection.connect();

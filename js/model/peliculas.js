@@ -4,7 +4,11 @@ export class MovieService {
   constructor() {
     this.connection = Connection;
   }
-
+/**
+ * Retrieves all available movies from the database.
+ *
+ * @returns {Promise<Array>} An array of available movies.
+ */
   async getAllMovies() {
     try {
       const db = await this.connection.connect();

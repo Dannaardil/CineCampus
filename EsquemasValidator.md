@@ -1,27 +1,29 @@
-```
-boletos
+BOLETOS:
 
+```
 {
   $jsonSchema: {
     bsonType: 'object',
     required: [
       'proyeccion_id',
       'usuario_id',
-      'asientos',
-      'precio_total'
+      'asiento',
+      'fecha_compra',
+      'codigo'
     ],
     properties: {
       proyeccion_id: {
-        bsonType: 'objectId'
+        bsonType: 'int'
       },
       usuario_id: {
-        bsonType: 'objectId'
+        bsonType: 'int'
       },
-      asientos: {
+      asiento: {
         bsonType: 'object',
         required: [
           'fila',
-          'numero'
+          'numero',
+          'tipo'
         ],
         properties: {
           fila: {
@@ -29,63 +31,77 @@ boletos
           },
           numero: {
             bsonType: 'int'
+          },
+          tipo: {
+            bsonType: 'string',
+            'enum': [
+              'vip',
+              'regular'
+            ]
           }
         }
       },
-      precio_total: {
-        bsonType: 'decimal'
-      },
-      descuento_aplicado: {
-        bsonType: 'decimal'
-      },
       fecha_compra: {
         bsonType: 'date'
+      },
+      codigo: {
+        bsonType: 'int'
       }
     }
   }
 }
 ```
 
-```
-pagos 
+PAGOS: 
 
+```
 {
   $jsonSchema: {
     bsonType: 'object',
     required: [
-      'boleto_id',
-      'monto',
       'metodo_pago',
-      'estado'
+      'estado',
+      'fecha_de_pago',
+      'tipo_transaccion',
+      'boleto_cod',
+      'id'
     ],
     properties: {
-      boleto_id: {
-        bsonType: 'objectId'
-      },
-      monto: {
-        bsonType: 'decimal'
-      },
       metodo_pago: {
-        bsonType: 'string'
+        bsonType: 'string',
+        'enum': [
+          'tarjeta',
+          'efectivo'
+        ]
       },
       estado: {
+        bsonType: 'string',
         'enum': [
-          'pendiente',
           'completado',
+          'pendiente',
           'cancelado'
         ]
       },
       fecha_pago: {
         bsonType: 'date'
+      },
+      tipo_transaccion: {
+        bsonType: 'string'
+      },
+      boleto_cod: {
+        bsonType: 'int'
+      },
+      id: {
+        bsonType: 'int'
       }
     }
   }
 }
 ```
 
-```
-peliculas 
+PELICULAS
 
+```
 {
   $jsonSchema: {
     bsonType: 'object',
@@ -96,7 +112,10 @@ peliculas
       'sinopsis',
       'clasificacion',
       'fechaEstreno',
-      'fechaRetiro'
+      'fechaRetiro',
+      'director',
+      'actores',
+      'id'
     ],
     properties: {
       titulo: {
@@ -128,15 +147,18 @@ peliculas
         items: {
           bsonType: 'string'
         }
+      },
+      id: {
+        bsonType: 'int'
       }
     }
   }
 }
 ```
 
-```
-proyecciones
+PROYECCIONES
 
+```
 {
   $jsonSchema: {
     bsonType: 'object',
@@ -145,41 +167,47 @@ proyecciones
       'sala_id',
       'inicio',
       'fin',
-      'precio'
+      'precio',
+      'formato',
+      'id'
     ],
     properties: {
       pelicula_id: {
-        bsonType: 'objectId'
+        bsonType: 'int'
       },
       sala_id: {
-        bsonType: 'objectId'
+        bsonType: 'int'
       },
-      Inicio: {
+      inicio: {
         bsonType: 'date'
       },
-      Fin: {
+      fin: {
         bsonType: 'date'
       },
       precio: {
-        bsonType: 'decimal'
+        bsonType: 'int'
       },
       formato: {
         bsonType: 'string'
+      },
+      id: {
+        bsonType: 'int'
       }
     }
   }
 }
 ```
 
-```
-salas
+SALAS
 
+```
 {
   $jsonSchema: {
     bsonType: 'object',
     required: [
       'numero',
-      'capacidad'
+      'capacidad',
+      'asientos'
     ],
     properties: {
       numero: {
@@ -187,9 +215,6 @@ salas
       },
       capacidad: {
         bsonType: 'int'
-      },
-      tipo: {
-        bsonType: 'string'
       },
       asientos: {
         bsonType: 'array',
@@ -206,6 +231,13 @@ salas
             },
             numero: {
               bsonType: 'int'
+            },
+            tipo: {
+              bsonType: 'string',
+              'enum': [
+                'regular',
+                'vip'
+              ]
             }
           }
         }
@@ -215,17 +247,17 @@ salas
 }
 ```
 
+USUARIOS
+
 ```
-usuario
-
-
 {
   $jsonSchema: {
     bsonType: 'object',
     required: [
       'nombre',
       'email',
-      'rol'
+      'rol',
+      'id'
     ],
     properties: {
       nombre: {
@@ -235,19 +267,27 @@ usuario
         bsonType: 'string'
       },
       rol: {
+        bsonType: 'string',
         'enum': [
           'estandar',
           'vip',
           'administrador'
         ]
       },
+      id: {
+        bsonType: 'int'
+      },
       tarjeta_vip: {
         bsonType: 'object',
+        required: [
+          'estado',
+          'numero'
+        ],
         properties: {
-          numero: {
+          estado: {
             bsonType: 'string'
           },
-          fecha_expiracion: {
+          numero: {
             bsonType: 'string'
           }
         }

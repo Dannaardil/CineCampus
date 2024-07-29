@@ -56,7 +56,9 @@ export class MovieService {
       console.error('Error checking movie availability:', error);
      
     }
+    return ''
   }
+  
 
   async close() {
     await this.connection.close();

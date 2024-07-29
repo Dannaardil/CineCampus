@@ -1,6 +1,6 @@
 [{
   "_id": {
-    "$oid": "669feb25a7ccc1eb86e589c0"
+    "$oid": "66a6c9ed79ff5b5d5a887f75"
   },
   "numero": 1,
   "capacidad": 100,
@@ -22,6 +22,16 @@
     },
     {
       "fila": "B",
+      "numero": 2,
+      "tipo": "vip"
+    },
+    {
+      "fila": "C",
+      "numero": 1,
+      "tipo": "vip"
+    },
+    {
+      "fila": "C",
       "numero": 2,
       "tipo": "vip"
     }

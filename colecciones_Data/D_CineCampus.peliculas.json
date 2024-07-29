@@ -1,6 +1,6 @@
 [{
   "_id": {
-    "$oid": "669feaf0a7ccc1eb86e589be"
+    "$oid": "66a6ca1479ff5b5d5a887f79"
   },
   "titulo": "Inception",
   "genero": "Ciencia ficción",
@@ -11,18 +11,19 @@
     "$date": "2024-07-16T00:00:00.000Z"
   },
   "fechaRetiro": {
-    "$date": "2024-07-29T00:00:00.000Z"
+    "$date": "2024-07-30T00:00:00.000Z"
   },
   "director": "Christopher Nolan",
   "actores": [
     "Leonardo DiCaprio",
     "Joseph Gordon-Levitt",
     "Ellen Page"
-  ]
+  ],
+  "id": 1
 },
 {
   "_id": {
-    "$oid": "669feaf0a7ccc1eb86e589bf"
+    "$oid": "66a6ca1479ff5b5d5a887f7a"
   },
   "titulo": "The Shawshank Redemption",
   "genero": "Drama",
@@ -40,5 +41,6 @@
     "Tim Robbins",
     "Morgan Freeman",
     "Bob Gunton"
-  ]
+  ],
+  "id": 2
 }]

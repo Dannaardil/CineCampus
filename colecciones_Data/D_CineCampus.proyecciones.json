@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "66a6ca2279ff5b5d5a887f7b"
+  },
+  "pelicula_id": 1,
+  "sala_id": 1,
+  "inicio": {
+    "$date": "2024-07-24T20:00:00.000Z"
+  },
+  "fin": {
+    "$date": "2024-07-24T22:00:00.000Z"
+  },
+  "precio": 13,
+  "formato": "2D",
+  "id": 1
+},
+{
+  "_id": {
+    "$oid": "66a6ca2279ff5b5d5a887f7c"
+  },
+  "pelicula_id": 2,
+  "sala_id": 1,
+  "inicio": {
+    "$date": "2024-08-24T20:00:00.000Z"
+  },
+  "fin": {
+    "$date": "2024-08-24T22:00:00.000Z"
+  },
+  "precio": 14,
+  "formato": "3D",
+  "id": 2
+}]

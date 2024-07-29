@@ -1,0 +1,46 @@
+[{
+  "_id": {
+    "$oid": "66a6ca1479ff5b5d5a887f79"
+  },
+  "titulo": "Inception",
+  "genero": "Ciencia ficción",
+  "duracion": 120,
+  "sinopsis": "Un ladrón con la rara habilidad de 'extracción' de sueños recibe un t...",
+  "clasificacion": "PG-13",
+  "fechaEstreno": {
+    "$date": "2024-07-16T00:00:00.000Z"
+  },
+  "fechaRetiro": {
+    "$date": "2024-07-30T00:00:00.000Z"
+  },
+  "director": "Christopher Nolan",
+  "actores": [
+    "Leonardo DiCaprio",
+    "Joseph Gordon-Levitt",
+    "Ellen Page"
+  ],
+  "id": 1
+},
+{
+  "_id": {
+    "$oid": "66a6ca1479ff5b5d5a887f7a"
+  },
+  "titulo": "The Shawshank Redemption",
+  "genero": "Drama",
+  "duracion": 120,
+  "sinopsis": "Dos hombres encarcelados se unen durante varios años, encontrando cons...",
+  "clasificacion": "R",
+  "fechaEstreno": {
+    "$date": "2024-08-23T00:00:00.000Z"
+  },
+  "fechaRetiro": {
+    "$date": "2024-08-31T00:00:00.000Z"
+  },
+  "director": "Frank Darabont",
+  "actores": [
+    "Tim Robbins",
+    "Morgan Freeman",
+    "Bob Gunton"
+  ],
+  "id": 2
+}]

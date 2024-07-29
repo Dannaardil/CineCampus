@@ -58,7 +58,20 @@ export class ticketService {
                 }
             }).toArray();
             let operacion9 = await pagos.find({ "id": numero1 }).toArray();
+                 
+        function verificarAsientosOcupados() {
+            let asientoOcupado = false;
+            for (let i = 0; i < operacion5.length; i++) {
+                if (operacion5[i].proyeccion_id === proyeccion_id) {
+                    asientoOcupado = true;
+                    break; // Salimos del bucle al encontrar el primer asiento ocupado
+                }
+            }
+        return asientoOcupado
+        
+        }
 
+        let asientoEstaOcupado = verificarAsientosOcupados()
 
 
             if (operacion1.length === 0 || operacion2.length === 0) {
@@ -71,9 +84,9 @@ export class ticketService {
 
 
 
-            } else if (operacion5.length != 0) {
+            } else if (asientoEstaOcupado) {
                 console.log('El asiento esta ocupado')
-
+         
 
             }
 
@@ -187,7 +200,7 @@ export class ticketService {
         let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activa" }).toArray()
 
         let operacion7 = await boletos.find({ "codigo": numero }).toArray();
-
+     
 
         const operacion8 = await salas.find({
             "asientos": {
@@ -195,6 +208,23 @@ export class ticketService {
             }
         }).toArray();
         let operacion9 = await pagos.find({ "id": numero1 }).toArray();
+         
+           
+        function verificarAsientosOcupados() {
+            let asientoOcupado = false;
+            for (let i = 0; i < operacion5.length; i++) {
+                if (operacion5[i].proyeccion_id === proyeccion_id) {
+                    asientoOcupado = true;
+                    break; // Salimos del bucle al encontrar el primer asiento ocupado
+                }
+            }
+        return asientoOcupado
+        
+        }
+
+        let asientoEstaOcupado = verificarAsientosOcupados()
+        
+       
 
 
 
@@ -205,24 +235,24 @@ export class ticketService {
 
         } else if (operacion1[0].fin < currentDate) {
             console.log(' la proyeccion ya termino ')
+        
+            
+        } 
+        
+        else if (operacion8.length == 0) {
+            console.log('el asiento no existe ')
 
-
-
-        } else if (operacion5.length != 0) {
+        }else if(asientoEstaOcupado){
             console.log('El asiento esta ocupado')
 
 
         }
 
-        else if (operacion8.length == 0) {
-            console.log('el asiento no existe ')
 
-        }
-
-
+       
 
         else {
-
+            
             if (operacion7.length != 0) {
                 numero = generarNumeroAleatorio()
             }
@@ -266,9 +296,9 @@ export class ticketService {
                 metodo_pago: metodo_pago,
                 estado: 'pendiente',
                 fecha_de_pago: fecha_pago,
-                tipo_transaccion: 'Reserva',
                 boleto_cod: numero,
-                id: numero1
+                id: numero1,
+                tipo_transaccion: 'Reserva'
             })
             let operacion10 = await pagos.find({id:numero1}).toArray()
             

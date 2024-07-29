@@ -47,7 +47,19 @@ export class payService {
             let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activo" }).toArray()
 
             let operacion7 = await boletos.find({ "codigo": numero }).toArray();
-
+            function verificarAsientosOcupados() {
+                let asientoOcupado = false;
+                for (let i = 0; i < operacion5.length; i++) {
+                    if (operacion5[i].proyeccion_id === proyeccion_id) {
+                        asientoOcupado = true;
+                        break; // Salimos del bucle al encontrar el primer asiento ocupado
+                    }
+                }
+            return asientoOcupado
+            
+            }
+    
+            let asientoEstaOcupado = verificarAsientosOcupados()
 
             const operacion8 = await salas.find({
                 "asientos": {
@@ -68,7 +80,7 @@ export class payService {
 
 
 
-            } else if (operacion5.length != 0) {
+            } else if (asientoEstaOcupado) {
                 console.log('El asiento esta ocupado')
 
 

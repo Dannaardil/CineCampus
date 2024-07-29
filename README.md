@@ -33,8 +33,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario=usuario
          contraseña=user123
-          MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+        MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ```
 
@@ -70,8 +70,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario=admin
          contraseña=admin123
-          MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+         MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ```
 
@@ -109,8 +109,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario=usuario
          contraseña=user123
-          MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+          MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ```
 
@@ -134,10 +134,10 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       ## Credenciales
 
          ```plaintext
-         usuario=usuario
-         contraseña=user123
-         MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+         usuario=administrador
+         contraseña=admin123
+          MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ```
 
@@ -180,8 +180,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario =administrador
          contraseña=admin123
-          MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+         MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ``
          
@@ -202,8 +202,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       ```plaintext
       usuario=usuario
       contraseña=user123
-       MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+        MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
       ```
 
@@ -268,8 +268,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario =administrador
          contraseña=admin123
-          MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+           MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ``
          
@@ -300,8 +300,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario =administrador
          contraseña=admin123
-          MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+        MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ``
          
@@ -341,8 +341,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario =administrador
          contraseña=admin123
-      MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+     MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ``
          
@@ -376,8 +376,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario =administrador
          contraseña=admin123
-         MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+         MONGO MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ``
          
@@ -412,8 +412,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
             ```plaintext
             usuario=usuario
             contraseña=user123
-       MONGO_HOST=monorail.proxy.rlwy.net
-        MONGO_PORT=11362
+       MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
         MONGO_DB=D_CineCampus
             ```
 

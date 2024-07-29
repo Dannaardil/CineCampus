@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "66a6c9ff79ff5b5d5a887f76"
+  },
+  "nombre": "Juan Pérez",
+  "email": "juan@ejemplo.com",
+  "rol": "estandar",
+  "id": 1
+},
+{
+  "_id": {
+    "$oid": "66a6c9ff79ff5b5d5a887f77"
+  },
+  "nombre": "María García",
+  "email": "maria@ejemplo.com",
+  "rol": "vip",
+  "id": 2,
+  "tarjeta_vip": {
+    "estado": "Activa",
+    "numero": "VIP1234593"
+  }
+},
+{
+  "_id": {
+    "$oid": "66a6c9ff79ff5b5d5a887f78"
+  },
+  "nombre": "Maria Guzman",
+  "email": "mari@gmail.com",
+  "rol": "administrador",
+  "id": 3
+}]

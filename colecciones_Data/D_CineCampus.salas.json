@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "66a6c9ed79ff5b5d5a887f75"
+  },
+  "numero": 1,
+  "capacidad": 100,
+  "asientos": [
+    {
+      "fila": "A",
+      "numero": 1,
+      "tipo": "regular"
+    },
+    {
+      "fila": "A",
+      "numero": 2,
+      "tipo": "regular"
+    },
+    {
+      "fila": "B",
+      "numero": 1,
+      "tipo": "vip"
+    },
+    {
+      "fila": "B",
+      "numero": 2,
+      "tipo": "vip"
+    },
+    {
+      "fila": "C",
+      "numero": 1,
+      "tipo": "vip"
+    },
+    {
+      "fila": "C",
+      "numero": 2,
+      "tipo": "vip"
+    }
+  ]
+}]

@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "66a6ca7a79ff5b5d5a887f7f"
+  },
+  "monto": 3.4,
+  "metodo_pago": "tarjeta",
+  "estado": "completado",
+  "boleto_cod": 123,
+  "id": 1,
+  "tipo_transaccion": "compra",
+  "fecha_de_pago": {
+    "$date": "2024-07-23T17:42:13.444Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "66a6ca7a79ff5b5d5a887f80"
+  },
+  "monto": 12,
+  "metodo_pago": "efectivo",
+  "estado": "pendiente",
+  "boleto_cod": 694,
+  "id": 41,
+  "tipo_transaccion": "Reserva",
+  "fecha_de_pago": {
+    "$date": "2024-08-24T20:00:00.000Z"
+  }
+}]

@@ -66,7 +66,7 @@ export class usersService {
             }
 
             if (operacion1.length != 0 || operacion2.length != 0) {
-                console.log(' el usuario ya existe o el correo ya fue registrado.')
+                return(' el usuario ya existe o el correo ya fue registrado.')
             }
 
             else {
@@ -87,7 +87,7 @@ export class usersService {
                         roles: [{ role: 'usuario_p', db: 'D_CineCampus' }]
                     });
                     await usuarios.insertOne(dataInsertUser)
-                    console.log(' se ha registrado correctamente el usuario', dataInsertUser)
+                    return(' se ha registrado correctamente el usuario', dataInsertUser)
 
 
                 }
@@ -98,7 +98,7 @@ export class usersService {
                         roles: [{ role: 'dbOwner', db: 'D_CineCampus' }]
                     });
                     await usuarios.insertOne(dataInsertUser)
-                    console.log(' se ha registrado correctamente el admin', dataInsertUser)
+                    return(' se ha registrado correctamente el admin', dataInsertUser)
 
                 }
 
@@ -133,7 +133,7 @@ export class usersService {
             let operacion1 = await usuarios.find({ id: id }).toArray();
 
             if (operacion1.length == 0) {
-                console.log(' el usuario no existe')
+                return(' el usuario no existe')
             }else{
 
                 console.log('el usuario que buscas es: ')
@@ -191,11 +191,11 @@ export class usersService {
 
 
             if (operacion1[0].rol === rol){
-                console.log('el usuario ya es: ' + rol)
+                return('el usuario ya es: ' + rol)
             }
 
             else if (operacion1.length == 0) {
-                console.log(' el usuario no existe')
+                return(' el usuario no existe')
             }else if (rol === 'vip') {
 
 
@@ -216,7 +216,7 @@ export class usersService {
 
                 let info =  await usuarios.find({ id: id }).toArray();
 
-                console.log('el usuario vip se ha actualizado correctamente a vip y se le ha generado una tarjeta activa con este num: '+numero )
+                return('el usuario vip se ha actualizado correctamente a vip y se le ha generado una tarjeta activa con este num: '+numero )
             }else if (rol === 'estandar' || rol === 'administrador') {
               
                   
@@ -248,7 +248,7 @@ export class usersService {
                     )
                     await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
                     let info2 = await usuarios.find({ id: id }).toArray();
-                    console.log('el usuario se ha actualizado correctamente ', info2)
+                    return('el usuario se ha actualizado correctamente ', info2)
                 } else { // si el usuario anteriormente no era vip y no se va a actualizar ni a admin ni a vip
                     await db.command({ 
                         dropUser: username 
@@ -262,7 +262,7 @@ export class usersService {
                     await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
                     
                     let info3 = await usuarios.find({ id: id }).toArray();
-                    console.log('el usuario se ha actualizado correctamente', info3)
+                    return('el usuario se ha actualizado correctamente', info3)
                 }
             }2
                 

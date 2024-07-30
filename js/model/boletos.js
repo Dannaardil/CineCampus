@@ -76,22 +76,22 @@ export class ticketService {
 
             if (operacion1.length === 0 || operacion2.length === 0) {
 
-                console.log('No se encontro la proyeccion o usuario ');
+                return('No se encontro la proyeccion o usuario ');
 
 
             } else if (operacion1[0].fin < currentDate) {
-                console.log(' la proyeccion ya termino ')
+                return(' la proyeccion ya termino ')
 
 
 
             } else if (asientoEstaOcupado) {
-                console.log('El asiento esta ocupado')
+                return('El asiento esta ocupado')
          
 
             }
 
             else if (operacion8.length == 0) {
-                console.log('el asiento no existe ')
+                return('el asiento no existe ')
 
             }
 
@@ -117,10 +117,10 @@ export class ticketService {
 
                     descuento_aplicado = (operacion1[0].precio * 0.10)
 
-                    console.log(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
+                    return(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
 
                 } else if (operacion2[0].rol == 'vip' && operacion6.length == 0) {
-                    console.log('el usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento')
+                    return('el usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento')
                 }
 
 
@@ -146,7 +146,7 @@ export class ticketService {
                     id: numero1
                 })
 
-                console.log('Pago realizado con exito!')
+                return('Pago realizado con exito!')
             }
      
 
@@ -230,20 +230,20 @@ export class ticketService {
 
         if (operacion1.length === 0 || operacion2.length === 0) {
 
-            console.log('No se encontro la proyeccion o usuario ');
+            return('No se encontro la proyeccion o usuario ');
 
 
         } else if (operacion1[0].fin < currentDate) {
-            console.log(' la proyeccion ya termino ')
+            return(' la proyeccion ya termino ')
         
             
         } 
         
         else if (operacion8.length == 0) {
-            console.log('el asiento no existe ')
+            return('el asiento no existe ')
 
         }else if(asientoEstaOcupado){
-            console.log('El asiento esta ocupado')
+            return('El asiento esta ocupado')
 
 
         }
@@ -271,10 +271,10 @@ export class ticketService {
 
                 descuento_aplicado = (operacion1[0].precio * 0.10)
 
-                console.log(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
+                return(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
 
             } else if (operacion2[0].rol == 'vip' && operacion6.length == 0) {
-                console.log('el usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento')
+                return('el usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento')
             }
             let fecha_pago = operacion1[0].inicio
           
@@ -337,11 +337,11 @@ async cancelAReservation(id) {
         let operacion1 = await pagos.find({id: id}).toArray()
      
         if (operacion1 === 0){
-            console.log('este boleto no existe ')
+            return('este boleto no existe ')
         }else if(operacion1[0].estado === 'cancelado'){
-            console.log('este boleto ya fue cancelado')
+            return('este boleto ya fue cancelado')
         }else if(operacion1[0].tipo_transaccion !== 'Reserva'){
-            console.log('este boleto no es una reserva')
+            return('este boleto no es una reserva')
         }else{
             
             await pagos.updateOne({id: id}, {$set: {estado: 'cancelado'}})

@@ -33,11 +33,11 @@ export class projectionsService {
 
           
         if (asientoEstaOcupado) {
-            console.log('El asiento esta ocupado')
+            return('El asiento esta ocupado')
 
 
         }else if (operacion1.length == 0) {
-            console.log('el asiento no existe ')
+            return('el asiento no existe ')
 
         }else{
             return 'el asiento esta disponible'

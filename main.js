@@ -4,6 +4,7 @@ import{MovieService} from './js/model/peliculas.js';
 import{ticketService} from './js/model/boletos.js';
 import {usersService} from './js/model/usuarios.js'
 import { payService } from './js/model/pagos.js';
+import {projectionsService}from './js/model/proyecciones.js'
 // console.log(await testConnection())
 
 //PELICULAS ---------------
@@ -12,7 +13,7 @@ let peliculas = new MovieService
 
 // QUERY #1 ----**Selección de Películas:**
 
- //console.log(await peliculas.getAllMovies())
+//  console.log(await peliculas.getAllMovies())
 
 // ---------------------------------------------------
 
@@ -20,6 +21,7 @@ let peliculas = new MovieService
 
 
 let boletos = new ticketService
+let proyecciones = new projectionsService
 
 //QUERY 2 y QUERY  4 (comprar boletos y verificar tarjetas vip)
 
@@ -29,15 +31,22 @@ let boletos = new ticketService
 //     'tipo': 'vip'
 // }, 'efectivo' )) //proyeccion_id, usuario_id, asiento, metodo_pago
 
+// console.log(await proyecciones.verifySeats(1, {
+    
+// fila:"C",
+// numero:2,
+// tipo:"vip"
+// }))  ----verificar los asientos 
+
 // ---------------------------------------------------------------
 
 // QUERY #3.1 #3.2 (reservar asientos y cancelar la reserva)
 
-console.log(await boletos.bookATicket(2, 2, {
-     'fila': 'A',
-    'numero': 2,
-    'tipo': 'regular'
- }, 'efectivo' ))
+// console.log(await boletos.bookATicket(2, 2, {
+//      'fila': 'A',
+//     'numero': 2,
+//     'tipo': 'regular'
+//  }, 'efectivo' ))
  
 // console.log(await boletos.cancelAReservation(41)) //cancelar reserva
 
@@ -49,7 +58,7 @@ console.log(await boletos.bookATicket(2, 2, {
 let usuarios = new usersService
 
 // QUERY  #5.1 (Crear usuarios)
-// console.log(await usuarios.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
+// console.log(await usuarios.createAUser(9, 'David Romero', 'david@gmail.com', 'administrador'))
 
 
 // ----------------------------------------------------------------
@@ -59,7 +68,7 @@ let usuarios = new usersService
 
 // ----------------------------------------------------------------
 //QUERY #5.3 (actualizar usuarios)
-// console.log(await usuarios.updateUser(2, 'estandar')) // 
+// console.log(await usuarios.updateUser(7, 'Henry Boada', 'vip')) // 
 
 // ----------------------------------------------------------------
 

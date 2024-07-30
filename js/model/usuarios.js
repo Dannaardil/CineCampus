@@ -19,6 +19,7 @@ export class usersService {
     async createAUser(id, nombre, email, rol) {
         try {
             const db = await this.connection.connect();
+            // const dbMongo = await this.connection.db('D_CineCampus')
             function generar_tarjeta() {
 
                 return Math.floor(Math.random() * 99) + 1;
@@ -71,15 +72,36 @@ export class usersService {
             else {
                 if (rol == 'vip') {
                     await usuarios.insertOne(dataInsertVip)
+                    await db.command({
+                        createUser: nombre,
+                        pwd: nombre + 123,
+                        roles: [{ role: 'usuarioVip', db: 'D_CineCampus' }]
+                    });
                     console.log('el usuario vip se ha registrado correctamente', dataInsertVip)
                     console.log('se le ha generado un numero de tarjeta vip activa su numero es ' + numero)
                 }
-                if (rol === 'usuario' || rol === 'administrador') {
+                if (rol === 'estandar') {
+                    await db.command({
+                        createUser: nombre,
+                        pwd: nombre + 123,
+                        roles: [{ role: 'usuario_p', db: 'D_CineCampus' }]
+                    });
                     await usuarios.insertOne(dataInsertUser)
-                    console.log(' se ha registrado correctamente', dataInsertUser)
+                    console.log(' se ha registrado correctamente el usuario', dataInsertUser)
 
 
                 }
+                if (rol === 'administrador'){
+                    await db.command({
+                        createUser: nombre,
+                        pwd: nombre + 123,
+                        roles: [{ role: 'dbOwner', db: 'D_CineCampus' }]
+                    });
+                    await usuarios.insertOne(dataInsertUser)
+                    console.log(' se ha registrado correctamente el admin', dataInsertUser)
+
+                }
+
             }
 
 
@@ -137,12 +159,15 @@ export class usersService {
  * const usersService = new usersService();
  * const result = await usersService.updateUser('123', 'vip');
  */
-    async updateUser(id, rol) {
+    async updateUser(id, username, rol) {
         try {
             const db = await this.connection.connect();
    
 
             const usuarios = db.collection('usuarios');
+
+
+            
             function generar_tarjeta() {
 
                 return Math.floor(Math.random() * 99) + 1;
@@ -156,6 +181,9 @@ export class usersService {
 
             let operacion1 = await usuarios.find({ id: id }).toArray();
             let operacion2 = await usuarios.find({ "tarjeta_vip.numero": numero }).toArray();
+          
+
+             
             if (operacion2.length != 0) {
                 numero_f = generar_tarjeta()
                 numero = 'VIP12345' + numero_f.toString()
@@ -170,26 +198,73 @@ export class usersService {
                 console.log(' el usuario no existe')
             }else if (rol === 'vip') {
 
-                await usuarios.updateOne({ id: id }, { $set: { rol: rol, 'tarjeta_vip.estado': 'Activa', 'tarjeta_vip.numero': numero } })
-                let info = await usuarios.find({ id: id }).toArray();
+
+                await db.command({ 
+                    dropUser: username 
+                  });
+                   
+ 
+                await db.command({
+                    createUser: username,
+                    pwd:  username+ 123,
+                    roles: [{ role: 'usuarioVip', db: 'D_CineCampus' }]
+                });
+                await usuarios.updateOne({ id: id },
+                     { $set: { rol: rol, 
+                    'tarjeta_vip.estado': 'Activa',
+                    'tarjeta_vip.numero': numero } })
+
+                let info =  await usuarios.find({ id: id }).toArray();
+
                 console.log('el usuario vip se ha actualizado correctamente a vip y se le ha generado una tarjeta activa con este num: '+numero )
             }else if (rol === 'estandar' || rol === 'administrador') {
+              
+                  
+                
                 if (operacion1[0].rol == 'vip') {
+                    await db.command({ 
+                        dropUser: username 
+                      });
+
+                    if (rol === 'administrador'){
+                        await db.command({
+                            createUser: username,
+                            pwd: username + 123,
+                            roles: [{ role: 'dbOwner', db: 'D_CineCampus' }]
+                        });
+                    }
+                      else if(rol === 'estandar'){
+                        await db.command({
+                            createUser: username,
+                            pwd: username + 123,
+                            roles: [{ role: 'usuario_p', db: 'D_CineCampus' }]
+                        });
+                      }
+    
+                  
                     await usuarios.updateOne(
                         { id: id},
                         { $unset: { tarjeta_vip: "" } }
                     )
                     await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
                     let info2 = await usuarios.find({ id: id }).toArray();
-                    console.log('el usuario se ha actualizado correctamente ')
-                } else {
-
+                    console.log('el usuario se ha actualizado correctamente ', info2)
+                } else { // si el usuario anteriormente no era vip y no se va a actualizar ni a admin ni a vip
+                    await db.command({ 
+                        dropUser: username 
+                      });
+                      await db.command({
+                        createUser: username, 
+                        pwd: username + 123,
+                        roles: [{ role: 'usuario_p', db: 'D_CineCampus' }]
+                    });
+                     
                     await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
                     
                     let info3 = await usuarios.find({ id: id }).toArray();
-                    console.log('el usuario se ha actualizado correctamentep')
+                    console.log('el usuario se ha actualizado correctamente', info3)
                 }
-            }
+            }2
                 
             
               

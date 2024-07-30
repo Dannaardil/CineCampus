@@ -38,7 +38,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
    
 2. **Compra de Boletos:**
    - **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
-   - **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+  
 
       # Función `setTicket` 
 
@@ -68,7 +68,18 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          usuario=admin
          contraseña=admin123
          ```
+ - **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
 
+  ## Ejemplo de Uso
+      ```javascript
+      console.log(await proyecciones.verifySeats(1, {
+         
+       fila:"C",
+       numero:2,
+       tipo:"vip"
+       })) 
+
+ 
         
 
 3. **Asignación de Asientos:**
@@ -93,7 +104,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       ```javascript
       console.log(await boletos.bookATicket(2, 2, {
          'fila': 'A',
-         'numero': 1,
+         'numero': 2,
          'tipo': 'regular'
       }, 'efectivo'))
 
@@ -119,7 +130,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
       ## Ejemplo de Uso
       ```javascript
-      console.log(await boletos.cancelAReservation(74))`
+      console.log(await boletos.cancelAReservation(41))`
       
 
       ## Credenciales
@@ -192,28 +203,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
 
 
-     - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP. (no añadido)
+     - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP. 
+         ## Credenciales
 
-
-      ## Descripción
-      Inicialmente se consideró la creación de un rol específico de **Usuario VIP** que permitiría a los usuarios comprar boletos 
-      en línea con descuentos aplicables para titulares de tarjetas VIP. Sin embargo, se decidió no incluir este rol de manera separada 
-      debido a la implementación actual del proceso de compra.
-
-      ## Razón de la Decisión
-      ### Gestión Unificada de Usuarios
-      La funcionalidad de compra de boletos ya maneja la verificación del rol VIP y la aplicación de descuentos dentro del mismo proceso. Al no separar los roles de usuario estándar y VIP, se simplifica el flujo de compra y la gestión de usuarios. Esta unificación proporciona los siguientes beneficios:
-
-      1. **Simplicidad en el Código:** No es necesario duplicar la lógica de compra para diferentes tipos de usuarios, reduciendo la complejidad del código.
-      2. **Mantenimiento:** Un solo punto de control para las compras facilita el mantenimiento y la actualización del sistema.
-      3. **Flexibilidad:** Permite la expansión futura del sistema sin necesidad de grandes modificaciones para integrar nuevos roles o condiciones especiales.
-
-      ### Verificación durante la Compra
-      Durante el proceso de compra, el sistema verifica automáticamente si el usuario tiene un rol VIP y si su tarjeta VIP está activa. Si ambas condiciones se cumplen, se aplica el descuento correspondiente al precio del boleto. Este enfoque evita la necesidad de una separación explícita de roles y garantiza que todos los usuarios, independientemente de su tipo, pasen por el mismo flujo de compra.
-
-
-
-
+      ```plaintext
+      usuario=usuarioVip
+      contraseña=usuarioVip123
+      ```
+ 
+      
    - **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
 
       # Función `createAUser`
@@ -301,14 +299,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       ## Ejemplo de Uso
 
       ```javascript
-      // Actualizar el rol de un usuario con ID 2 a 'estándar'
-      console.log(await updateUser(2, 'estándar'));
+      // console.log(await usuarios.updateUser(7, 'Henry Boada', 'vip')) // 
 
-      // Actualizar el rol de un usuario con ID 3 a 'vip'
-      console.log(await updateUser(3, 'vip'));
-
-      // Actualizar el rol de un usuario con ID 3 a 'administrador'
-      console.log(await updateUser(3, 'administrador'));
          ```
 
       ## Credenciales

@@ -4,6 +4,7 @@ import{MovieService} from './js/model/peliculas.js';
 import{ticketService} from './js/model/boletos.js';
 import {usersService} from './js/model/usuarios.js'
 import { payService } from './js/model/pagos.js';
+import {projectionsService}from './js/model/proyecciones.js'
 // console.log(await testConnection())
 
 //PELICULAS ---------------
@@ -14,7 +15,13 @@ let peliculas = new MovieService
 
  //console.log(await peliculas.getAllMovies())
 
+// ---------------------------------------------------
+
+// BOLETOS ----------------------
+
+
 let boletos = new ticketService
+let proyecciones = new projectionsService
 
 //QUERY 2 y QUERY  4 (comprar boletos y verificar tarjetas vip)
 
@@ -23,6 +30,13 @@ let boletos = new ticketService
 //     'numero': 1,
 //     'tipo': 'vip'
 // }, 'efectivo' )) //proyeccion_id, usuario_id, asiento, metodo_pago
+
+// console.log(await proyecciones.verifySeats(1, {
+    
+// fila:"C",
+// numero:2,
+// tipo:"vip"
+// }))  ----verificar los asientos 
 
 // ---------------------------------------------------------------
 
@@ -43,11 +57,18 @@ let boletos = new ticketService
 
 let usuarios = new usersService
 
-// console.log(await usuarios.createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'))
+// QUERY  #5.1 (Crear usuarios)
+// console.log(await usuarios.createAUser(9, 'David Romero', 'david@gmail.com', 'administrador'))
 
 // console.log(await usuarios.getUser(2))
-// console.log(await usuarios.updateUser(2, 'estandar')) 
 
+// ----------------------------------------------------------------
+//QUERY #5.3 (actualizar usuarios)
+// console.log(await usuarios.updateUser(7, 'Henry Boada', 'vip')) // 
+
+// ----------------------------------------------------------------
+
+//QUERY #5.4(consultar usuarios filtrando por rol)
 // console.log(await usuarios.getUsersByRol('vip'))
 
 let pagos = new payService

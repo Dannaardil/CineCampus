@@ -13,7 +13,7 @@ let peliculas = new MovieService
 
 // QUERY #1 ----**Selección de Películas:**
 
- //console.log(await peliculas.getAllMovies())
+//  console.log(await peliculas.getAllMovies())
 
 // ---------------------------------------------------
 
@@ -48,7 +48,7 @@ let proyecciones = new projectionsService
 //     'tipo': 'regular'
 //  }, 'efectivo' ))
  
-// console.log(await boletos.cancelAReservation(41)) //cancelar reserva
+// console.log(await boletos.cancelAReservation(89))) //cancelar reserva
 
 // --------------------------------------------------------------------------
 

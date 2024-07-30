@@ -31,17 +31,30 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        ## Credenciales
 
          ```plaintext
+
+             usuario=usuarioVip
+            contraseña=usuarioVip123
+            __________________
          usuario=usuario
          contraseña=user123
+
+
         MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
+
+        ##credenciales generales
+
+        la contraseña de un usuario creado se genera automaticamente, es el nombre de usuario+123
+
+        mongodb://mongo:yuxlykrWuBDRDZqazlqvGClONOhZwWkK@viaduct.proxy.rlwy.net:47991/ 
+
          ```
 
    
 2. **Compra de Boletos:**
    - **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
-   - **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+  
 
       # Función `setTicket` 
 
@@ -67,17 +80,83 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
      
   ## Credenciales
 
-         ```plaintext
-         usuario=admin
+
+      
+         usuario=usuarioVip
+        contraseña=usuarioVip123
+          __________________
+          usuario=administrador
          contraseña=admin123
+
+         ------------------------
          MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
-         ```
 
-        
 
-3. **Asignación de Asientos:**
+         
+ - **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+ 
+
+ # Servicio de Proyecciones
+
+Este servicio es responsable de gestionar las proyecciones de películas y verificar la disponibilidad de los asientos.
+
+## Descripción
+
+La clase `projectionsService` proporciona métodos para interactuar con una base de datos y verificar la disponibilidad de los asientos para proyecciones específicas de películas. Se conecta a la base de datos, realiza la verificación de asientos y proporciona respuestas adecuadas según el estado del asiento.
+
+## Métodos
+
+### `constructor()`
+
+Inicializa el servicio y configura la conexión a la base de datos.
+
+### `verifySeats(proyeccion_id, asiento)`
+
+Verifica si un asiento está disponible para una proyección dada.
+
+#### Parámetros
+
+- `proyeccion_id` (número): El ID de la proyección.
+- `asiento` (Objeto): El objeto asiento a verificar.
+  - `fila` (string): La fila del asiento.
+  - `numero` (número): El número del asiento.
+  - `tipo` (string): El tipo de asiento (por ejemplo, "vip").
+
+#### Retorna
+
+- `Promise<string>`: Un mensaje que indica si el asiento está disponible, ocupado, o no existe.
+
+### `close()`
+
+Cierra la conexión a la base de datos.
+
+## Ejemplo de Uso
+
+
+
+
+
+    console.log(await projectionsService.verifySeats(1, {
+        fila: "C",
+        numero: 2,
+        tipo: "vip"
+    }));
+
+     ## Credenciales
+   
+      usuario=administrador
+      contraseña=admin123
+       MONGO_HOST=viaduct.proxy.rlwy.net
+      MONGO_PORT=47991
+      MONGO_DB=D_CineCampus
+
+
+
+ 
+
+   3. **Asignación de Asientos:**
    - **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
 
       ## Función `bookATicket`
@@ -96,23 +175,28 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
       ## Ejemplo de Uso
       
-      ```javascript
+    
       console.log(await boletos.bookATicket(2, 2, {
          'fila': 'A',
-         'numero': 1,
+         'numero': 2,
          'tipo': 'regular'
       }, 'efectivo'))
 
 
     ## Credenciales
 
-         ```plaintext
+       
          usuario=usuario
          contraseña=user123
-          MONGO_HOST=viaduct.proxy.rlwy.net
+
+         
+         usuario=usuarioVip
+         contraseña=usuarioVip123
+    
+         MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
-         ```
+         
 
    - **API para Cancelar Reserva de Asientos:** Permitir la cancelación de una reserva de asiento ya realizada.
     #  Función `cancelAReservation`
@@ -128,7 +212,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
       ## Ejemplo de Uso
       ```javascript
-      console.log(await boletos.cancelAReservation(74))`
+      console.log(await boletos.cancelAReservation(89))`
       
 
       ## Credenciales
@@ -169,7 +253,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
 5. - Roles Definidos:
      - **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
-            # Credenciales del Rol Administrador
+           
 
          ## Descripción
          Las siguientes credenciales son utilizadas para acceder al rol de administrador en la base de datos MongoDB. Estas credenciales proporcionan permisos elevados para realizar operaciones administrativas y de gestión de la base de datos.
@@ -183,7 +267,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
-         ``
+         ````
          
        
 
@@ -200,8 +284,9 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       ## Credenciales
 
       ```plaintext
-      usuario=usuario
-      contraseña=user123
+     
+         usuario=usuario
+         contraseña=user123
         MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
@@ -211,28 +296,19 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
 
 
-     - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP. (no añadido)
+     - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP. 
+      ## Credenciales
 
+      ```plaintext
+      usuario=usuarioVip
+      contraseña=usuarioVip123
 
-      ## Descripción
-      Inicialmente se consideró la creación de un rol específico de **Usuario VIP** que permitiría a los usuarios comprar boletos 
-      en línea con descuentos aplicables para titulares de tarjetas VIP. Sin embargo, se decidió no incluir este rol de manera separada 
-      debido a la implementación actual del proceso de compra.
-
-      ## Razón de la Decisión
-      ### Gestión Unificada de Usuarios
-      La funcionalidad de compra de boletos ya maneja la verificación del rol VIP y la aplicación de descuentos dentro del mismo proceso. Al no separar los roles de usuario estándar y VIP, se simplifica el flujo de compra y la gestión de usuarios. Esta unificación proporciona los siguientes beneficios:
-
-      1. **Simplicidad en el Código:** No es necesario duplicar la lógica de compra para diferentes tipos de usuarios, reduciendo la complejidad del código.
-      2. **Mantenimiento:** Un solo punto de control para las compras facilita el mantenimiento y la actualización del sistema.
-      3. **Flexibilidad:** Permite la expansión futura del sistema sin necesidad de grandes modificaciones para integrar nuevos roles o condiciones especiales.
-
-      ### Verificación durante la Compra
-      Durante el proceso de compra, el sistema verifica automáticamente si el usuario tiene un rol VIP y si su tarjeta VIP está activa. Si ambas condiciones se cumplen, se aplica el descuento correspondiente al precio del boleto. Este enfoque evita la necesidad de una separación explícita de roles y garantiza que todos los usuarios, independientemente de su tipo, pasen por el mismo flujo de compra.
-
-
-
-
+       MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
+        MONGO_DB=D_CineCampus
+      ```
+ 
+      
    - **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
 
       # Función `createAUser`
@@ -268,6 +344,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          ```plaintext
          usuario =administrador
          contraseña=admin123
+
+         
            MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
@@ -326,22 +404,16 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       ## Ejemplo de Uso
 
       ```javascript
-      // Actualizar el rol de un usuario con ID 2 a 'estándar'
-      console.log(await updateUser(2, 'estándar'));
+      // console.log(await usuarios.updateUser(7, 'Henry Boada', 'vip')) // 
 
-      // Actualizar el rol de un usuario con ID 3 a 'vip'
-      console.log(await updateUser(3, 'vip'));
-
-      // Actualizar el rol de un usuario con ID 3 a 'administrador'
-      console.log(await updateUser(3, 'administrador'));
-         ```
+         
 
       ## Credenciales
 
          ```plaintext
          usuario =administrador
          contraseña=admin123
-     MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
          ``
@@ -369,7 +441,8 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       console.log(await getUsersByRol('vip'));
 
       // Obtener una lista de usuarios con el rol 'administrador'
-      console.log(await getUsersByRol('administrador'));```
+      console.log(await getUsersByRol('administrador'));````
+      ````
 
        ## Credenciales
 
@@ -379,7 +452,7 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          MONGO MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
-         ``
+         ````
          
 
 
@@ -388,7 +461,15 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       - **API para Confirmación de Compra:** Enviar confirmación de la compra y los detalles del boleto al usuario.
       #  Función `payOnline`
 
-   ## Descripción
+      ## Credenciales
+
+         ```plaintext
+         usuario=administrador
+         contraseña=admin123
+          MONGO_HOST=viaduct.proxy.rlwy.net
+        MONGO_PORT=47991
+        MONGO_DB=D_CineCampus
+         ```   ## Descripción
    La función `payOnline` permite el procesamiento de pagos en línea para la compra de boletos de proyecciones. Además, envía la confirmación de la compra y los detalles del boleto al usuario.
 
    ## Parámetros
@@ -403,19 +484,22 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 
    ## Ejemplo de Uso
 
-   ```javascript
+ 
    // Realizar el pago en línea para una proyección con ID 2, usuario con ID 2, asiento especificado y método de pago 'tarjeta'
-   console.log(await payOnline(2, 2, { 'fila': 'B', 'numero': 2, 'tipo': 'vip' }, 'tarjeta'));```
+   console.log(await payOnline(2, 2, { 'fila': 'B', 'numero': 2, 'tipo': 'vip' }, 'tarjeta'));
 
    ## Credenciales
 
-            ```plaintext
             usuario=usuario
             contraseña=user123
-       MONGO_HOST=viaduct.proxy.rlwy.net
+
+            usuario = usuarioVip
+            contraseña = usuarioVip123
+
+        MONGO_HOST=viaduct.proxy.rlwy.net
         MONGO_PORT=47991
         MONGO_DB=D_CineCampus
-            ```
+           
 
 #### Requisitos Técnicos
 
@@ -431,6 +515,9 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
 2. **Documentación de API:** Documento con la descripción detallada de cada API, incluyendo ejemplos de uso y formato de datos.
 3. **Esquema de Base de Datos:** Diseño del esquema de MongoDB utilizado para almacenar la información.
 
+![alt text](image.png)
+
+[esquemasValidacion](EsquemasValidator.md)
 #### Evaluación
 
 - **Funcionalidad:** Cumplimiento de los requisitos funcionales establecidos.

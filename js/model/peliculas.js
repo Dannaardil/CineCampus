@@ -30,7 +30,7 @@ export class MovieService {
             titulo: 1,
             fechaEstreno: 1,
             fechaRetiro: 1,
-            sipnosis: 1,
+            sinopsis: 1,
             genero: 1,
             clasificacion: 1, 
             duracion: 1, 

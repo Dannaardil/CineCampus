@@ -1,4 +1,6 @@
-import Connection from '../../db/connect/connect.js';
+// import Connection from '../../db/connect/connect.js';
+
+const Connection = require('../../db/connect/connect.js')
 
 export class MovieService {
   constructor() {

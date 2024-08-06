@@ -1,10 +1,11 @@
-const express  = require("express")
+const express  = require("express");
+const { default: peliculas } = require("./js/model/peliculas");
 
 const app = express();
 
-const host = "localhost"
-const port = 3001
 
-app.get("/peliculas",(req, res),  ()=>{
-    let peliculasDisp = 
+
+app.get("/peliculas",async(req, res)=>{
+    let peliculasDisp = new MovieService();
+    res.status(200).send(await peliculasDisp.getAllMovies())
 } )

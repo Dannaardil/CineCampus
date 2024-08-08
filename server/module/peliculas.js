@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb'); // Import ObjectId to work with MongoDB IDs
-const Connection = require('../../db/connect/connect.js');
+const Connection = require('../../server/db/connect/connect.js');
 
 class MovieService {
   constructor() {

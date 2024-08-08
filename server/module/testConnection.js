@@ -1,4 +1,4 @@
-import Connection from '../../db/connect/connect.js';
+import Connection from '../db/connect/connect.js';
 
 /**
  * Tests the connection to the MongoDB database.

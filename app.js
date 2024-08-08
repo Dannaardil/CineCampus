@@ -12,7 +12,7 @@ app.get("/movies",async(req, res)=>{
 } )
 
 
-app.use("/seats", appPeliculas)
+app.use("/movies", appPeliculas)
 // app.get("/peliculas/:id", async(req, res)=>{
 //     let peliculaById = new MovieService();
 //     res.status(200).send(await peliculaById.getMovieById(req.params))

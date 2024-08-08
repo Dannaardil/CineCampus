@@ -6,7 +6,7 @@ const appPeliculas = express.Router()
 
 
 appPeliculas.get('/v1', async(req,res)=>{
-    let obj = new pelicula();
+    let peliculasDisp = new pelicula();
     res.send(await peliculasDisp.getAllMovies())
 })
 

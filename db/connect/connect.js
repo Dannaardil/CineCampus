@@ -1,6 +1,7 @@
 // import { MongoClient } from 'mongodb';
 // import dotenv from 'dotenv';
-const MongoClient = require('mongodb')
+const { MongoClient } = require('mongodb');
+
 const dotenv = require('dotenv')
 
 dotenv.config();
@@ -45,4 +46,4 @@ class Connection {
   }
 }
 
-export default new Connection();
+module.exports = Connection

@@ -1,16 +1,16 @@
-// import Connection from '../../db/connect/connect.js';
+const { ObjectId } = require('mongodb'); // Import ObjectId to work with MongoDB IDs
+const Connection = require('../../db/connect/connect.js');
 
-const Connection = require('../../db/connect/connect.js')
-
-export class MovieService {
+class MovieService {
   constructor() {
-    this.connection = Connection;
+    this.connection = new Connection();
   }
-/**
- * Retrieves all available movies from the database.
- *
- * @returns {Promise<Array>} An array of available movies.
- */
+
+  /**
+   * Retrieves all available movies from the database.
+   *
+   * @returns {Promise<Array>} An array of available movies.
+   */
   async getAllMovies() {
     try {
       const db = await this.connection.connect();
@@ -26,8 +26,7 @@ export class MovieService {
             as: "proyecciones"
           }
         },
-      
-          {
+        {
           $project: {
             titulo: 1,
             fechaEstreno: 1,
@@ -43,7 +42,6 @@ export class MovieService {
               ]
             },
             horarios_proyeccion: "$proyecciones.inicio",
-            
           }
         },
         {
@@ -56,16 +54,39 @@ export class MovieService {
       return availableMovies;
     } catch (error) {
       console.error('Error checking movie availability:', error);
-     
     }
-    return ''
+    return '';
   }
-  
+
+  /**
+   * Retrieves a movie by its ID from the database.
+   *
+   * @param {string} id - The ID of the movie to retrieve.
+   * @returns {Promise<Object|null>} The movie object or null if not found.
+   * 
+   * 
+   */
+
+    
+  async getMovieById(id) {
+   
+    try {
+      
+      const db = await this.connection.connect();
+      const collection = db.collection('peliculas');
+
+      const movie = await collection.findOne({ id:  id });
+
+      return movie;
+    } catch (error) {
+      console.error('Error retrieving movie by ID:', error);
+      return null;
+    }
+  }
 
   async close() {
     await this.connection.close();
   }
 }
 
-
-export default new MovieService();
+module.exports = MovieService;

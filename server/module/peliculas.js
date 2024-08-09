@@ -75,7 +75,7 @@ class MovieService {
       const db = await this.connection.connect();
       const collection = db.collection('peliculas');
 
-      const movie = await collection.findOne({ id:  id });
+      const movie = await collection.find({ id:  id }).toArray();
 
       return movie;
     } catch (error) {

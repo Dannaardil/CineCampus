@@ -18,6 +18,8 @@ app.use("/movies", appPeliculas)
 //     res.status(200).send(await peliculaById.getMovieById(req.params))
 // })
 
+app.use('/movies/:id', appPeliculas)
+
 app.listen({host: process.env.EXPRESS_HOST, port: process.env.EXPRESS_PORT},()=>{
     console.log(`http://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}`)
 })

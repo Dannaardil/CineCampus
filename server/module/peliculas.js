@@ -58,29 +58,33 @@ class MovieService {
     return '';
   }
 
+
   /**
    * Retrieves a movie by its ID from the database.
    *
-   * @param {string} id - The ID of the movie to retrieve.
-   * @returns {Promise<Object|null>} The movie object or null if not found.
-   * 
-   * 
+   * @param {Object} params - An object containing the ID of the movie to retrieve
+   * @param {string|number} params.id - The ID of the movie to retrieve
+   * @returns {Promise<Object|null>} The movie object or null if not found
    */
-
-    
-  async getMovieById(id) {
-   
+  async getMovieById({ id }) {
     try {
-      
       const db = await this.connection.connect();
       const collection = db.collection('peliculas');
+      
+      let movie;
+      // Try to find by custom 'id' field first
+      movie = await collection.findOne({ id: parseInt(id) });
+      
+   
+   
+      
 
-      const movie = await collection.find({ id:  id }).toArray();
-
-      return movie;
+      console.log('Found movie:', movie);  // For debugging
+      
+      return movie 
     } catch (error) {
       console.error('Error retrieving movie by ID:', error);
-      return null;
+      throw error;
     }
   }
 

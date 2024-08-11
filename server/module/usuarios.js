@@ -160,7 +160,7 @@ class usersService {
  * const usersService = new usersService();
  * const result = await usersService.updateUser('123', 'vip');
  */
-    async updateUser(id, username, rol) {
+    async updateUser({id, username, rol}) {
         try {
             const db = await this.connection.connect();
    
@@ -180,7 +180,7 @@ class usersService {
             let numero = 'VIP12345' + numero_f.toString()
 
 
-            let operacion1 = await usuarios.find({ id: id }).toArray();
+            let operacion1 = await usuarios.find({ id: parseInt(id) }).toArray();
             let operacion2 = await usuarios.find({ "tarjeta_vip.numero": numero }).toArray();
           
 
@@ -210,14 +210,14 @@ class usersService {
                     pwd:  username+ 123,
                     roles: [{ role: 'usuarioVip', db: 'D_CineCampus' }]
                 });
-                await usuarios.updateOne({ id: id },
+                await usuarios.updateOne({ id: parseInt(id) },
                      { $set: { rol: rol, 
                     'tarjeta_vip.estado': 'Activa',
                     'tarjeta_vip.numero': numero } })
 
-                let info =  await usuarios.find({ id: id }).toArray();
+                let info =  await usuarios.find({ id: parseInt(id) }).toArray();
 
-                return('el usuario vip se ha actualizado correctamente a vip y se le ha generado una tarjeta activa con este num: '+numero )
+                return{message: 'el usuario vip se ha actualizado correctamente a vip y se le ha generado una tarjeta activa con este num: '+numero }
             }else if (rol === 'estandar' || rol === 'administrador') {
               
                   
@@ -244,12 +244,12 @@ class usersService {
     
                   
                     await usuarios.updateOne(
-                        { id: id},
+                        { id: parseInt(id)},
                         { $unset: { tarjeta_vip: "" } }
                     )
-                    await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
-                    let info2 = await usuarios.find({ id: id }).toArray();
-                    return('el usuario se ha actualizado correctamente ', info2)
+                    await usuarios.updateOne({ id: parseInt(id) }, { $set: { rol: rol } })
+                    let info2 = await usuarios.find({ id: parseInt(id) }).toArray();
+                    return{message: 'el usuario se ha actualizado correctamente ', info2}
                 } else { // si el usuario anteriormente no era vip y no se va a actualizar ni a admin ni a vip
                     await db.command({ 
                         dropUser: username 
@@ -260,12 +260,12 @@ class usersService {
                         roles: [{ role: 'usuario_p', db: 'D_CineCampus' }]
                     });
                      
-                    await usuarios.updateOne({ id: id }, { $set: { rol: rol } })
+                    await usuarios.updateOne({ id: parseInt(id) }, { $set: { rol: rol } })
                     
-                    let info3 = await usuarios.find({ id: id }).toArray();
-                    return('el usuario se ha actualizado correctamente', info3)
+                    let info3 = await usuarios.find({ id: parseInt(id) }).toArray();
+                    return{message: 'el usuario se ha actualizado correctamente', "info": info3}
                 }
-            }2
+            }
                 
             
               

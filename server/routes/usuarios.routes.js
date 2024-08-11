@@ -21,12 +21,12 @@ appUsers.post('/users/create', async (req, res) => {
   
 })
 // {
-//    "id":  9, 
-
-//     "nombre":'David Romero', 
-//     "email":'david@gmail.com',
-//      "rol": 'administrador'
-//     }
+//     "id":  9, 
+ 
+//      "nombre":"David Romero", 
+//      "email":"david@gmail.com",
+//       "rol": "administrador"
+//      }
 
 
 appUsers.get('/users/get/:id', async (req, res) => {
@@ -43,4 +43,24 @@ try{
 
 })
 
+
+//updateUser
+
+appUsers.patch('/users/update', async (req,res)=>{
+
+    try{
+        const { id, username, rol } = req.body;
+
+
+        let updateUser = new usersService();
+        const result = await updateUser.updateUser({ id, username, rol });
+         res.status(200).send(result)
+
+
+    }catch(error){
+        console.error('Error in updating users', error)
+        res.status(500).json({ error: 'InternalServerError'})
+    }
+
+})
 module.exports = appUsers

@@ -122,7 +122,7 @@ class usersService {
  * const usersService = new usersService();
  * const result = await usersService.getUser('123');
  */
-    async getUser(id) {
+    async getUser({id}) {
         try {
             const db = await this.connection.connect();
 
@@ -130,7 +130,7 @@ class usersService {
             const usuarios = db.collection('usuarios');
 
 
-            let operacion1 = await usuarios.find({ id: id }).toArray();
+            let operacion1 = await usuarios.find({ id: parseInt(id) }).toArray();
 
             if (operacion1.length == 0) {
                 return(' el usuario no existe')
@@ -138,6 +138,7 @@ class usersService {
 
                 console.log('el usuario que buscas es: ')
                 console.log(operacion1[0])
+               return { success: true, message: 'usuario encontrado: ', info: operacion1[0]}
             }
 
 
@@ -146,7 +147,7 @@ class usersService {
             console.error('Error ', error);
 
         }
-        return ''
+        return { success: true, message: 'Se ha registrado correctamente el admin', oper }
 
     }
     /**

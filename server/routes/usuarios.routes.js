@@ -28,4 +28,19 @@ appUsers.post('/users/create', async (req, res) => {
 //      "rol": 'administrador'
 //     }
 
+
+appUsers.get('/users/get/:id', async (req, res) => {
+try{
+
+    let getUser = new usersService();
+    const result = await getUser.getUser({ id: req.params.id})
+    res.status(200).send(result)
+
+}catch (error) {
+    console.error('Error in getting users', error)
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+
+})
+
 module.exports = appUsers

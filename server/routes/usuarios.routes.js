@@ -63,4 +63,28 @@ appUsers.patch('/users/update', async (req,res)=>{
     }
 
 })
+
+// {
+//     "id":  9, 
+ 
+//      "username":"David Romero", 
+ 
+//       "rol": "administrador"
+//      }
+
+
+appUsers.get('/users/getByRol/:rol', async (req, res)=>{
+
+    try{
+        let getUser2 = new usersService();
+        const result = await getUser2.getUsersByRol({ rol: req.params.rol})
+        res.status(200).send(result)
+
+        
+
+    }catch(error){
+        console.error('Error in getting users by rol', error)
+        res.status(500).json({ error: 'InternalServerError'})
+    }
+})
 module.exports = appUsers

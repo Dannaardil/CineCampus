@@ -289,7 +289,7 @@ class usersService {
  * const usersService = new usersService();
  * const result = await usersService.getUsersByRol('vip');
  */
-    async getUsersByRol(rol) {
+    async getUsersByRol({rol}) {
         try {
             const db = await this.connection.connect();
 
@@ -301,6 +301,8 @@ class usersService {
 
             
                 console.log(operacion1)
+
+            return { message: "usuarios encontrados: " + operacion1}
            
 
 

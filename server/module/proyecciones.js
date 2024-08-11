@@ -9,6 +9,7 @@ class projectionsService {
     async getAvailableSeats({proyeccionId}) {
         try {
             const db = await this.connection.connect();
+            
             const boletos = db.collection('boletos');
             const proyecciones = db.collection('proyecciones');
             const salas = db.collection('salas');

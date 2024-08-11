@@ -1,7 +1,10 @@
 const express  = require("express");
 const { default: peliculas } = require("./server/module/peliculas.js");
 const appPeliculas = require("./server/routes/peliculas.routes.js");
+const appTicket = require("./server/routes/boletos.routes.js")
+const appPayments = require("./server/routes/pagos.routes.js");
 const appSeats = require("./server/routes/asientos.routes.js");
+const appUsers = require("./server/routes/usuarios.routes.js");
 const app = express();
 
 app.use(express.static(process.env.EXPRESS_STATIC))
@@ -15,6 +18,12 @@ app.use("/movies", appPeliculas)
 app.use('/movies/', appPeliculas)
 
 app.use('/seats/', appSeats)
+
+app.use('/', appPayments);
+
+app.use('/', appTicket)
+
+app.use('/', appUsers)
 
 
 app.listen({host: process.env.EXPRESS_HOST, port: process.env.EXPRESS_PORT},()=>{

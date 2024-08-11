@@ -1,8 +1,8 @@
-const Connection = require('../../db/connect/connect.js');
+const Connection = require('../../server/db/connect/connect.js');
 
 class TicketService {
     constructor() {
-        this.connection = Connection;
+        this.connection = new Connection();
     }
 
     /**
@@ -129,7 +129,7 @@ class TicketService {
      */
 
 
-    async bookATicket(proyeccion_id, usuario_id, asiento, metodo_pago){
+    async bookATicket({proyeccion_id, usuario_id, asiento, metodo_pago}){
         const db = await this.connection.connect();
 
         try
@@ -228,7 +228,7 @@ class TicketService {
 
                 descuento_aplicado = (operacion1[0].precio * 0.10)
 
-                return(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
+                console.log(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
 
             } else if (operacion2[0].rol == 'vip' && operacion6.length == 0) {
                 return('el usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento')
@@ -266,8 +266,8 @@ class TicketService {
         }
         return { 
             message: 'Reserva realizada con exito!',
-            recibo: operacion10,
-            fechaLimite: fecha_pago
+      
+        
         };
     } catch (error) {
         console.log('error ', error);
@@ -284,57 +284,54 @@ class TicketService {
      * @returns {Promise<Object>} - Returns an object with the result of the operation.
      * @throws {Error} - Throws an error if there's an issue with the database connection or operation.
      */
-async cancelAReservation(id) {
-
+async cancelAReservation({ id }) {
     const db = await this.connection.connect();
-    try{
-        const pagos = db.collection('pagos');
-        const boletos = db.collection('boletos');
- // verificar el pago si exista osea que el boleto ya esta reservado y que sea  una reserva
- // verificar el boleto si ya ha sido cancelado
-
-
-        let operacion1 = await pagos.find({id: id}).toArray()
-     
-        if (operacion1 === 0){
-            return('este boleto no existe ')
-        }else if(operacion1[0].estado === 'cancelado'){
-            return('este boleto ya fue cancelado')
-        }else if(operacion1[0].tipo_transaccion !== 'Reserva'){
-            return('este boleto no es una reserva')
-        }else{
-            
-            await pagos.updateOne({id: id}, {$set: {estado: 'cancelado'}})
-            await boletos.deleteOne({codigo: operacion1[0].boleto_cod})
-            // se elimina el boleto para que no aparezca el asiento ocupado
-
-            console.log(' El boleto fue cancelado exitosamente')
-            let info = await pagos.find({id: id}).toArray()
-            console.log(' Esta es la informacion del boleto cancelado: ',  info)
-        }
-
-
-
-
-
-        return { 
-            message: 'El boleto fue cancelado exitosamente',
-            infoCancelacion: info
-        };
+    try {
+      const pagos = db.collection('pagos');
+      const boletos = db.collection('boletos');
+  
+      // Check if the payment exists
+      const operacion1 = await pagos.findOne({ id: parseInt(id) }); // Use findOne for efficiency
+      if (!operacion1) {
+        return 'Este boleto no existe.'; // Clearer error message
+      }
+  
+      // Check if the reservation is already canceled
+      if (operacion1.estado === 'cancelado') {
+        return 'Este boleto ya fue cancelado.';
+      }
+  
+      // Check if it's a reservation
+      if (operacion1.tipo_transaccion !== 'Reserva') {
+        return 'Este boleto no es una reserva.';
+      }
+  
+      // Update payment status and delete ticket
+      await pagos.updateOne({ id: parseInt(id) }, { $set: { estado: 'cancelado' } });
+      await boletos.deleteOne({ codigo: operacion1.boleto_cod });
+  
+      console.log('El boleto fue cancelado exitosamente');
+  
+      // Fetch updated payment info (optional)
+      const info = await pagos.findOne({ id });
+      console.log('Esta es la informacion del boleto cancelado: ', info);
+  
+      return {
+        message: 'El boleto fue cancelado exitosamente',
+      
+      };
     } catch (error) {
-        console.log('Error con la operacion', error);
-        throw error;
+      console.error('Error con la operacion', error);
+      throw error;
     }
-
-}
-
-
-
-
+  }
+  
 
 
 
 
 }
+
+module.exports =  TicketService;
 
 

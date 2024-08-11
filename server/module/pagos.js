@@ -1,8 +1,8 @@
-import Connection from '../../db/connect/connect.js';
+const Connection = require('../../server/db/connect/connect.js');
 
-export class payService {
+ class payService {
     constructor() {
-        this.connection = Connection;
+        this.connection = new Connection();
     }
     /**
  * @description This function is responsible for processing an online payment for a movie ticket.
@@ -15,8 +15,7 @@ export class payService {
  * @example
  * payOnline(123, 456, 'A1', 'Credit Card');
  */
-    async payOnline(proyeccion_id, usuario_id, asiento, metodo_pago) {
-
+    async payOnline({proyeccion_id, usuario_id, asiento, metodo_pago}) {
 
 
 
@@ -30,7 +29,7 @@ export class payService {
             const pagos = db.collection('pagos');
 
             let currentDate = new Date();
-            let descuento_aplicado = 0
+            let descuento_aplicado = 0;
 
             function generarNumeroAleatorio() {
                 return Math.floor(Math.random() * 999) + 1;
@@ -44,22 +43,9 @@ export class payService {
             let operacion1 = await proyecciones.find({ id: proyeccion_id }).toArray();
             let operacion2 = await usuarios.find({ id: usuario_id }).toArray();
             let operacion5 = await boletos.find({ asiento: asiento }).toArray();
-            let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activo" }).toArray()
+            let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activa" }).toArray();
 
             let operacion7 = await boletos.find({ "codigo": numero }).toArray();
-            function verificarAsientosOcupados() {
-                let asientoOcupado = false;
-                for (let i = 0; i < operacion5.length; i++) {
-                    if (operacion5[i].proyeccion_id === proyeccion_id) {
-                        asientoOcupado = true;
-                        break; // Salimos del bucle al encontrar el primer asiento ocupado
-                    }
-                }
-            return asientoOcupado
-            
-            }
-    
-            let asientoEstaOcupado = verificarAsientosOcupados()
 
             const operacion8 = await salas.find({
                 "asientos": {
@@ -67,59 +53,46 @@ export class payService {
                 }
             }).toArray();
             let operacion9 = await pagos.find({ "id": numero1 }).toArray();
+                 
+            function verificarAsientosOcupados() {
+                let asientoOcupado = false;
+                for (let i = 0; i < operacion5.length; i++) {
+                    if (operacion5[i].proyeccion_id === proyeccion_id) {
+                        asientoOcupado = true;
+                        break;
+                    }
+                }
+                return asientoOcupado;
+            }
 
-
+            let asientoEstaOcupado = verificarAsientosOcupados();
 
             if (operacion1.length === 0 || operacion2.length === 0) {
-
-                return('No se encontro la proyeccion o usuario ');
-
-
+                return { message: 'No se encontro la proyeccion o usuario' };
             } else if (operacion1[0].fin < currentDate) {
-                return(' la proyeccion ya termino ')
-
-
-
+                return { message: 'La proyeccion ya termino' };
             } else if (asientoEstaOcupado) {
-                return('El asiento esta ocupado')
-
-
-            }
-
-            else if (operacion8.length == 0) {
-                return('el asiento no existe ')
-
-            }
-
-
-
-            else {
-
+                return { message: 'El asiento esta ocupado' };
+            } else if (operacion8.length == 0) {
+                return { message: 'El asiento no existe' };
+            } else {
                 if (operacion7.length != 0) {
-                    numero = generarNumeroAleatorio()
+                    numero = generarNumeroAleatorio();
                 }
                 if (operacion9.length != 0) {
-                    numero1 = generarNumeroAleatorio1()
-
+                    numero1 = generarNumeroAleatorio1();
                 }
 
-
-
-                console.log('----------Se procedera con el pago en linea...')
-
-
+                console.log('----------Se procedera con el pago...');
 
                 if (operacion2[0].rol == 'vip' && operacion6.length != 0) {
-
-                    descuento_aplicado = (operacion1[0].precio * 0.10)
-
-                    return(' el usuario el vip, se le aplicara descuento de:', descuento_aplicado)
-
+                    descuento_aplicado = (operacion1[0].precio * 0.10);
+                    console.log('El usuario es vip, se le aplicara descuento de:', descuento_aplicado);
                 } else if (operacion2[0].rol == 'vip' && operacion6.length == 0) {
-                    return('el usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento')
+                    console.log('El usuario es vip pero su tarjeta no esta activa, no se le aplicara descuento');
                 }
 
-                let infoBoleto = {
+                await boletos.insertOne({
                     proyeccion_id: proyeccion_id,
                     usuario_id: usuario_id,
                     asiento: asiento,
@@ -127,12 +100,9 @@ export class payService {
                     descuento_aplicado: descuento_aplicado,
                     fecha_compra: currentDate,
                     codigo: numero
-
-                }
-                console.log('se ha comprado el boleto con exito este es su boleto ', infoBoleto)
-
-                await boletos.insertOne(infoBoleto)
-                let infoPago = {
+                });
+               
+                await pagos.insertOne({
                     monto: (operacion1[0].precio - descuento_aplicado),
                     metodo_pago: metodo_pago,
                     estado: 'completado',
@@ -140,20 +110,14 @@ export class payService {
                     tipo_transaccion: 'compra en linea',
                     boleto_cod: numero,
                     id: numero1
-                }
-                await pagos.insertOne(infoPago)
+                });
 
-                return('Pago en linea realizado con exito!, recibo:  ', infoPago)
+                return { message: 'Pago realizado con exito!' };
             }
-
-
         } catch (error) {
             console.log('error ', error);
-
+            throw error;
         }
-
-        return ''
-
     }
 
 
@@ -162,5 +126,4 @@ export class payService {
     }
 }
 
-
-export default new payService();
+module.exports = payService

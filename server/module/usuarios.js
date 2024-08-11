@@ -1,8 +1,8 @@
-import Connection from '../../db/connect/connect.js';
+const Connection = require('../db/connect/connect.js');
 
-export class usersService {
+class usersService {
     constructor() {
-        this.connection = Connection;
+        this.connection = new Connection();
     }
     /**
  * @description This function creates a new user in the database.
@@ -16,7 +16,7 @@ export class usersService {
  * const usersService = new usersService();
  * const result = await usersService.createAUser('123', 'John Doe', 'john.doe@example.com', 'vip');
  */
-    async createAUser(id, nombre, email, rol) {
+    async createAUser({id, nombre, email, rol}) {
         try {
             const db = await this.connection.connect();
             // const dbMongo = await this.connection.db('D_CineCampus')
@@ -87,7 +87,7 @@ export class usersService {
                         roles: [{ role: 'usuario_p', db: 'D_CineCampus' }]
                     });
                     await usuarios.insertOne(dataInsertUser)
-                    return(' se ha registrado correctamente el usuario', dataInsertUser)
+                    console.log(' se ha registrado correctamente el usuario', dataInsertUser)
 
 
                 }
@@ -98,7 +98,7 @@ export class usersService {
                         roles: [{ role: 'dbOwner', db: 'D_CineCampus' }]
                     });
                     await usuarios.insertOne(dataInsertUser)
-                    return(' se ha registrado correctamente el admin', dataInsertUser)
+                    return { success: true, message: 'Se ha registrado correctamente el admin', data: dataInsertUser }
 
                 }
 
@@ -111,7 +111,7 @@ export class usersService {
             console.error('Error ', error);
 
         }
-        return ''
+        return { success: true, message: 'Se ha registrado correctamente el admin', data: dataInsertUser }
     }
   /**
  * @description This function retrieves a user by their unique id from the database.
@@ -316,4 +316,4 @@ export class usersService {
 }
 
 
-export default new usersService();
+module.exports = usersService;

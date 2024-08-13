@@ -14,6 +14,15 @@ appPeliculas.get('/v1', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+appPeliculas.get('/v2', async (req, res) => {
+  try {
+    let peliculasDisp = new MovieService();
+    const movies = await peliculasDisp.getUpcomingMovies();
+    res.send(movies);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 appPeliculas.get('/:id', async (req, res) => {
   try {
@@ -29,5 +38,7 @@ appPeliculas.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
 
 module.exports = appPeliculas;

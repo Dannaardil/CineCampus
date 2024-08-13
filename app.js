@@ -1,5 +1,5 @@
 const express  = require("express");
-const { default: peliculas } = require("./server/module/peliculas.js");
+const peliculas = require("./server/module/peliculas.js");
 const appPeliculas = require("./server/routes/peliculas.routes.js");
 const appTicket = require("./server/routes/boletos.routes.js")
 const appPayments = require("./server/routes/pagos.routes.js");
@@ -14,16 +14,17 @@ const path = require('path');
 const cors = require('cors');
 
 
+
+
+
 app.use(cors());
-
-
-app.use(express.static(process.env.EXPRESS_STATIC))
-
 app.use(express.json());
+app.use(express.static(process.env.EXPRESS_STATIC))
 
 
 
 app.use("/api/movies", appPeliculas);
+
 app.get('/movies', (req, res) => {
     res.sendFile(path.join(__dirname, './public/views/home.html'));
   });

@@ -88,6 +88,56 @@ class MovieService {
       throw error;
     }
   }
+   /**
+   * Retrieves all movies that are not currently available but will be released in the future.
+   *
+   * @returns {Promise<Array>} An array of upcoming movies.
+   */
+   async getUpcomingMovies() {
+    try {
+      const db = await this.connection.connect();
+      const collection = db.collection('peliculas');
+
+      const upcomingMovies = await collection.aggregate([
+        {
+          $lookup: {
+            from: "proyecciones",
+            localField: "id",
+            foreignField: "pelicula_id",
+            as: "proyecciones"
+          }
+        },
+        {
+          $project: {
+            titulo: 1,
+            fechaEstreno: 1,
+            fechaRetiro: 1,
+            sinopsis: 1,
+            genero: 1,
+            clasificacion: 1,
+            duracion: 1,
+            poster_url: 1,
+            estaPorVenir: {
+              $gt: ["$fechaEstreno", "$$NOW"]
+            },
+            horarios_proyeccion: "$proyecciones.inicio",
+          }
+        },
+        {
+          $match: {
+            estaPorVenir: true
+          }
+        }
+      ]).toArray();
+
+    
+      return upcomingMovies;
+
+    } catch (error) {
+      console.error('Error checking upcoming movies:', error);
+    }
+    return '';
+  }
 
   async close() {
     await this.connection.close();

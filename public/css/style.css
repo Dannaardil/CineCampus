@@ -166,7 +166,7 @@ gap:0.3rem;
     display: flex;
     flex-wrap: nowrap;
     gap: 1.3rem;
-    height: 47vh;
+    height: 45vh;
 align-items: center;
 /* justify-content: center; */
     overflow: scroll;
@@ -183,8 +183,8 @@ align-items: center;
 }
 .movie__carrusel__cover img{
     /* padding-top:1rem; */
- width: 26vh;
- height: 38vh;
+ width: 24vh;
+ height: 36vh;
  border-radius: 1.5em;
 }
 .movie__carrusel__cover {
@@ -223,7 +223,7 @@ justify-content: space-between;
 .comming__soon__title h3{
     font-size: medium;
     
-   padding-bottom: 1rem;
+   padding-bottom: 0.5rem;
    
    
 }
@@ -235,14 +235,13 @@ justify-content: space-between;
 }
 .comming__soon__movies{
 /* background-color: red; */
-    height:20vh;
     margin-left: 2em;
     display:flex;
     flex-direction: column;
     margin-right: 2em;
     /* align-items: center; */
     /* justify-content: space-between; */
-    overflow-y: scroll;
+    margin-bottom: 5rem;
     gap:1em;
    
 }

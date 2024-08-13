@@ -3,81 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-   
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Document</title>
     <link rel="stylesheet" href="../css/peliculas.css">
+    <script type="module" src="../js/module/peliculaDetalle.js" defer></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Document</title>
 </head>
 <body>
-    <header class="cinema__header">
-        <i class='bx bx-chevron-left'></i>
-        <h2>Cinema Selection</h2>
-        <i class="bi bi-three-dots-vertical"></i>
+    <header>
+        <a href=""><i class='bx bx-chevron-left'></i></a>
+        <h4>Cinema Selection</h4>
+        <i class='bx bx-dots-vertical-rounded'></i>
     </header>
-    <main class="movie__info">
-        <div class="movie__cover">
-            <div class="movie__img">
-            <img src="https://i.pinimg.com/736x/bd/98/88/bd9888c5a942f7490c9b10b345cc585c.jpg" alt="movie_cover">
+    <main>
+        <section id="video-main" class="video-main">
 
-            </div>
-          
-            <div class="title__trailer">
-                <div class="title">
-                    <p>Puss in boots</p>
-                    <p>genero</p>
-                </div>
-                <button><i>D</i> Watch Trailer</button>
-            </div>
-        
-        </div>
-        <div class="movie__description">
-            <p>Lorem, ipsum dolor sit amet c.</p>
 
-        </div>
-
-        <div class="movie__actors">
-            <div class="actors__info">
-                <img src="https://m.media-amazon.com/images/M/MV5BMjQyNzM2MjM1Ml5BMl5BanBnXkFtZTcwMDE5NjI3Mg@@._V1_.jpg" alt="actor__img">
-                <p>Nombre del  actor</p>
-                <p>personaje</p>
-            </div>
-            <div class="actors__info">
-                <img src="https://m.media-amazon.com/images/M/MV5BMjQyNzM2MjM1Ml5BMl5BanBnXkFtZTcwMDE5NjI3Mg@@._V1_.jpg" alt="actor__img">
-                <p>Nombre del  actor</p>
-                <p>personaje</p>
-            </div>
-            <div class="actors__info">
-                <img src="https://m.media-amazon.com/images/M/MV5BMjQyNzM2MjM1Ml5BMl5BanBnXkFtZTcwMDE5NjI3Mg@@._V1_.jpg" alt="actor__img">
-                <p>Nombre del  actor</p>
-                <p>personaje</p>
-            </div>
             
-
-        </div>
-
-
+        </section>
+        <section class="info_video-main">
+            <div>
+                <h5>Puss in boots the last wish</h5>
+                <p>Action, Adventure</p>
+            </div>
+            <button>Watch Trailer</button>
+        </section>
+        <section class="detalle_video-main">
+            <p class="p">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto nihil eveniet omnis consequuntur optio magni, placeat maxime tenetur, soluta voluptates ipsam odio, molestias repellat corporis? Quaerat cupiditate laudantium quae consequatur!</p>
+            <div class="detalle_video-actor">
+                <p>Cast</p>
+                <div class="actor-list">
+                    <div class="actor-info">
+                        <img src="https://i.postimg.cc/qRGy3vB2/furiosa.jpg" alt="Antonio Banderas">
+                        <div>
+                            <p class="actor-name">Antonio Ban</p>
+                            <p class="actor-role">Puss in Boots</p>
+                        </div>
+                    </div>
+                    <div class="actor-info">
+                        <img src="https://i.postimg.cc/qRGy3vB2/furiosa.jpg" alt="Salma Hayek">
+                        <div>
+                            <p class="actor-name">Salma Hayek</p>
+                            <p class="actor-role">Kitty Softpaws</p>
+                        </div>
+                    </div>
+                    <div class="actor-info">
+                        <img src="https://i.postimg.cc/qRGy3vB2/furiosa.jpg" alt="Harvey Guillén">
+                        <div>
+                            <p class="actor-name">Harvey Guillén</p>
+                            <p class="actor-role">Perro</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="detalle_video-cinema">
+                <p class="actor-name">Cinema</p>
+                <div class="cinema-info">
+                    <div>
+                        <p class="actor-name">Campuslands</p>
+                        <p class="actor-role">Zona Franca, Floridablanca</p>
+                    </div>
+                    <img src="https://i.postimg.cc/qRGy3vB2/furiosa.jpg" alt="Antonio Banderas">
+                </div>
+            </div>
+        </section>
     </main>
-    <section class="cinema__info">
-        <h6>Cinema</h6>
-        <div class="cinema__op">
-            <h5>CineCampus</h5>
-            <p>cinema description</p>
-            <img src="" alt="cine_img">
-
-
-        </div>
-        <div class="cinema__op">
-            <h5>CineCampus</h5>
-            <p>cinema description</p>
-            <img src="" alt="cine_img">
-
-        </div>
-    </section>
-    <footer class="book__ticket">
+    <footer>
         <button>Book Now</button>
-
-    </footer>    
+    </footer>
 </body>
 </html>

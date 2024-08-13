@@ -1,44 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url(variables.css);
-
-* {
-    padding: 0;
+*{
     margin: 0;
-    /* color: rgb(255, 255, 255);
-    background-color: var(--color1); */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    background: #000;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
 
-}
-body{
-    margin:1rem;
-    width: 32vh;
-    
-}
-.cinema__header{
+header {
     display: flex;
-   
-    background-color: red;;
-    justify-content: space-between;
+    width: 100%;
+    height: 40%;
     align-items: center;
-  
-
-}
-.cinema__header :nth-child(1){
-    font-size: 2rem;
-   
-}
-.cinema__header :nth-child(3){
+    justify-content: space-around;
+    gap: 3rem;
     font-size: 1.5rem;
-   
+    padding: 2rem;
 }
-.movie__img{
- 
-height: 19rem;
-overflow-y: hidden;
-}
-.movie__cover img{
-    width: 19.5rem;
 
+header i {
+    font-size: 2rem;
 }
-.
+
+main {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    flex-direction: column;
+    padding: 0.3rem;
+}
+
+.video-main {
+    height: 50%;
+    text-align: center;
+}
+
+.video-main iframe {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    width: 25rem;
+    height: 19rem;
+}
+
+.info_video-main {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: space-around;
+    font-size: 1.5rem;
+}
+
+.info_video-main p {
+    font-size: 1rem;
+    color: #9b9898;
+}
+
+.info_video-main button {
+    text-decoration: none;
+    border: none;
+    background: red;
+    padding: 0.7rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.detalle_video-main {
+    position: relative;
+    display: flex;
+    width: 95%;
+    height: 50%;
+    flex-direction: column;
+    left: 1rem;
+    gap: 2rem;
+    top: 1rem;
+}
+
+.detalle_video-main .p {
+    font-size: 1rem;
+    color: #9b9898;
+}
+
+.detalle_video-actor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detalle_video-actor > p {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.actor-list {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+}
+
+.actor-info {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 200px;
+}
+
+.actor-info img {
+    width: 3.5rem;
+    height: 3.5rem; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.detalle_video-cinema {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: auto;
+    gap: 0.6rem;
+}
+
+.actor-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.actor-role {
+    color: #9b9898;
+    font-size: 0.8rem;
+}
+
+.cinema-info {
+    display: flex;
+    width: 96%;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+    background: #272727;   
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+}
+
+.cinema-info div{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 0.4rem;
+    background-color: #272727;
+}
+
+.cinema-info div p {
+    background-color: #272727;
+}
+
+.cinema-info img {
+    width: 3.5rem;
+    height: 3.5rem; 
+    border-radius: 10%;
+    object-fit: cover;
+}
+
+footer {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    position: fixed; 
+}
+
+footer button {
+    width: 90%;
+    text-decoration: none;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1.2em;
+    background: red;
+    border-radius: 0.5rem;
+}

@@ -5,17 +5,29 @@ const appTicket = require("./server/routes/boletos.routes.js")
 const appPayments = require("./server/routes/pagos.routes.js");
 const appSeats = require("./server/routes/asientos.routes.js");
 const appUsers = require("./server/routes/usuarios.routes.js");
+
 const app = express();
+
+
+const { body, validationResult } = require('express-validator');
+const path = require('path');
+const cors = require('cors');
+
+
+app.use(cors());
+
 
 app.use(express.static(process.env.EXPRESS_STATIC))
 
 app.use(express.json());
 
 
-app.use("/movies", appPeliculas)
 
+app.use("/api/movies", appPeliculas);
+app.get('/movies', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/views/home.html'));
+  });
 
-app.use('/movies/', appPeliculas)
 
 app.use('/seats/', appSeats)
 

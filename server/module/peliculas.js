@@ -35,6 +35,7 @@ class MovieService {
             genero: 1,
             clasificacion: 1, 
             duracion: 1, 
+            poster_url:1,
             estaDisponible: {
               $and: [
                 { $lte: ["$fechaEstreno", "$$NOW"] },

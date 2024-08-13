@@ -195,12 +195,12 @@ align-items: center;
     /* background-color: red; */
 }
 .movie__carrusel__cover p{
-    font-size: medium;
+    font-size: 0.7em;
 
 }
 .movie__carrusel__cover h4{
     margin-top: 0.3em;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 /* comming soon */

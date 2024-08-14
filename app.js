@@ -31,7 +31,7 @@ app.get('/movies', (req, res) => {
   app.get('/movie/:id', (req, res) => {
     res.sendFile(path.join(__dirname, './public/views/peliculas.html'));
   });
-
+ 
 
 
 app.use('/seats/', appSeats)

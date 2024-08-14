@@ -17,15 +17,15 @@ class MovieService {
           throw error;
         }
       }
-      static async fetchMoviesById() {
-        try {
-          const response = await fetch('/api/movies/:id');
-          return await response.json();
-        } catch (error) {
-          console.error('Error fetching movies:', error);
-          throw error;
-        }
-      }
+      // static async fetchMoviesById() {
+      //   try {
+      //     console.log(response);
+      //     return await response.json();
+      //   } catch (error) {
+      //     console.error('Error fetching movies:', error);
+      //     throw error;
+      //   }
+      // }
 
 
    

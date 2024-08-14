@@ -75,6 +75,7 @@ footer {
 }
 
 .login__button {
+   
 
     padding: 1rem;
     border: 0;
@@ -84,6 +85,14 @@ footer {
     margin-right: 1rem;
     font-size: medium;
     font-weight: bold;
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    
+
+}
+ a  {
+    text-decoration: none;
 
 }
 
@@ -93,6 +102,7 @@ footer {
     display: flex;
     gap: 0.5rem;
     background-color: transparent;
+
 
 }
 

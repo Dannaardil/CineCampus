@@ -28,6 +28,7 @@ class MovieService {
         },
         {
           $project: {
+            id:1,
             titulo: 1,
             fechaEstreno: 1,
             fechaRetiro: 1,
@@ -80,7 +81,6 @@ class MovieService {
    
       
 
-      console.log('Found movie:', movie);  // For debugging
       
       return movie 
     } catch (error) {
@@ -109,6 +109,7 @@ class MovieService {
         },
         {
           $project: {
+            id:1,
             titulo: 1,
             fechaEstreno: 1,
             fechaRetiro: 1,

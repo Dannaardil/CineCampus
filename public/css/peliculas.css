@@ -35,18 +35,18 @@ main {
 }
 
 .video-main {
-    height: 50%;
-    text-align: center;
+   height: 26vh;
+   margin-bottom: 1rem;
+   border-radius: 0.7rem;
+   overflow: hidden;
+}
+.video-main img{
+    height: 25rem;
+   
+    width: 100%;
 }
 
-.video-main iframe {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    width: 25rem;
-    height: 19rem;
-}
+
 
 .info_video-main {
     display: flex;

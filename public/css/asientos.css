@@ -74,9 +74,10 @@
     /* background-color: yellow; */
     /* border: 1px solid ; */
     width: 100%;
-   display: grid;
-   grid-template-rows: 1fr 1fr;
-   grid-template-columns: repeat(7,1fr);
+   display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    justify-content: center;
     padding-left: 2.5em;
     padding-right: 2.5em;
  
@@ -97,7 +98,7 @@
 
 .front__seat {
     background-color: var(--color5);
-    /* border: 1px solid ; */
+    /* bordfront__seatser: 1px solid ; */
     width: 2em;
     height: 2em;
     

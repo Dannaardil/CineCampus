@@ -1,90 +1,59 @@
+// Dependencies
 const express = require('express');
-const usersService = require('../module/usuarios.js')
+const usersService = require('../module/usuarios.js');
 
+// Initialize Router
 const appUsers = express.Router();
 
+// Route: Create User
 appUsers.post('/users/create', async (req, res) => {
     try {
         const { id, nombre, email, rol } = req.body;
         const createUser = new usersService();
         const result = await createUser.createAUser({ id, nombre, email, rol });
-    
-      
-          res.status(200).json({ message: result });
-      
-         
-        
-      } catch (error) {
-        console.error('Error in creating a user  route:', error);
+        res.status(200).json({ message: result });
+    } catch (error) {
+        console.error('Error in creating a user route:', error);
         res.status(500).json({ error: 'Internal Server Error' });
-      }
-  
-})
-// {
-//     "id":  9, 
- 
-//      "nombre":"David Romero", 
-//      "email":"david@gmail.com",
-//       "rol": "administrador"
-//      }
+    }
+});
 
-
+// Route: Get User by ID
 appUsers.get('/users/get/:id', async (req, res) => {
-try{
+    try {
+        let getUser = new usersService();
+        const result = await getUser.getUser({ id: req.params.id });
+        res.status(200).send(result);
+    } catch (error) {
+        console.error('Error in getting users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
-    let getUser = new usersService();
-    const result = await getUser.getUser({ id: req.params.id})
-    res.status(200).send(result)
-
-}catch (error) {
-    console.error('Error in getting users', error)
-    res.status(500).json({ error: 'Internal Server Error' });
-}
-
-})
-
-
-//updateUser
-
-appUsers.patch('/users/update', async (req,res)=>{
-
-    try{
+// Route: Update User
+appUsers.patch('/users/update', async (req, res) => {
+    try {
         const { id, username, rol } = req.body;
-
-
         let updateUser = new usersService();
         const result = await updateUser.updateUser({ id, username, rol });
-         res.status(200).send(result)
-
-
-    }catch(error){
-        console.error('Error in updating users', error)
-        res.status(500).json({ error: 'InternalServerError'})
+        res.status(200).send(result);
+    } catch (error) {
+        console.error('Error in updating users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
+});
 
-})
-
-// {
-//     "id":  9, 
- 
-//      "username":"David Romero", 
- 
-//       "rol": "administrador"
-//      }
-
-
-appUsers.get('/users/getByRol/:rol', async (req, res)=>{
-
-    try{
+// Route: Get Users by Role
+appUsers.get('/users/getByRol/:rol', async (req, res) => {
+    try {
         let getUser2 = new usersService();
-        const result = await getUser2.getUsersByRol({ rol: req.params.rol})
-        res.status(200).send(result)
-
-        
-
-    }catch(error){
-        console.error('Error in getting users by rol', error)
-        res.status(500).json({ error: 'InternalServerError'})
+        const result = await getUser2.getUsersByRol({ rol: req.params.rol });
+        res.status(200).send(result);
+    } catch (error) {
+        console.error('Error in getting users by role:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-})
-module.exports = appUsers
+});
+
+// Export Router
+module.exports = appUsers;

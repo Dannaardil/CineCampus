@@ -25,9 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(movie => {
             const videoId = getYouTubeVideoID(movie.trailer);
-            const movieDetailsContainer = document.getElementById('main');
+            const movieDetailsContainer = document.getElementById('body');
 
             movieDetailsContainer.innerHTML = `
+             <header>
+                <a href="/movies/"><i class='bx bx-chevron-left'></i></a>
+                <h4>Cinema Selection</h4>
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </header>
+            <main id="main">
             <section class="video__container">
                 <div id="cover-container" class="cover-main">
                     <img id="cover-image"  src=${movie.poster_url} alt=${movie.titulo}>
@@ -82,6 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             </section>
+            </main>
+
+             <footer>
+                <a href="/seats2">
+                    <button>Book Now</button>
+                </a>
+            
+            </footer>
             `;
 
             // Event Listener para el botón "Watch Trailer"

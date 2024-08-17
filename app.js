@@ -39,6 +39,26 @@ app.use('/seats/', appSeats)
 app.get('/seats2', (req, res) => {
   res.sendFile(path.join(__dirname, './public/views/asientos.html'));
 });
+app.get('/api/seats', async (req, res) => {
+  try {
+      const seatsService = new SeatsService();
+      const allSeats = await seatsService.getAllSeats();
+      res.json(allSeats);
+  } catch (error) {
+      console.error('Error fetching all seats:', error);
+      res.status(500).send({ error: 'Internal Server Error' });
+  }
+});
+app.get('/api/projections/:movieId', async (req, res) => {
+  try {
+      const projectionsService = new ProjectionsService();
+      const projections = await projectionsService.getProjectionsForMovie(req.params.movieId, req.query.date);
+      res.json(projections);
+  } catch (error) {
+      console.error('Error fetching projections:', error);
+      res.status(500).send({ error: 'Internal Server Error' });
+  }
+});
 
 app.use('/', appPayments);
 

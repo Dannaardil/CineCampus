@@ -58,7 +58,16 @@ class projectionsService {
             throw error;
         }
     }
-    
+    async getProjectionById({projectionId}) {
+        try {
+            const db = await this.connection.connect();
+            const proyecciones = db.collection('proyecciones');
+            return await proyecciones.findOne({ id: parseInt(projectionId) });
+        } catch (error) {
+            console.error('Error fetching projection:', error);
+            throw error;
+        }
+    }
     async close() {
         await this.connection.close();
     }

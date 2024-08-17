@@ -3,221 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>seats</title>
+    <title>Choose Seats</title>
     <link rel="stylesheet" href="../css/asientos.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <script src="../js/module/asientos.js"></script>
 </head>
 <body>
     <header class="choose__seat">
         <i class='bx bx-chevron-left'></i>
         <h4>Choose Seat</h4>
         <i class='bx bx-menu-alt-right'></i>
-
     </header>
 
-
-    <main class= "teather">
-
+    <main class="teather">
         <section class="screen">
             <img src="../img/screen2.jpg" alt="screen">
             <p>Screen This way</p>
-
-   
         </section>
 
-        <section class="seats">
-
-            <div class= "front__seats">
-                <div class ="front__letter">
-                    <p>A</p>
-                    <p>B</p>
-                 
-                </div>
-                <div class="group__seats_f">
-                    <div class="front__seat B "></div>
-                    <div class="front__seat B"></div>
-                    <div class="front__seat B"></div>
-                    <div class="front__seat B"></div>
-                    <div class="front__seat B"></div>
-                    <div class="front__seat B"></div>
-                    <div class="front__seat B"></div>
-                    <div class="front__seat A"></div>
-                    <div class="front__seat A"></div>
-                    <div class="front__seat A"></div>
-                    <div class="front__seat A"></div>
-                    <div class="front__seat A"></div>
-                    <div class="front__seat A"></div>
-                    <div class="front__seat A"></div>
-        
-
-                </div>
-         
-    
-            </div>
-
-            <div class= "back__seats">
-                <div class ="back__letter">
-                    <p>C</p>
-                    <p>D</p>
-                    <p>E</p>
-                    <p>F</p>
-                </div>
-                <div class= "group__seats">
-
-                <div class="back__seat C uno"></div>
-                <div class="back__seat C dos"></div>
-                <div class="back__seat C tres"></div>
-                <div class="back__seat C cuatro"></div>
-                <div class="back__seat C cinco"></div>
-                <div class="back__seat C seis"></div>
-                <div class="back__seat C siete"></div>
-                <div class="back__seat C ocho"></div>
-                <div class="back__seat C nueve"></div>
-
-
-                <div class="back__seat D"></div>
-
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-                <div class="back__seat D"></div>
-
-
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                <div class="back__seat E"></div>
-                
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-                <div class="back__seat F"></div>
-              
-
-                </div>
-                
-    
-            </div>    
-            
+        <section id="seatsContainer" class="seats">
+            <!-- Seats will be dynamically inserted here -->
         </section>
-    
-    <div class="conventions">
-        <i class='bx bxs-circle'></i>
-        <p>Available</p>
-        <i class='bx bxs-circle'></i>
-        <p>Reserved</p>
 
-        <i class='bx bxs-circle'></i>
-        <p>Selected</p>
-
-
-
-    </div>
-
-
-   
-<section class="dates">
-
-    <div class= "days">
-        <div class="day">
-            <p>Mon</p>
-            <p>17</p>
-        </div>
-        <div class="day">
-            <p>Tue</p>
-            <p>18</p>
-        </div>
-        <div class="day">
-            <p>wed</p>
-            <p>19</p>
+        <div class="conventions">
+            <i class='bx bxs-circle'></i>
+            <p>Available</p>
+            <i class='bx bxs-circle'></i>
+            <p>Reserved</p>
+            <i class='bx bxs-circle'></i>
+            <p>Selected</p>
         </div>
 
-        <div class="day">
-            <p>Thu</p>
-            <p>20</p>
-        </div>
-        <div class="day">
-            <p>Fri</p>
-            <p>21</p>
-        </div>
+        <section id="dateContainer" class="dates">
+            <!-- Date buttons will be dynamically inserted here -->
+        </section>
 
-        <div class="day">
-            <p>Sat</p>
-            <p>22</p>
-        </div>
-        <div class="day">
-            <p>Sun</p>
-            <p>23</p>
-        </div>
-      
-        
-
-
-    </div>
-
-    <div class="times">
-        <div class="time">
-            <p>13:00</p>
-            <p>$5.99</p>
-        </div>
-        <div class="time">
-            <p>13:00</p>
-            <p>$5.99</p>
-        </div>
-        <div class="time">
-            <p>13:00</p>
-            <p>$5.99</p>
-        </div>
-        <div class="time">
-            <p>13:00</p>
-            <p>$5.99</p>
-        </div>
-        
-
-    </div>
-
-</section>
-        
-
-
-
-
+        <section id="projectionsContainer" class="projections">
+            <!-- Projections will be dynamically inserted here -->
+        </section>
     </main>
 
-
     <footer class="payment">
-
         <div class="price">
             <p>Price</p>
-            <p>$23.99</p>
-
+            <p id="totalPrice">$0.00</p>
         </div>
-
         <div class="buy">
-            <button>Buy ticket</button>
-         
-
+            <button id="buyTicket">Buy ticket</button>
         </div>
-
     </footer>
-    
 
-    
-
+   
 </body>
 </html>

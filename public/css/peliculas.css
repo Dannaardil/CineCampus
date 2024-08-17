@@ -16,10 +16,13 @@ header {
     width: 100%;
     height: 40%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 3rem;
     font-size: 1.5rem;
-    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+   padding-left: 1rem;
+   padding-right: 1rem;
 }
 
 header i {
@@ -31,7 +34,7 @@ main {
     width: 100%;
     height: 80%;
     flex-direction: column;
-    padding: 0.3rem;
+    padding: 1.5rem;
 }
 
 .video-main {
@@ -52,7 +55,7 @@ main {
     display: flex;
     width: 100%;
     height: 10%;
-    justify-content: space-around;
+    justify-content: space-between;
     font-size: 1.5rem;
 }
 
@@ -75,12 +78,10 @@ main {
 .detalle_video-main {
     position: relative;
     display: flex;
-    width: 95%;
-    height: 50%;
+
     flex-direction: column;
-    left: 1rem;
     gap: 2rem;
-    top: 1rem;
+    margin-top: 1rem;
 }
 
 .detalle_video-main .p {

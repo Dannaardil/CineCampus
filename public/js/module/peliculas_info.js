@@ -29,21 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         <img src="${movie.actores[0].actor_img}" alt="${movie.actores[0].actor}">
                         <div>
                             <p class="actor-name">${movie.actores[0].actor}</p>
-                            <p class="actor-role">Puss in Boots</p>
+                            <p class="actor-role">${movie.actores[0].personaje}</p>
                         </div>
                     </div>
                    <div class="actor-info">
                         <img src="${movie.actores[1].actor_img}" alt="${movie.actores[1].actor}">
                         <div>
-                            <p class="actor-name">${movie.actores[2].actor}</p>
-                            <p class="actor-role">Puss in Boots</p>
+                            <p class="actor-name">${movie.actores[1].actor}</p>
+                            <p class="actor-role">${movie.actores[1].personaje}</p>
                         </div>
                     </div>
                    <div class="actor-info">
                         <img src="${movie.actores[2].actor_img}" alt="${movie.actores[2].actor}">
                         <div>
                             <p class="actor-name">${movie.actores[2].actor}</p>
-                            <p class="actor-role">Puss in Boots</p>
+                            <p class="actor-role">${movie.actores[2].personaje}</p>
                         </div>
                     </div>
                 </div>

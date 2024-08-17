@@ -328,6 +328,15 @@ justify-content: space-between;
     background-color: transparent;
 }
 
+.bottom-nav__item.active {
+    color: var(--color6)
+
+}
+
+.bottom-nav__item.active i,
+.bottom-nav__item.active span {color: red;
+    color: var(--color6)
+}
 
 
 }

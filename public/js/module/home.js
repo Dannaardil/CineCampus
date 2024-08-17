@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadMovies();
   loadMoviesComming();
   setupSearch();
+  setupBottomNav();
 });
 let allMovies = [];
 
@@ -45,6 +46,8 @@ async function handleSearch(event) {
     return;
   }
 
+
+
   // Filter movies based on the query
   const filteredMovies = allMovies.filter(movie =>
     movie.titulo.toLowerCase().includes(query) ||
@@ -55,6 +58,30 @@ async function handleSearch(event) {
   // Display filtered movies
   displayMovies(filteredMovies);
 }
+
+// function to redirect to thw input 
+function setupBottomNav() {
+  const navItems = document.querySelectorAll('.bottom-nav__item');
+  
+  navItems.forEach(item => {
+      item.addEventListener('click', (event) => {
+          event.preventDefault();
+          
+          // Remover la clase 'active' de todos los items
+          navItems.forEach(navItem => navItem.classList.remove('active'));
+          
+          // Añadir la clase 'active' al item clickeado
+          item.classList.add('active');
+          
+          // Si es el botón de Browse, enfoca en el input de búsqueda
+          if (item.querySelector('span').textContent === 'Browse') {
+              document.getElementById('searchInput').focus();
+              window.scrollTo(0, 0);
+          }
+      });
+  });
+}
+
 
 // async function loadMoviesById() {
 //   try {

@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="detalle_video-cinema">
-                    <p class="actor-name">Cinema</p>
-                    <div class="cinema-info">
+                    <p class="cinema-name">Cinema</p>
+                    <div class="cinema-info" >
                         <div>
                             <p class="actor-name">Campuslands</p>
                             <p class="actor-role">Zona Franca, Floridablanca</p>
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </main>
 
              <footer>
-                <a href="/seats2">
+                <a href="/seats2" class="button">
                     <button>Book Now</button>
                 </a>
             
@@ -108,6 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 coverImage.style.display = 'none';
                 video.style.display = 'block';
             });
+
+            document.querySelector('.cinema-info').addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
         })
         .catch(error => console.error('Error:', error));
 });
+
+

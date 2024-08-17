@@ -141,7 +141,16 @@ main {
     flex-direction: column;
     height: auto;
     gap: 0.6rem;
+    align-items: space-between;
 }
+.detalle_video-cinema p {
+    font-weight: bold;
+    font-size: 0.9rem;
+    align-self: flex-start;
+    margin-left: 0.8rem;
+
+}
+
 
 .actor-name {
     font-weight: bold;
@@ -161,8 +170,18 @@ main {
     gap: 6rem;
     background: #272727;   
     padding: 0.4rem;
+
+    border: 1px solid transparent;
     border-radius: 0.5rem;
+    cursor: pointer;
+   
 }
+.cinema-info.active{
+    border-color: red; /* Cambia el color del borde después del clic */
+  
+
+}
+
 
 .cinema-info div{
     display: flex;
@@ -194,13 +213,24 @@ footer {
     position: fixed; 
 }
 
-footer button {
-    width: 90%;
+footer  a button {
+    width: 92%;
     text-decoration: none;
     border: none;
     padding: 0.8rem;
     font-size: 1.2em;
     background: red;
     border-radius: 0.5rem;
+    
+}
+footer a{
+    width: 92%;
+    display: flex;
+    margin-left: 1rem;
+    justify-content: space-between;
+    text-decoration: none;
+   
+
+
 }
 

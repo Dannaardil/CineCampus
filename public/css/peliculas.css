@@ -36,6 +36,13 @@ main {
     flex-direction: column;
     padding: 1.5rem;
 }
+.video__container{
+    height: 26vh;
+    margin-bottom: 1rem;
+    border-radius: 0.7rem;
+    overflow: hidden;
+
+}
 
 .video-main {
    height: 26vh;
@@ -43,7 +50,14 @@ main {
    border-radius: 0.7rem;
    overflow: hidden;
 }
-.video-main img{
+/* .cover-main{
+    height: 26vh;
+    margin-bottom: 1rem;
+    border-radius: 0.7rem;
+    overflow: hidden;
+
+} */
+.cover-main img{
     height: 25rem;
    
     width: 100%;
@@ -189,3 +203,4 @@ footer button {
     background: red;
     border-radius: 0.5rem;
 }
+

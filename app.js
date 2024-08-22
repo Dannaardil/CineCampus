@@ -36,7 +36,7 @@ app.get('/movies', (req, res) => {
 
 
 app.use('/seats/', appSeats)
-app.get('/seats2', (req, res) => {
+app.get('/seat/:projectionId', (req, res) => {
   res.sendFile(path.join(__dirname, './public/views/asientos.html'));
 });
 app.get('/api/seats', async (req, res) => {

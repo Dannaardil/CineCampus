@@ -88,7 +88,12 @@
    
 
 }
+.group__seats_f div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+}
 .front__letter {
     display: flex;
     flex-direction: column;
@@ -139,6 +144,13 @@
     display: grid;
     grid-template-columns: repeat(9,1fr);
     margin-top: 3rem;
+
+}
+
+.group__seats div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -292,5 +304,31 @@
 }
 .price :nth-child(2){
 font-weight: bold;
+}
+.available {
+    background-color: var(--color3);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem; /* Green */
+    cursor: pointer;
+}
+.selected {
+    background-color: var(--color6);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem; /* Green */
+    cursor: pointer;
+}
+
+.occupied {
+    background-color: var(--color5);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem;
+
+    cursor: not-allowed;
 }
 }

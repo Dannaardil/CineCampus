@@ -331,4 +331,49 @@ font-weight: bold;
 
     cursor: not-allowed;
 }
+.seat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.row-letter {
+    margin-right: 10px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border: none;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+}
+
+.seat.vip {
+    background-color: #666;
+}
+
+.seat.selected {
+    background-color: #ff0000;
+}
+
+.date-button, .time-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.date-button.active, .time-button.active {
+    background-color: #ff0000;
+}
+
+.projection-type {
+    font-size: 0.8em;
+    color: #999;
+}
 }

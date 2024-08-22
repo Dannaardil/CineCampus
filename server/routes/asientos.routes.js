@@ -65,4 +65,25 @@ appSeats.get('/api/projections/:movieId', async (req, res) => {
     res.status(500).send({ error: 'Internal Server Error' });
   }
   });
+  appSeats.get('/api/projections/week/:movieId', async (req, res) => {
+    try {
+        const projectionsservice = new projectionsService();
+        const projections = await projectionsservice.getProjectionsForWeek(req.params.movieId);
+        res.send(projections);
+    } catch (error) {
+        console.error('Error fetching projections for week:', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+    }
+});
+
+appSeats.get('/api/sala/:salaId', async (req, res) => {
+    try {
+        const projectionsservice = new projectionsService();
+        const salaDetails = await projectionsservice.getSalaDetails(req.params.salaId);
+        res.send(salaDetails);
+    } catch (error) {
+        console.error('Error fetching sala details:', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+    }
+});
 module.exports = appSeats;

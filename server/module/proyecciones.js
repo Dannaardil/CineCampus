@@ -159,6 +159,45 @@ class projectionsService {
             throw error;
         }
     }
+    async getProjectionsForWeek(movieId) {
+        try {
+            const db = await this.connection.connect();
+            const proyecciones = db.collection('proyecciones');
+            const today = new Date();
+            const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+            let data = await proyecciones.find({
+                pelicula_id: parseInt(movieId),
+                inicio: { $gte: today, $lt: oneWeekLater }
+            }).toArray();
+            console.log(data)
+            return data
+        } catch (error) {
+            console.error('Error fetching projections for week:', error);
+            throw error;
+        }
+    }
+
+    async getMovieDetails(movieId) {
+        try {
+            const db = await this.connection.connect();
+            const peliculas = db.collection('peliculas');
+            return await peliculas.findOne({ id: parseInt(movieId) });
+        } catch (error) {
+            console.error('Error fetching movie details:', error);
+            throw error;
+        }
+    }
+
+    async getSalaDetails(salaId) {
+        try {
+            const db = await this.connection.connect();
+            const salas = db.collection('salas');
+            return await salas.findOne({ numero: parseInt(salaId) });
+        } catch (error) {
+            console.error('Error fetching sala details:', error);
+            throw error;
+        }
+    }
 
     async close() {
         await this.connection.close();

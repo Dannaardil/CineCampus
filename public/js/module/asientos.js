@@ -13,6 +13,7 @@ async function init() {
         state.weekProjections = await fetchProjections(state.movieId);
         if (state.weekProjections.length) {
             displayDates(state.weekProjections);
+            await selectFirstAvailableDateTime(); // Make this call async
         } else {
             throw new Error('No projections available for this movie');
         }
@@ -21,7 +22,23 @@ async function init() {
         alert('Failed to load movie information: ' + error.message);
     }
 }
-
+async function selectFirstAvailableDateTime() {
+    if (state.weekProjections.length > 0) {
+        const firstProjection = state.weekProjections[0];
+        const firstDate = new Date(firstProjection.inicio);
+        const firstDayElement = document.querySelector('.day');
+        
+        if (firstDayElement) {
+            selectDate(firstDate, firstDayElement);
+            
+            // Select the first projection time
+            const firstTimeElement = document.querySelector('.time');
+            if (firstTimeElement) {
+                await selectProjection(firstProjection, firstTimeElement);
+            }
+        }
+    }
+}
 async function fetchSeatAvailability(movieId) {
     const response = await fetch(`/seats/withAvailability/${movieId}`);
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
@@ -32,6 +49,7 @@ async function fetchProjections(movieId) {
     const response = await fetch(`/seats/api/projections/week/${movieId}`);
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     const data = await response.json();
+    console.log('Fetched projections:', data); // Add this line
     return Array.isArray(data[0]) ? data.flat() : data;
 }
 
@@ -60,7 +78,7 @@ function selectDate(date, element) {
     element.classList.add('active');
     const projectionsForDate = state.weekProjections.filter(p => new Date(p.inicio).toDateString() === date.toDateString());
     displayProjectionTimes(projectionsForDate);
-    clearSeats();
+    // Remove the clearSeats() call from here
 }
 
 function displayProjectionTimes(projections) {
@@ -70,21 +88,39 @@ function displayProjectionTimes(projections) {
     projections.forEach((projection) => {
         const timeDiv = document.createElement('div');
         timeDiv.className = 'time';
-        timeDiv.innerHTML = `<p>${formatTime(projection.inicio)}</p><p>$${projection.precio.toFixed(2)}</p>`;
+        const formattedTime = formatTime(projection.inicio);
+        timeDiv.innerHTML = `
+            <p>${formattedTime}</p>
+            <p>$${projection.precio.toFixed(2)}</p>
+            
+        `;
         timeDiv.addEventListener('click', () => selectProjection(projection, timeDiv));
         timesContainer.appendChild(timeDiv);
     });
 }
 
 function formatTime(timeString) {
-    return new Date(timeString).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const date = new Date(timeString);
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 24h to 12h format
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    return `${formattedHours}:${formattedMinutes} ${ampm}`;
 }
 
 async function selectProjection(projection, element) {
     try {
+        state.selectedProjection = {
+            ...projection,
+            precio: parseFloat(projection.precio)};
+            
         state.selectedProjection = projection;
         document.querySelectorAll('.time').forEach(time => time.classList.remove('active'));
         element.classList.add('active');
+
+        // Clear seats before fetching new ones
+        clearSeats();
 
         const seatAvailability = await fetchSeatAvailability(state.movieId);
         const currentProjectionSeats = seatAvailability.find(p => p.projectionId === projection.id);
@@ -92,6 +128,7 @@ async function selectProjection(projection, element) {
         if (currentProjectionSeats) {
             displaySeats(currentProjectionSeats.seats);
             updateSeatAvailability(currentProjectionSeats.seats);
+            updatePrice(); 
         } else {
             throw new Error('Seat information not found for this projection');
         }
@@ -117,7 +154,10 @@ function displaySeats(seats) {
         const seatDiv = document.createElement('div');
         seatDiv.id = seat.fila + seat.numero;
         seatDiv.className = (seat.fila === 'A' || seat.fila === 'B') ? 'front__seat' : 'back__seat';
+        seatDiv.classList.add(seat.tipo.toLowerCase()); // Add 'vip' or 'regular' class
+        seatDiv.classList.add(seat.available ? 'available' : 'occupied');
         seatDiv.textContent = seatDiv.id;
+        seatDiv.dataset.priceModifier = seat.tipo.toLowerCase() === 'vip' ? 1.5 : 1; // Example price modifier
         seatDiv.addEventListener('click', () => toggleSeatSelection(seatDiv, seat));
 
         (seat.fila === 'A' || seat.fila === 'B' ? frontSeatsContainer : backSeatsContainer).appendChild(seatDiv);
@@ -144,11 +184,15 @@ function toggleSeatSelection(seatElement, seatInfo) {
 
     const seatId = seatElement.id;
     if (seatElement.classList.contains('selected')) {
-        if (!state.selectedSeats.includes(seatId)) {
-            state.selectedSeats.push(seatId);
+        if (!state.selectedSeats.some(seat => seat.id === seatId)) {
+            state.selectedSeats.push({
+                id: seatId,
+                type: seatInfo.tipo,
+                priceModifier: parseFloat(seatElement.dataset.priceModifier)
+            });
         }
     } else {
-        state.selectedSeats = state.selectedSeats.filter(seat => seat !== seatId);
+        state.selectedSeats = state.selectedSeats.filter(seat => seat.id !== seatId);
     }
     updatePrice();
 }
@@ -156,8 +200,17 @@ function toggleSeatSelection(seatElement, seatInfo) {
 
 function updatePrice() {
     const priceElement = document.querySelector('.price p:last-child');
-    const totalPrice = state.selectedProjection ? state.selectedProjection.precio * state.selectedSeats.length : 0;
-    priceElement.textContent = `$${totalPrice.toFixed(2)}`;
+    let totalPrice = 0;
+    
+    if (state.selectedProjection && state.selectedProjection.precio) {
+        state.selectedSeats.forEach(seat => {
+            const basePrice = parseFloat(state.selectedProjection.precio);
+            const seatPrice = basePrice * seat.priceModifier;
+            totalPrice += seatPrice;
+        });
+    }
+    
+    priceElement.textContent = Number.isFinite(totalPrice) ? `$${totalPrice.toFixed(2)}` : '$0.00';
 }
 
 function clearSeats() {
@@ -171,10 +224,16 @@ document.querySelector('.buy button').addEventListener('click', () => {
     if (!state.selectedSeats.length) {
         alert('Please select at least one seat before buying a ticket.');
     } else {
-        alert(`You've selected ${state.selectedSeats.length} seat(s) for a total of ${document.querySelector('.price p:last-child').textContent}`);
+        let message = 'You\'ve selected:\n';
+        state.selectedSeats.forEach(seat => {
+            const basePrice = state.selectedProjection.precio;
+            const seatPrice = basePrice * seat.priceModifier;
+            message += `${seat.id} (${seat.type}): $${seatPrice.toFixed(2)}\n`;
+        });
+        message += `\nTotal: ${document.querySelector('.price p:last-child').textContent}`;
+        alert(message);
     }
 });
-
 document.getElementById('back-pelicula_detalle').addEventListener('click', e => {
     e.preventDefault();
     window.history.back();

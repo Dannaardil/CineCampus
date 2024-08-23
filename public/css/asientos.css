@@ -263,13 +263,14 @@
    justify-content: center;
    align-items: center;
    gap:0.2rem;
+   padding:0.2rem;
    background-color: gray;
    border-radius: 0.6rem;
 }
 .time :nth-child(1){
     background-color: transparent;
 
-    font-size: larger;
+    font-size: medium;
     font-weight: 500;
 }
 .time :nth-child(2){
@@ -402,6 +403,13 @@ font-weight: bold;
     border-radius: 0.3rem;
     font-size: 0.8em;
 }
+.active{
+     
+  
+   background-color: var(--color6)
+  
+
+}
 
 .available {
     background-color: var(--color3);
@@ -411,8 +419,5 @@ font-weight: bold;
     background-color: var(--color6);
 }
 
-.occupied {
-    background-color: red;
-    cursor: not-allowed;
-}
+
 }

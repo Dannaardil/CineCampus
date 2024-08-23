@@ -376,4 +376,43 @@ font-weight: bold;
     font-size: 0.8em;
     color: #999;
 }
+.front__seat, .back__seat {
+    cursor: pointer;
+}
+
+.available {
+    background-color: #444; /* Dark gray for available seats */
+}
+
+.selected {
+    background-color: #ff0000; /* Red for selected seats */
+}
+
+.occupied {
+    background-color: #888; /* Light gray for occupied seats */
+    cursor: not-allowed;
+}
+.front__seat, .back__seat {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem;
+    font-size: 0.8em;
+}
+
+.available {
+    background-color: var(--color3);
+}
+
+.selected {
+    background-color: var(--color6);
+}
+
+.occupied {
+    background-color: var(--color5);
+    cursor: not-allowed;
+}
 }

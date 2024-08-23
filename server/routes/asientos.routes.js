@@ -69,10 +69,14 @@ appSeats.get('/api/projections/:movieId', async (req, res) => {
     try {
         const projectionsservice = new projectionsService();
         const projections = await projectionsservice.getProjectionsForWeek(req.params.movieId);
+        if (projections.length === 0) {
+            console.log('No projections found for movie ID:', req.params.movieId);
+            return res.status(404).send({ message: 'No projections available for this movie' });
+        }
         res.send(projections);
     } catch (error) {
         console.error('Error fetching projections for week:', error);
-        res.status(500).send({ error: 'Internal Server Error' });
+        res.status(500).send({ error: 'Internal Server Error', details: error.message });
     }
 });
 

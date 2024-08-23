@@ -162,18 +162,18 @@ class projectionsService {
     async getProjectionsForWeek(movieId) {
         try {
             const db = await this.connection.connect();
-            const proyecciones = db.collection('proyecciones');
+            const proyecciones = db.collection('proyecciones'); // Define proyecciones here
             const today = new Date();
-            const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+            const oneYearLater = new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000);
             let data = await proyecciones.find({
                 pelicula_id: parseInt(movieId),
-                inicio: { $gte: today, $lt: oneWeekLater }
+                inicio: { $gte: today, $lt: oneYearLater }
             }).toArray();
-            console.log(data)
-            return data
+            console.log('Projections found:', data);
+            return data;
         } catch (error) {
             console.error('Error fetching projections for week:', error);
-            throw error;
+            throw error; // Rethrow the error so it can be caught in the route handler
         }
     }
 

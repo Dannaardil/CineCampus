@@ -6,28 +6,40 @@
     <title>Choose Seats</title>
     <link rel="stylesheet" href="../css/asientos.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="../js/module/asientos.js"></script>
 </head>
 <body>
     <header class="choose__seat">
-        <a href="/movies">
-            <i class='bx bx-chevron-left'></i>
-        </a>
-        
+        <a id="back-pelicula_detalle" href="#"><i class='bx bx-chevron-left'></i></a>
         <h4>Choose Seat</h4>
         <i class='bx bx-menu-alt-right'></i>
     </header>
-
     <main class="teather">
         <section class="screen">
-            <img src="../img/screen2.jpg" alt="screen">
+            <img src="../img/image1.webp" alt="screen">
             <p>Screen This way</p>
         </section>
-
-        <section id="seatsContainer" class="seats">
-            <!-- Seats will be dynamically inserted here -->
+        <section class="seats">
+            <div class="front__seats">
+                <div class="front__letter">
+                    <p>A</p>
+                    <p>B</p>
+                </div>
+                <div id="frontSeatsContainer" class="group__seats_f">
+                    <!-- Front seats will be dynamically inserted here -->
+                </div>
+            </div>
+            <div class="back__seats">
+                <div class="back__letter">
+                    <p>C</p>
+                    <p>D</p>
+                    <p>E</p>
+                    <p>F</p>
+                </div>
+                <div id="backSeatsContainer" class="group__seats">
+                    <!-- Back seats will be dynamically inserted here -->
+                </div>
+            </div>    
         </section>
-
         <div class="conventions">
             <i class='bx bxs-circle'></i>
             <p>Available</p>
@@ -36,26 +48,24 @@
             <i class='bx bxs-circle'></i>
             <p>Selected</p>
         </div>
-
-        <section id="dateContainer" class="dates">
-            <!-- Date buttons will be dynamically inserted here -->
-        </section>
-
-        <section id="projectionsContainer" class="projections">
-            <!-- Projections will be dynamically inserted here -->
+        <section class="dates">
+            <div class="days">
+                <!-- Date buttons will be dynamically inserted here -->
+            </div>
+            <div class="times">
+                <!-- Time buttons will be dynamically inserted here -->
+            </div>
         </section>
     </main>
-
     <footer class="payment">
         <div class="price">
             <p>Price</p>
-            <p id="totalPrice">$0.00</p>
+            <p>$0.00</p>
         </div>
         <div class="buy">
-            <button id="buyTicket">Buy ticket</button>
+            <button>Buy ticket</button>
         </div>
     </footer>
-
-   
+    <script type="module" src="../js/module/asientos.js" defer></script>
 </body>
 </html>

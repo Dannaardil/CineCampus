@@ -1,35 +1,38 @@
-let selectedProjection = null;
-let selectedSeats = [];
-let movieId = window.location.pathname.split('/').pop();
-let weekProjections = [];
+let state = {
+    movieId: window.location.pathname.split('/').pop(),
+    weekProjections: [],
+    selectedDate: null,
+    selectedProjection: null,
+    selectedSeats: []
+};
 
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     try {
-        weekProjections = await fetchProjections(movieId);
-        if (weekProjections.length) {
-            displayDates(weekProjections);
-            displayProjectionTimes(weekProjections);
-            await initializeSeats();
+        state.weekProjections = await fetchProjections(state.movieId);
+        if (state.weekProjections.length) {
+            displayDates(state.weekProjections);
         } else {
-            alert('No projections available for this movie');
+            throw new Error('No projections available for this movie');
         }
     } catch (error) {
-        alert('Failed to load projection information: ' + error.message);
+        console.error('Initialization error:', error);
+        alert('Failed to load movie information: ' + error.message);
     }
 }
 
+async function fetchSeatAvailability(movieId) {
+    const response = await fetch(`/seats/withAvailability/${movieId}`);
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+    return await response.json();
+}
+
 async function fetchProjections(movieId) {
-    try {
-        const response = await fetch(`/seats/api/projections/week/${movieId}`);
-        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-        let data = await response.json();
-        return Array.isArray(data[0]) ? data.flat() : data;
-    } catch (error) {
-        console.error('Error fetching projections:', error);
-        return [];
-    }
+    const response = await fetch(`/seats/api/projections/week/${movieId}`);
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+    const data = await response.json();
+    return Array.isArray(data[0]) ? data.flat() : data;
 }
 
 function displayDates(projections) {
@@ -37,13 +40,12 @@ function displayDates(projections) {
     daysContainer.innerHTML = '';
     const dates = [...new Set(projections.map(p => new Date(p.inicio).toDateString()))];
 
-    dates.forEach((dateString, index) => {
+    dates.forEach((dateString) => {
         const date = new Date(dateString);
         const dayDiv = document.createElement('div');
         dayDiv.className = 'day';
         dayDiv.innerHTML = `<p>${formatDay(date)}</p><p>${date.getDate()}</p>`;
         dayDiv.addEventListener('click', () => selectDate(date, dayDiv));
-        if (index === 0) dayDiv.classList.add('active');
         daysContainer.appendChild(dayDiv);
     });
 }
@@ -53,26 +55,25 @@ function formatDay(date) {
 }
 
 function selectDate(date, element) {
+    state.selectedDate = date;
     document.querySelectorAll('.day').forEach(day => day.classList.remove('active'));
     element.classList.add('active');
-    const projectionsForDate = weekProjections.filter(p => new Date(p.inicio).toDateString() === date.toDateString());
+    const projectionsForDate = state.weekProjections.filter(p => new Date(p.inicio).toDateString() === date.toDateString());
     displayProjectionTimes(projectionsForDate);
+    clearSeats();
 }
 
 function displayProjectionTimes(projections) {
     const timesContainer = document.querySelector('.times');
     timesContainer.innerHTML = '';
     
-    projections.forEach((projection, index) => {
+    projections.forEach((projection) => {
         const timeDiv = document.createElement('div');
         timeDiv.className = 'time';
         timeDiv.innerHTML = `<p>${formatTime(projection.inicio)}</p><p>$${projection.precio.toFixed(2)}</p>`;
         timeDiv.addEventListener('click', () => selectProjection(projection, timeDiv));
-        if (index === 0) timeDiv.classList.add('active');
         timesContainer.appendChild(timeDiv);
     });
-
-    if (projections.length) selectProjection(projections[0], timesContainer.firstChild);
 }
 
 function formatTime(timeString) {
@@ -80,32 +81,30 @@ function formatTime(timeString) {
 }
 
 async function selectProjection(projection, element) {
-    selectedProjection = projection;
-    document.querySelectorAll('.time').forEach(time => time.classList.remove('active'));
-    element.classList.add('active');
-
     try {
-        const salaDetails = await fetchSalaDetails(projection.sala_id);
-        updateSeatAvailability(salaDetails.asientos);
-        updatePrice();
+        state.selectedProjection = projection;
+        document.querySelectorAll('.time').forEach(time => time.classList.remove('active'));
+        element.classList.add('active');
+
+        const seatAvailability = await fetchSeatAvailability(state.movieId);
+        const currentProjectionSeats = seatAvailability.find(p => p.projectionId === projection.id);
+
+        if (currentProjectionSeats) {
+            displaySeats(currentProjectionSeats.seats);
+            updateSeatAvailability(currentProjectionSeats.seats);
+        } else {
+            throw new Error('Seat information not found for this projection');
+        }
     } catch (error) {
-        alert('Failed to load seat information');
+        console.error('Error selecting projection:', error);
+        alert('Failed to load seat information: ' + error.message);
     }
 }
 
 async function fetchSalaDetails(salaId) {
     const response = await fetch(`/seats/api/sala/${salaId}`);
-    if (!response.ok) throw new Error('Failed to fetch sala details');
+    if (!response.ok) throw new Error(`Failed to fetch sala details: HTTP ${response.status}`);
     return await response.json();
-}
-
-async function initializeSeats() {
-    if (weekProjections.length) {
-        const firstProjection = weekProjections[0];
-        const salaDetails = await fetchSalaDetails(firstProjection.sala_id);
-        displaySeats(salaDetails.asientos);
-        updateSeatAvailability(salaDetails.asientos);
-    }
 }
 
 function displaySeats(seats) {
@@ -119,44 +118,60 @@ function displaySeats(seats) {
         seatDiv.id = seat.fila + seat.numero;
         seatDiv.className = (seat.fila === 'A' || seat.fila === 'B') ? 'front__seat' : 'back__seat';
         seatDiv.textContent = seatDiv.id;
-        seatDiv.classList.add('available');
-        seatDiv.addEventListener('click', () => toggleSeatSelection(seatDiv));
+        seatDiv.addEventListener('click', () => toggleSeatSelection(seatDiv, seat));
 
         (seat.fila === 'A' || seat.fila === 'B' ? frontSeatsContainer : backSeatsContainer).appendChild(seatDiv);
     });
 }
 
-function updateSeatAvailability(availableSeats) {
-    document.querySelectorAll('.front__seat, .back__seat').forEach(seat => {
-        const seatInfo = availableSeats.find(s => s.fila + s.numero === seat.id);
-        seat.className = seatInfo && seatInfo.available ? 'available' : 'occupied';
+function updateSeatAvailability(seats) {
+    seats.forEach(seat => {
+        const seatElement = document.getElementById(seat.fila + seat.numero);
+        if (seatElement) {
+            seatElement.className = seat.available ? 'available' : 'occupied';
+            seatElement.classList.remove('selected');
+        }
     });
-    selectedSeats = [];
+    state.selectedSeats = [];
     updatePrice();
 }
 
-function toggleSeatSelection(seatElement) {
-    if (seatElement.classList.contains('occupied')) return;
+function toggleSeatSelection(seatElement, seatInfo) {
+    if (!seatInfo.available) return;
 
-    if (seatElement.classList.toggle('selected')) {
-        selectedSeats.push(seatElement.id);
+    seatElement.classList.toggle('selected');
+    seatElement.classList.toggle('available');
+
+    const seatId = seatElement.id;
+    if (seatElement.classList.contains('selected')) {
+        if (!state.selectedSeats.includes(seatId)) {
+            state.selectedSeats.push(seatId);
+        }
     } else {
-        selectedSeats = selectedSeats.filter(seat => seat !== seatElement.id);
+        state.selectedSeats = state.selectedSeats.filter(seat => seat !== seatId);
     }
     updatePrice();
 }
 
+
 function updatePrice() {
     const priceElement = document.querySelector('.price p:last-child');
-    const totalPrice = selectedProjection ? selectedProjection.precio * selectedSeats.length : 0;
+    const totalPrice = state.selectedProjection ? state.selectedProjection.precio * state.selectedSeats.length : 0;
     priceElement.textContent = `$${totalPrice.toFixed(2)}`;
 }
 
+function clearSeats() {
+    document.getElementById('frontSeatsContainer').innerHTML = '';
+    document.getElementById('backSeatsContainer').innerHTML = '';
+    state.selectedSeats = [];
+    updatePrice();
+}
+
 document.querySelector('.buy button').addEventListener('click', () => {
-    if (!selectedSeats.length) {
+    if (!state.selectedSeats.length) {
         alert('Please select at least one seat before buying a ticket.');
     } else {
-        alert(`You've selected ${selectedSeats.length} seat(s) for a total of ${document.querySelector('.price p:last-child').textContent}`);
+        alert(`You've selected ${state.selectedSeats.length} seat(s) for a total of ${document.querySelector('.price p:last-child').textContent}`);
     }
 });
 

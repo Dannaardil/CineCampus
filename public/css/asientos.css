@@ -412,7 +412,7 @@ font-weight: bold;
 }
 
 .occupied {
-    background-color: var(--color5);
+    background-color: red;
     cursor: not-allowed;
 }
 }

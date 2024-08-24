@@ -208,31 +208,33 @@ function updateSeatAvailability(seats) {
 function toggleSeatSelection(seatElement, seatInfo) {
     if (!seatInfo.available) return;
 
+    const seatId = seatInfo.fila + seatInfo.numero;
+
+    // If a seat is already selected and it's not the current seat, show message and return
+    if (state.selectedSeats.length > 0 && !state.selectedSeats.some(seat => seat.id === seatId)) {
+        alert("Please select only one seat. Deselect the current seat to choose a different one.");
+        return;
+    }
+
+    // Toggle the current seat
     seatElement.classList.toggle('selected');
     seatElement.classList.toggle('available');
 
     // Show or hide the seat number based on selection
     if (seatElement.classList.contains('selected')) {
         seatElement.textContent = seatElement.dataset.seatNumber;
+        state.selectedSeats = [{
+            id: seatId,
+            type: seatInfo.tipo,
+            priceModifier: parseFloat(seatElement.dataset.priceModifier)
+        }];
     } else {
         seatElement.textContent = '';
+        state.selectedSeats = [];
     }
 
-    const seatId = seatInfo.fila + seatInfo.numero;
-    if (seatElement.classList.contains('selected')) {
-        if (!state.selectedSeats.some(seat => seat.id === seatId)) {
-            state.selectedSeats.push({
-                id: seatId,
-                type: seatInfo.tipo,
-                priceModifier: parseFloat(seatElement.dataset.priceModifier)
-            });
-        }
-    } else {
-        state.selectedSeats = state.selectedSeats.filter(seat => seat.id !== seatId);
-    }
     updatePrice();
 }
-
 
 function updatePrice() {
     const priceElement = document.querySelector('.price p:last-child');

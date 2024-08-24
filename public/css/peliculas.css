@@ -223,6 +223,12 @@ footer  a button {
     border-radius: 0.5rem;
     
 }
+ /* Estilos del botón cuando está deshabilitado */
+ #book-now:disabled {
+    background-color: rgba(255, 0, 0, 0.445); /* Color más claro cuando está deshabilitado */
+    cursor: not-allowed;
+    /* Desactivar el puntero */
+}
 footer a{
     width: 92%;
     display: flex;

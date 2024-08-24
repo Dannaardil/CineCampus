@@ -60,7 +60,10 @@ app.get('/api/projections/:movieId', async (req, res) => {
   }
 });
 
-app.use('/', appPayments);
+app.use('/pay/', appPayments);
+app.get('/all/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/views/pagos.html'));
+});
 
 app.use('/', appTicket)
 

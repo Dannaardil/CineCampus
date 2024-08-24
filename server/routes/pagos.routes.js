@@ -3,7 +3,7 @@ const payService = require('../module/pagos.js'); // Import the payService
 
 const appPayments = express.Router();
 
-appPayments.post('/pay', async (req, res) => {
+appPayments.post('/payment', async (req, res) => {
   try {
     const { proyeccion_id, usuario_id, asiento, metodo_pago } = req.body;
     const paymentService = new payService();

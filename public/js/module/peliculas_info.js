@@ -3,20 +3,14 @@ function getYouTubeVideoID(url) {
     let videoID;
 
     if (urlObj.pathname.startsWith('/embed/')) {
-        // El ID del video es la parte después de "/embed/"
         videoID = urlObj.pathname.split('/embed/')[1].split('?')[0];
     } else {
-        // Maneja otros casos (como con "v=")
         const urlParams = new URLSearchParams(urlObj.search);
         videoID = urlParams.get('v');
     }
 
     return videoID;
 }
-
-// Ejemplo de uso
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const movieId = window.location.pathname.split('/').pop();
@@ -31,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
              <header>
                 <a href="/movies/"><i class='bx bx-chevron-left'></i></a>
                 <h4>Cinema Selection</h4>
-                <i class='bx bx-dots-vertical-rounded'></i>
+                <i class="bi bi-three-dots-vertical"></i>
             </header>
             <main id="main">
             <section class="video__container">
                 <div id="cover-container" class="cover-main">
-                    <img id="cover-image"  src=${movie.poster_url} alt=${movie.titulo}>
+                    <img id="cover-image" src=${movie.poster_url} alt=${movie.titulo}>
                 </div>
                 <lite-youtube id="video-main" class="video-main" videoid="${videoId}" style="display:none;"></lite-youtube>
             </section>
@@ -79,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="detalle_video-cinema">
                     <p class="cinema-name">Cinema</p>
-                    <div class="cinema-info" >
+                    <div id="cinema-selection" class="cinema-info" >
+                    <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHE7i80RsNKcg/company-logo_200_200/company-logo_200_200/0/1681242172220/campuslands_logo?e=2147483647&v=beta&t=fD-jCUuIRu8uYnOn-t6IIQuXyO9tEtwsZ39CkM8zlI0" alt="Campuslands">
                         <div>
                             <p class="actor-name">Campuslands</p>
                             <p class="actor-role">Zona Franca, Floridablanca</p>
@@ -91,9 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
              <footer>
                 <a href="/seat/${movie.id}" class="button">
-                    <button>Book Now</button>
+                    <button id="book-now" disabled>Book Now</button>
                 </a>
-            
             </footer>
             `;
 
@@ -108,11 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 video.style.display = 'block';
             });
 
-            document.querySelector('.cinema-info').addEventListener('click', function() {
+            const cinemaSelection = document.getElementById('cinema-selection');
+            const bookNowButton = document.getElementById('book-now');
+
+            // Event Listener para seleccionar un cine
+            cinemaSelection.addEventListener('click', function() {
                 this.classList.toggle('active');
+                bookNowButton.disabled = !this.classList.contains('active');
             });
         })
         .catch(error => console.error('Error:', error));
 });
-
-

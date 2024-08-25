@@ -30,36 +30,60 @@ async function loadMoviesComming() {
 }
 
 // Setup Search Functionality
+
+// Setup Search Functionality
 function setupSearch() {
+
   const searchInput = document.querySelector('.search_bar input');
+  const browseButton = document.querySelector('.bottom-nav__item:nth-child(2)'); // Select the Browse button
+
   searchInput.addEventListener('input', handleSearch);
   searchInput.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
           handleSearch(event);
       }
   });
+
+  // Add focus event listener to the search input
+  searchInput.addEventListener('focus', () => {
+      // Remove 'active' class from all nav items
+      document.querySelectorAll('.bottom-nav__item').forEach(item => {
+          item.classList.remove('active');
+      });
+      // Add 'active' class to the Browse button
+      browseButton.classList.add('active');
+  });
 }
 
 // Handle Search Input
+// Handle Search Input
 async function handleSearch(event) {
-  const query = event.target.value.trim().toLowerCase();
-  clearContainers();
+    const query = event.target.value.trim().toLowerCase();
 
-  if (query.length === 0) {
-      loadMovies();
-      loadMoviesComming();
-      return;
-  }
 
-  const filteredMovies = allMovies.filter(movie =>
-      movie.titulo.toLowerCase().includes(query) ||
-      movie.genero.toLowerCase().includes(query) ||
-      (movie.actores && movie.actores.some(actor => actor.actor.toLowerCase().includes(query)))
-  );
+    clearContainers();
+    
+    if (query.length === 0) {
+        loadingDots.style.display = 'none';
+        loadMovies();
+        loadMoviesComming();
+        return;
+    }
 
-  displayMovies(filteredMovies);
+
+
+
+
+    const filteredMovies = allMovies.filter(movie =>
+        movie.titulo.toLowerCase().includes(query) ||
+        movie.genero.toLowerCase().includes(query) ||
+        (movie.actores && movie.actores.some(actor => actor.actor.toLowerCase().includes(query)))
+    );
+
+    displayMovies(filteredMovies);
+
+ 
 }
-
 // Setup Bottom Navigation
 function setupBottomNav() {
   const navItems = document.querySelectorAll('.bottom-nav__item');

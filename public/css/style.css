@@ -175,14 +175,24 @@
         gap: 1em;
     }
 
-    .comming__soon__carrusel {
+    .comming__soon__carrusel a{
         display: flex;
+        width: 100%;
         gap: 1rem;
         margin: 0 0.5rem;
         padding: 0.5rem;
         align-items: center;
         background-color: #272727;
         border-radius: 1.5em;
+     text-decoration: none;
+
+       
+    }
+    .comming__soon__carrusel{
+        display: flex;
+        align-items: center;
+        width: 100%;
+       
     }
 
     .comming__soon__carrusel img {
@@ -199,6 +209,7 @@
     .comming__soon__carrusel p {
         font-size: 0.8em;
         background-color: transparent;
+     margin-left: 4rem;
     }
 
     /* BOTTOM NAVIGATION */

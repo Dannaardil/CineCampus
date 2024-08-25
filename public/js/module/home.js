@@ -97,14 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayMovies(movies) {
     const movieContainer = document.querySelector('.movie__carrusel');
     movieContainer.innerHTML = movies.map(movie => `
-        <div class="movie__carrusel__cover">
-            <a href="/movie/${movie.id}">  
-                <img src="${movie.poster_url}" alt="${movie.titulo}">
-                <h4>${movie.titulo}</h4>
-                <p>${movie.genero}</p>
-            </a>
-        </div>
+      <div class="movie__carrusel__cover">
+        <a href="/movie/${movie.id}">
+          <img src="${movie.poster_url}" alt="${movie.titulo}">
+          <h4>${movie.titulo}</h4>
+          <p>${movie.genero}</p>
+        </a>
+      </div>
     `).join('');
+  
+    setupCarouselPagination(); // Add this line
   }
   
   // Display Coming Soon Movies
@@ -119,4 +121,36 @@ document.addEventListener('DOMContentLoaded', () => {
             </a>
         </div>
     `).join('');
+  }
+  function createPaginationDots(movieCount) {
+    const paginationContainer = document.querySelector('.pagination-dots');
+    paginationContainer.innerHTML = '';
+    for (let i = 0; i < movieCount; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('pagination-dot');
+      if (i === 0) dot.classList.add('active');
+      paginationContainer.appendChild(dot);
+    }
+  }
+  
+  function updatePaginationDots(currentIndex) {
+    const dots = document.querySelectorAll('.pagination-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+  
+  function setupCarouselPagination() {
+    const movieCarousel = document.querySelector('.movie__carrusel');
+    const movieCount = movieCarousel.children.length;
+    createPaginationDots(movieCount);
+  
+    let currentIndex = 0;
+    movieCarousel.addEventListener('scroll', () => {
+      const newIndex = Math.round(movieCarousel.scrollLeft / movieCarousel.offsetWidth);
+      if (newIndex !== currentIndex) {
+        currentIndex = newIndex;
+        updatePaginationDots(currentIndex);
+      }
+    });
   }

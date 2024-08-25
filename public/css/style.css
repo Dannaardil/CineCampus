@@ -256,4 +256,29 @@
     .bottom-nav__item.active span {
         color: var(--color6);
     }
+    .carousel-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 0;
+      }
+      
+      .pagination-dots {
+        display: flex;
+        gap: 0.5rem;
+      }
+      
+      .pagination-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #555;
+        transition: all 0.3s ease;
+      }
+      
+      .pagination-dot.active {
+        width: 20px;
+        border-radius: 4px;
+        background-color: var(--color6);
+      }
 }

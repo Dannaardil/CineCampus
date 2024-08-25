@@ -9,17 +9,20 @@ let state = {
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
+    showLoader('Loading movie information...');
     try {
         state.weekProjections = await fetchProjections(state.movieId);
         if (state.weekProjections.length) {
             displayDates(state.weekProjections);
-            await selectFirstAvailableDateTime(); // Make this call async
+            await selectFirstAvailableDateTime();
         } else {
             throw new Error('No projections available for this movie');
         }
     } catch (error) {
         console.error('Initialization error:', error);
         alert('Failed to load movie information: ' + error.message);
+    } finally {
+        hideLoader();
     }
 }
 async function selectFirstAvailableDateTime() {
@@ -43,6 +46,24 @@ async function fetchSeatAvailability(movieId) {
     const response = await fetch(`/seats/withAvailability/${movieId}`);
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return await response.json();
+}
+function showLoader(message = 'Loading...') {
+    const overlay = document.createElement('div');
+    overlay.className = 'loading-overlay';
+    overlay.innerHTML = `
+        <div class='loader__container'>
+            <div class="loader"></div>
+            <div class="loading-text">${message}</div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+}
+
+function hideLoader() {
+    const overlay = document.querySelector('.loading-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
 }
 
 async function fetchProjections(movieId) {
@@ -111,6 +132,7 @@ function formatTime(timeString) {
 }
 
 async function selectProjection(projection, element) {
+    showLoader('Loading seat information...');
     try {
         state.selectedProjection = {
             ...projection,
@@ -138,6 +160,8 @@ async function selectProjection(projection, element) {
     } catch (error) {
         console.error('Error selecting projection:', error);
         alert('Failed to load seat information: ' + error.message);
+    }finally {
+        hideLoader();
     }
 }
 
@@ -262,6 +286,8 @@ document.querySelector('.buy button').addEventListener('click', async () => {
     if (!state.selectedSeats.length) {
         alert('Please select at least one seat before buying a ticket.');
     } else {
+      
+            showLoader('Processing your order...');
         try {
             let movieId = window.location.pathname.split('/').pop();
             const movieResponse = await fetch(`/api/movies/${movieId}`);
@@ -284,6 +310,8 @@ document.querySelector('.buy button').addEventListener('click', async () => {
         } catch (error) {
             console.error('Error fetching movie details:', error);
             alert('Failed to process your order. Please try again.');
+        }finally {
+            hideLoader();
         }
     }
 });

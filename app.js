@@ -69,6 +69,9 @@ app.use('/', appTicket)
 
 app.use('/', appUsers)
 
+app.get('/ticket/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/views/ticket.html'));
+});
 
 app.listen({host: process.env.EXPRESS_HOST, port: process.env.EXPRESS_PORT},()=>{
     console.log(`http://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}`)

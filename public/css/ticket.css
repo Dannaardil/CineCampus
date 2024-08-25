@@ -148,15 +148,15 @@ header i {
 }
 
 .info1 {
-    gap: 3.5rem;
-}
-
-.info2 {
     gap: 6rem;
 }
 
+.info2 {
+    gap: 4.5rem;
+}
+
 .info3 {
-    gap: 9rem;
+    gap: 8.3rem;
 }
 
 .info1 , .info2 , .info3 , .cinema__bottom {

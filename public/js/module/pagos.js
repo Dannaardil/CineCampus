@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generate random order number
         const orderNumber = generateRandomOrderNumber();
+        orderInfo.orderNumber = orderNumber;
         document.querySelector('.order__title p').textContent = `ORDER NUMBER: ${orderNumber}`;
 
         // Update movie information
@@ -40,6 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.movie__info3 p:first-child').textContent = movieDetails.director || 'Director';
         document.querySelector('.movie__info3 p:last-child').textContent = new Date(selectedProjection.inicio).toLocaleDateString();
 
+        const priceNumber = parseFloat(totalPrice.replace('$', ''));
+        const serviceFee = (priceNumber * 0.05).toFixed(2);
+        const totalPriceWithFee = (priceNumber + parseFloat(serviceFee)).toFixed(2);
+        orderInfo.totalPriceWithFee = totalPriceWithFee;
         // Update ticket information
         const ticketInfoDiv = document.querySelector('.ticket__info');
         ticketInfoDiv.innerHTML = `
@@ -63,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>$${serviceFee}</p>
             `;
         }
+
+        localStorage.setItem('orderInfo', JSON.stringify(orderInfo));
 
         // Start the timer (3 minutes instead of 4)
         const timerDisplay = document.querySelector('.alert p:last-child');
@@ -99,10 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Buy button click event
         buyButton.addEventListener('click', async () => {
             try {
-                const orderInfo = JSON.parse(localStorage.getItem('orderInfo'));
-                if (!orderInfo) throw new Error('No order information found');
+                const updatedOrderInfo = JSON.parse(localStorage.getItem('orderInfo'));
+                if (!updatedOrderInfo) throw new Error('No order information found');
         
-                const { selectedProjection, selectedSeats, totalPrice } = orderInfo;
+                const { selectedProjection, selectedSeats, totalPriceWithFee, orderNumber } = updatedOrderInfo;
+        
+               
                 console.log(orderInfo);
                 console.log(totalPrice)
                
@@ -153,7 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
         
                 alert(result.message);
-                localStorage.removeItem('orderInfo');
+                localStorage.setItem('paymentComplete', 'true');
+                window.location.href = '/ticket/';
                 // Redirect or update UI here
             } catch (error) {
                 console.error('Error processing payment:', error);

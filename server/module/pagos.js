@@ -15,7 +15,7 @@ const Connection = require('../../server/db/connect/connect.js');
  * @example
  * payOnline(123, 456, 'A1', 'Credit Card');
  */
-    async payOnline({proyeccion_id, usuario_id, asiento, metodo_pago}) {
+    async payOnline({proyeccion_id, usuario_id, asiento, metodo_pago, precio},) {
 
 
 
@@ -41,8 +41,11 @@ const Connection = require('../../server/db/connect/connect.js');
             let numero1 = generarNumeroAleatorio1();
 
           
-        let operacion1 = await proyecciones.find({ id: proyeccion_id }).toArray();
-        let operacion2 = await usuarios.find({ id: usuario_id }).toArray();
+            let operacion1 = await proyecciones.find({ id: proyeccion_id }).toArray();
+            console.log('operacion1:', operacion1);
+            
+            let operacion2 = await usuarios.find({ id: usuario_id }).toArray();
+            console.log('operacion2:', operacion2);
         let operacion5 = await boletos.find({ 
             "asiento.fila": asiento.fila, 
             "asiento.numero": asiento.numero 
@@ -103,14 +106,14 @@ const Connection = require('../../server/db/connect/connect.js');
                     proyeccion_id: proyeccion_id,
                     usuario_id: usuario_id,
                     asiento: asiento,
-                    precio_total: (operacion1[0].precio - descuento_aplicado),
+                    precio_total: (precio - descuento_aplicado),
                     descuento_aplicado: descuento_aplicado,
                     fecha_compra: currentDate,
                     codigo: numero
                 });
                
                 await pagos.insertOne({
-                    monto: (operacion1[0].precio - descuento_aplicado),
+                    monto: (precio - descuento_aplicado),
                     metodo_pago: metodo_pago,
                     estado: 'completado',
                     fecha_de_pago: currentDate,

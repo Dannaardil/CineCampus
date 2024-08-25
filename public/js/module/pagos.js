@@ -1,3 +1,5 @@
+
+
 function generateRandomOrderNumber() {
     return Math.floor(100000 + Math.random() * 900000);
 }
@@ -66,8 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const timerDisplay = document.querySelector('.alert p:last-child');
         startTimer(3 * 60, timerDisplay);
 
-      
-
         // Handle payment method selection and Buy ticket button
         const paymentMethodDiv = document.querySelector('.payment__method');
         const masterCardCheckbox = document.querySelector('.custom-checkbox input');
@@ -95,32 +95,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
         paymentMethodDiv.addEventListener('click', togglePaymentSelection);
         masterCardCheckbox.addEventListener('change', togglePaymentSelection);
+
+        // Buy button click event
         buyButton.addEventListener('click', async () => {
             try {
                 const orderInfo = JSON.parse(localStorage.getItem('orderInfo'));
-                console.log('orderinfo',orderInfo)
                 if (!orderInfo) throw new Error('No order information found');
         
-                const { selectedProjection, selectedSeats } = orderInfo;
-        
-                // Assuming selectedSeats[0] contains the seat information
+                const { selectedProjection, selectedSeats, totalPrice } = orderInfo;
+                console.log(orderInfo);
+                console.log(totalPrice)
+               
+                const priceNumber = parseFloat(totalPrice.replace('$', ''));
+
+              console.log(priceNumber)
                 const seat = selectedSeats[0];
-                console.log('selected ppro, seats',selectedProjection, selectedSeats)
-                // Split the seat ID into row (letter) and number
-                const [fila, numero] = seat.id.split('');
         
+                const response2 = await fetch('/config');
+                const config = await response2.json();
+
+                const username = config.MONGO_USER;
+                console.log(username);
+               
+                const userResponse = await fetch(`/users/get/${username}`);
+                const userData = await userResponse.json();
+                
+                // Extract the user ID from the 'info' object
+                const userId = userData.info.id;
+                console.log(userId);
+                const serviceFee = (parseFloat(priceNumber) * 0.05).toFixed(2)
+                 console.log(serviceFee)
+                // Create a payment object with the selected projection ID, user ID, selected seat, payment method, and total price
                 const paymentData = {
                     proyeccion_id: selectedProjection.id,
-                    // This should be dynamically set based on the logged-in user
+                    usuario_id: userId,  // Use the correct user ID here
                     asiento: {
                         fila: seat.id[0],
                         numero: parseInt(seat.id[1]),
-                        tipo: seat.type.toLowerCase()
+                        tipo: seat.type.toLowerCase(),
                     },
-                    metodo_pago: 'tarjeta'
+                    metodo_pago: 'tarjeta', 
+                    precio: priceNumber + parseFloat(serviceFee)// Use the correct total price here
                 };
-                console.log('data payment', paymentData)
-                
+        
                 const response = await fetch('/pay/payment', {
                     method: 'POST',
                     headers: {
@@ -128,14 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     body: JSON.stringify(paymentData),
                 });
-            
-                console.log('lo q se manda al servidor',response.json());
-
+        
+                const result = await response.json();
+        
                 if (!response.ok) {
                     throw new Error(`Payment failed: ${response.status} ${response.statusText}`);
                 }
         
-                const result = await response.json();
                 alert(result.message);
                 localStorage.removeItem('orderInfo');
                 // Redirect or update UI here
@@ -144,12 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Payment failed. Please try again.');
             }
         });
-         
-
-
+        
     } catch (error) {
         console.error('Error displaying order information:', error);
         alert('Failed to load order information. Please try again.');
     }
-    
 });

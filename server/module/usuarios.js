@@ -150,12 +150,12 @@ class usersService {
         return { success: true, message: 'Se ha registrado correctamente el admin', oper }
 
     }
-    async getUserByUsername(username) {
+    async getUserByUsername({username}) {
         try {
             const db = await this.connection.connect();
             const usuarios = db.collection('usuarios');
 
-            let user = await usuarios.findOne({ nombre: username });
+            let user = await usuarios.findOne({ nombre: username.toString() });
 
             if (!user) {
                 return { success: false, message: 'El usuario no existe' };

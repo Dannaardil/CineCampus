@@ -20,7 +20,7 @@ appUsers.post('/users/create', async (req, res) => {
 appUsers.get('/users/get/:username', async (req, res) => {
     try {
         let getUser = new usersService();
-        const result = await getUser.getUserByUsername(req.params.username);
+        const result = await getUser.getUserByUsername( { username: req.params.username});
         res.status(200).send(result);
     } catch (error) {
         console.error('Error in getting user:', error);
@@ -62,6 +62,12 @@ appUsers.get('/users/getByRol/:rol', async (req, res) => {
         console.error('Error in getting users by role:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+appUsers.get('/config', async(req, res) => {
+    res.json({
+        MONGO_USER: process.env.MONGO_USER,
+        // other variables...
+    });
 });
 
 // Export Router

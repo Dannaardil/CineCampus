@@ -150,6 +150,23 @@ class usersService {
         return { success: true, message: 'Se ha registrado correctamente el admin', oper }
 
     }
+    async getUserByUsername(username) {
+        try {
+            const db = await this.connection.connect();
+            const usuarios = db.collection('usuarios');
+
+            let user = await usuarios.findOne({ nombre: username });
+
+            if (!user) {
+                return { success: false, message: 'El usuario no existe' };
+            } else {
+                return { success: true, message: 'Usuario encontrado', info: user };
+            }
+        } catch (error) {
+            console.error('Error ', error);
+            throw error;
+        }
+    }
     /**
  * @description This function updates a user's role in the database.
  * @param {string} id - The unique identifier for the user.

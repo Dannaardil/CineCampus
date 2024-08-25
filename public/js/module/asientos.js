@@ -263,16 +263,13 @@ document.querySelector('.buy button').addEventListener('click', async () => {
         alert('Please select at least one seat before buying a ticket.');
     } else {
         try {
-            let movieId =  window.location.pathname.split('/').pop()
-            // Fetch movie details using the movieId from the state
+            let movieId = window.location.pathname.split('/').pop();
             const movieResponse = await fetch(`/api/movies/${movieId}`);
             if (!movieResponse.ok) throw new Error(`HTTP error! status: ${movieResponse.status}`);
             const movieDetails = await movieResponse.json();
 
-            // The selected projection is already in the state
             const selectedProjection = state.selectedProjection;
 
-            // Combine movie details with selected projection and seats
             const orderInfo = {
                 movieDetails: movieDetails,
                 selectedProjection: selectedProjection,
@@ -280,10 +277,9 @@ document.querySelector('.buy button').addEventListener('click', async () => {
                 totalPrice: document.querySelector('.price p:last-child').textContent
             };
 
-            // Store the combined information in localStorage
             localStorage.setItem('orderInfo', JSON.stringify(orderInfo));
 
-            // Redirect to the payment page
+            // Redirect to the payment page after setting localStorage
             window.location.href = '/all/';
         } catch (error) {
             console.error('Error fetching movie details:', error);

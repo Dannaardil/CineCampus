@@ -17,7 +17,16 @@ appUsers.post('/users/create', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
+appUsers.get('/users/get/:username', async (req, res) => {
+    try {
+        let getUser = new usersService();
+        const result = await getUser.getUserByUsername(req.params.username);
+        res.status(200).send(result);
+    } catch (error) {
+        console.error('Error in getting user:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 // Route: Get User by ID
 appUsers.get('/users/get/:id', async (req, res) => {
     try {

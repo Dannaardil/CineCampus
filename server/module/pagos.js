@@ -27,7 +27,7 @@ const Connection = require('../../server/db/connect/connect.js');
             const usuarios = db.collection('usuarios');
             const salas = db.collection('salas');
             const pagos = db.collection('pagos');
-
+    
             let currentDate = new Date();
             let descuento_aplicado = 0;
 
@@ -40,16 +40,23 @@ const Connection = require('../../server/db/connect/connect.js');
             let numero = generarNumeroAleatorio();
             let numero1 = generarNumeroAleatorio1();
 
-            let operacion1 = await proyecciones.find({ id: proyeccion_id }).toArray();
-            let operacion2 = await usuarios.find({ id: usuario_id }).toArray();
-            let operacion5 = await boletos.find({ asiento: asiento }).toArray();
-            let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activa" }).toArray();
+          
+        let operacion1 = await proyecciones.find({ id: proyeccion_id }).toArray();
+        let operacion2 = await usuarios.find({ id: usuario_id }).toArray();
+        let operacion5 = await boletos.find({ 
+            "asiento.fila": asiento.fila, 
+            "asiento.numero": asiento.numero 
+        }).toArray();
+        let operacion6 = await usuarios.find({ "tarjeta_vip.estado": "Activa" }).toArray();
 
             let operacion7 = await boletos.find({ "codigo": numero }).toArray();
 
             const operacion8 = await salas.find({
                 "asientos": {
-                    $elemMatch: asiento
+                    $elemMatch: { 
+                        fila: asiento.fila, 
+                        numero: asiento.numero 
+                    }
                 }
             }).toArray();
             let operacion9 = await pagos.find({ "id": numero1 }).toArray();

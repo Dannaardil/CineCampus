@@ -106,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('');
   
-    setupCarouselPagination(); // Add this line
+    setupCarouselPagination();
+    centerCarousel(); // Add this line
   }
   
   // Display Coming Soon Movies
@@ -139,18 +140,36 @@ document.addEventListener('DOMContentLoaded', () => {
       dot.classList.toggle('active', index === currentIndex);
     });
   }
-  
   function setupCarouselPagination() {
     const movieCarousel = document.querySelector('.movie__carrusel');
     const movieCount = movieCarousel.children.length;
     createPaginationDots(movieCount);
   
-    let currentIndex = 0;
+    let currentIndex = Math.floor(movieCount / 2);
+    updatePaginationDots(currentIndex);
+  
     movieCarousel.addEventListener('scroll', () => {
-      const newIndex = Math.round(movieCarousel.scrollLeft / movieCarousel.offsetWidth);
-      if (newIndex !== currentIndex) {
-        currentIndex = newIndex;
-        updatePaginationDots(currentIndex);
-      }
+      const scrollPosition = movieCarousel.scrollLeft;
+      const cardWidth = movieCarousel.children[0].offsetWidth;
+      const scrollWidth = movieCarousel.scrollWidth;
+      const viewportWidth = movieCarousel.offsetWidth;
+  
+      currentIndex = Math.round(scrollPosition / (scrollWidth - viewportWidth) * (movieCount - 1));
+  
+      // Asegúrate de que el índice esté dentro de los límites
+      currentIndex = Math.max(0, Math.min(currentIndex, movieCount - 1));
+  
+      updatePaginationDots(currentIndex);
     });
+  }
+  function centerCarousel() {
+    const movieCarousel = document.querySelector('.movie__carrusel');
+    const centerIndex = Math.floor(movieCarousel.children.length / 2);
+    const centerMovie = movieCarousel.children[centerIndex];
+    
+    if (centerMovie) {
+      const scrollLeft = centerMovie.offsetLeft - (movieCarousel.clientWidth - centerMovie.offsetWidth) / 2;
+      movieCarousel.scrollLeft = scrollLeft;
+      updatePaginationDots(centerIndex);
+    }
   }

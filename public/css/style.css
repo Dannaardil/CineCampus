@@ -281,4 +281,26 @@
         border-radius: 4px;
         background-color: var(--color6);
       }
+      .movie__carrusel {
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+      }
+      
+      .movie__carrusel__cover {
+        scroll-snap-align: start;
+      }
+      .movie__carrusel {
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        display: flex;
+        overflow-x: scroll;
+        padding: 0 10%; /* Reducimos el padding para mostrar más de las películas adyacentes */
+      }
+      
+      .movie__carrusel__cover {
+        scroll-snap-align: center;
+        flex: 0 0 auto;
+        width: 60%; /* Ajusta este valor según necesites */
+        margin: 0 5px; /* Reduce el margen entre las tarjetas */
+      }
 }

@@ -11,80 +11,69 @@
 </head>
 <body>
     <header>
-        <a id="back-pagos" href="history.back()"><i class='bx bx-chevron-left'></i></a>
+        <a id="back-pagos" href="#" onclick="history.back(); return false;"><i class='bx bx-chevron-left'></i></a>
         <h4>Ticket</h4>
         <i class="bi bi-three-dots-vertical"></i>
-
     </header>
-
     <main>
         <section class="ticket">
             <div class="ticket__cover">
                 <div class="ticket__cover__img">
-                    <img src="" alt="">
+                    <img src="" alt="movie-cover" id="movieCover">
                 </div>
-                <div>
-                    <h3>
-                        Movie Title
-            
-                    </h3>
-                    <h5>
-                        show ticket at the entrance
-
-                    </h5>
+                <div class="movie__title__advice">
+                    <h3 class="movie__title" id="movieTitle"></h3>
+                    <p>show ticket at the entrance</p>
                 </div>
-            
-
             </div>
             <div class="divider"></div>
-            <div class="cinema">
-                <p>Cinema</p>
-                <h2>CampusLands</h2>
-            </div>
-            <div class="info1">
-                <div class="date">
-                    <p>Date</p>
-                    <h5>Sun, Feb 12th 2023</h5>
-                </div>
-                <div class="time">
-                    <p>Time</p>
-                    <h5>18:00</h5>
-                </div>
-              
-
-            </div>
-            <div class="info2">
+            <div class="botton__section">
                 <div class="cinema">
-                    <p>Cinema hall #</p>
-                    <h5>campusLands</h5>
+                    <div class="cinema__info">
+                        <p>Cinema</p>
+                        <h2>CampusLands</h2>
+                    </div>
+                    <div class="cinema__img">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHE7i80RsNKcg/company-logo_200_200/company-logo_200_200/0/1681242172220/campuslands_logo?e=2147483647&v=beta&t=fD-jCUuIRu8uYnOn-t6IIQuXyO9tEtwsZ39CkM8zlI0" alt="">
+                    </div>
                 </div>
-                <div class="seat">
-                    <p>Seat</p>
-                    <h5>C5/h5>
+                <div class="info1">
+                    <div class="date">
+                        <p>Date</p>
+                        <h5 id="movieDate"></h5>
+                    </div>
+                    <div class="time">
+                        <p>Time</p>
+                        <h5 id="movieTime"></h5>
+                    </div>
                 </div>
-            </div>
-            <div class="info3">
-                <div class="cost">
-                    <p>Cost</p>
-                    <h5>$32.00</h5>
+                <div class="info2">
+                    <div class="cinema__bottom">
+                        <p>Cinema hall #</p>
+                        <h5>campusLands</h5>
+                    </div>
+                    <div class="seat">
+                        <p>Seat</p>
+                        <h5 id="seatInfo"></h5>
+                    </div>
                 </div>
-                <div class="orderID">
-                    <p>Order ID</p>
-                    <h5>1234567890</h5>
-                    
+                <div class="info3">
+                    <div class="cost">
+                        <p>Cost</p>
+                        <h5 id="totalCost"></h5>
+                    </div>
+                    <div class="orderID">
+                        <p>Order ID</p>
+                        <h5 id="orderNumber"></h5>
+                    </div>
                 </div>
-
-            </div>
-            <div class="divider2">
-
-            </div>
-            <div class="badCode">
-                <img src="../img/barcode.png" alt="">
+                <div class="divider2"></div>
+                <div class="barCode">
+                    <img src="../img/barcode.png" alt="">
+                </div>
             </div>
         </section>
     </main>
-
-
-    
+    <script src="../js/module/ticket.js"></script>
 </body>
 </html>

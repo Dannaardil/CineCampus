@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const orderNumber = generateRandomOrderNumber();
         orderInfo.orderNumber = orderNumber;
         document.querySelector('.order__title p').textContent = `ORDER NUMBER: ${orderNumber}`;
-
+         document.querySelector('.movie__cover img').setAttribute('src', `${movieDetails.poster_url}`)
         // Update movie information
         document.querySelector('.movie__info2 p:first-child').textContent = movieDetails.titulo || 'Movie Title';
         document.querySelector('.movie__info2 p:last-child').textContent = movieDetails.genero || 'Genre';
@@ -111,40 +111,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
                 const { selectedProjection, selectedSeats, totalPriceWithFee, orderNumber } = updatedOrderInfo;
         
-               
-                console.log(orderInfo);
-                console.log(totalPrice)
-               
                 const priceNumber = parseFloat(totalPrice.replace('$', ''));
-
-              console.log(priceNumber)
                 const seat = selectedSeats[0];
         
                 const response2 = await fetch('/config');
                 const config = await response2.json();
-
+        
                 const username = config.MONGO_USER;
-                console.log(username);
-               
+                
                 const userResponse = await fetch(`/users/get/${username}`);
                 const userData = await userResponse.json();
                 
-                // Extract the user ID from the 'info' object
                 const userId = userData.info.id;
-                console.log(userId);
                 const serviceFee = (parseFloat(priceNumber) * 0.05).toFixed(2)
-                 console.log(serviceFee)
-                // Create a payment object with the selected projection ID, user ID, selected seat, payment method, and total price
+                
                 const paymentData = {
                     proyeccion_id: selectedProjection.id,
-                    usuario_id: userId,  // Use the correct user ID here
+                    usuario_id: userId,
                     asiento: {
                         fila: seat.id[0],
-                        numero: parseInt(seat.id[1]),
+                        numero: parseInt(seat.id.slice(1)),
                         tipo: seat.type.toLowerCase(),
                     },
                     metodo_pago: 'tarjeta', 
-                    precio: priceNumber + parseFloat(serviceFee)// Use the correct total price here
+                    precio: priceNumber + parseFloat(serviceFee)
                 };
         
                 const response = await fetch('/pay/payment', {
@@ -157,19 +147,25 @@ document.addEventListener('DOMContentLoaded', () => {
         
                 const result = await response.json();
         
-                if (!response.ok) {
-                    throw new Error(`Payment failed: ${response.status} ${response.statusText}`);
+                if (response.ok) {
+                    if (result.message === 'Pago realizado con exito!') {
+                        alert(result.message);
+                        localStorage.setItem('paymentComplete', 'true');
+                        window.location.href = '/ticket/';
+                    } else {
+                        // Handle other successful responses that aren't a successful payment
+                        alert(result.message);
+                    }
+                } else {
+                    throw new Error(`Payment failed: ${result.error || response.statusText}`);
                 }
         
-                alert(result.message);
-                localStorage.setItem('paymentComplete', 'true');
-                window.location.href = '/ticket/';
-                // Redirect or update UI here
             } catch (error) {
                 console.error('Error processing payment:', error);
-                alert('Payment failed. Please try again.');
+                alert('Payment failed: ' + error.message);
             }
         });
+        
         
     } catch (error) {
         console.error('Error displaying order information:', error);

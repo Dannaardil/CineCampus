@@ -82,6 +82,7 @@ const Connection = require('../../server/db/connect/connect.js');
             } else if (operacion1[0].fin < currentDate) {
                 return { message: 'La proyeccion ya termino' };
             } else if (asientoEstaOcupado) {
+
                 return { message: 'El asiento esta ocupado' };
             } else if (operacion8.length == 0) {
                 return { message: 'El asiento no existe' };

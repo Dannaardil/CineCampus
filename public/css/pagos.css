@@ -60,6 +60,7 @@
 
             .movie__cover img {
                 width: 6.5em;
+                height: 9em;
                 border-radius: 1rem;
             }
 
@@ -194,8 +195,9 @@
 
             }
             .payment__method :nth-child(2){
-                margin-right: 3.5rem;
+                margin-right: 1.5rem;
             }
+          
             .payment__method img{
                 width: 5rem;
                 border-radius: 0.5rem;

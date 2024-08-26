@@ -1,16 +1,39 @@
 // Event Listener: DOM Content Loaded
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadMovies();
-    loadMoviesComming();
-    setupSearch();
-    setupBottomNav();
-  });
+  loadMovies();
+  loadMoviesComming();
+  setupSearch();
+  setupBottomNav();
+  loadUserInfo();  // Add this line
+});
   
   // Variables
   let allMovies = [];
   
   // Load Movies
+  async function loadUserInfo() {
+    try {
+        const response = await fetch('/config');
+        const config = await response.json();
+        const username = config.MONGO_USER;
+
+        if (username) {
+            const userResponse = await fetch(`/users/get/${username}`);
+            const userData = await userResponse.json();
+            
+            if (userData && userData.info && userData.info.nombre) {
+                document.getElementById('username').textContent = userData.info.nombre;
+            } else {
+                console.error('User data not found or incomplete');
+            }
+        } else {
+            console.error('Username not found in config');
+        }
+    } catch (error) {
+        console.error('Error loading user info:', error);
+    }
+}
   async function loadMovies() {
     try {
         allMovies = await MovieService.fetchMovies();
@@ -83,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Clear Containers
   function clearContainers() {
     const main = document.querySelector(".movie__carrusel");
+    
     const footer = document.querySelector(".comming__soon__movies");
     const footer_title = document.querySelector(".comming__soon__title");
     const icons = document.querySelector(".carrusel__icons");

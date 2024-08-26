@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="comming__soon__carrusel">
             <a href="/movie/${movie.id}?coming_soon=true">
                 <img src="${movie.poster_url}" alt="${movie.titulo}">
-                <h5>${movie.titulo}</h5>
-                <p>${movie.genero}</p>
+                <h5>${movie.titulo} (2024)</h5>
+               
             </a>
         </div>
     `).join('');

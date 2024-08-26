@@ -41,7 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h5>${movie.titulo}</h5>
                             <p>${movie.genero}</p>
                         </div>
-                        <button id="watch-trailer">Watch Trailer</button>
+                        <div class="watch__trailer">
+                        <button id="watch-trailer"><i class="bi bi-play-fill"></i>Watch Trailer</button>
+                        </div>
+                        
                     </section>
 
                     <section class="detalle_video-main">
@@ -62,25 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="detalle_video-cinema">
                             <p class="cinema-name">Cinema</p>
-                            <div id="cinema-selection" class="cinema-info" >
-                                <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHE7i80RsNKcg/company-logo_200_200/company-logo_200_200/0/1681242172220/campuslands_logo?e=2147483647&v=beta&t=fD-jCUuIRu8uYnOn-t6IIQuXyO9tEtwsZ39CkM8zlI0" alt="Campuslands">
+                            <div id="cinema-selection" class="cinema-info " >
+                               
                                 <div>
                                     <p class="actor-name">Campuslands</p>
                                     <p class="actor-role">Zona Franca, Floridablanca</p>
                                 </div>
+                                 <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHE7i80RsNKcg/company-logo_200_200/company-logo_200_200/0/1681242172220/campuslands_logo?e=2147483647&v=beta&t=fD-jCUuIRu8uYnOn-t6IIQuXyO9tEtwsZ39CkM8zlI0" alt="Campuslands">
                             </div>
                         </div>
                     </section>
                 </main>
 
-                <footer>
+              <footer>
                     <a href="/seat/${movie.id}" class="button">
-                        <button id="book-now" ${isComingSoon ? 'disabled' : ''}>
+                        <button id="book-now" disabled>
                             ${isComingSoon ? 'Coming Soon' : 'Book Now'}
                         </button>
                     </a>
                 </footer>
-            `;
+            `; 
 
             // Event Listener for the "Watch Trailer" button
             const watchTrailerButton = document.getElementById('watch-trailer');
@@ -93,10 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Only set up cinema selection if it's not a coming soon movie
-            if (!isComingSoon) {
-                const cinemaSelection = document.getElementById('cinema-selection');
-                const bookNowButton = document.getElementById('book-now');
-
+            const cinemaSelection = document.getElementById('cinema-selection');
+            const bookNowButton = document.getElementById('book-now');
+            
+            if (isComingSoon) {
+                bookNowButton.disabled = true;
+                cinemaSelection.style.pointerEvents = 'none';
+                cinemaSelection.style.opacity = '0.5';
+            } else {
                 cinemaSelection.addEventListener('click', function() {
                     this.classList.toggle('active');
                     bookNowButton.disabled = !this.classList.contains('active');

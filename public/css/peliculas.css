@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
+@import url(variables.css);
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: #000;
+    background: var(--color1);
     color: #fff;
-    font-family: "Inter", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
     font-optical-sizing: auto;
     font-style: normal;
 }
@@ -18,15 +19,15 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-   padding-left: 1rem;
-   padding-right: 1rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
+   padding-left: 2rem;
+   padding-right: 2.5rem;
 }
 
-header i {
-    font-size: 2rem;
+header :nth-child(1){
+    font-size: 2.3rem;
 }
 
 main {
@@ -34,18 +35,19 @@ main {
     width: 100%;
     height: 80%;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 .video__container{
     height: 26vh;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     border-radius: 0.7rem;
     overflow: hidden;
+   
 
 }
 
 .video-main {
-   height: 26vh;
+   height: 27vh;
    margin-bottom: 1rem;
    border-radius: 0.7rem;
    overflow: hidden;
@@ -67,26 +69,45 @@ main {
 
 .info_video-main {
     display: flex;
-    width: 100%;
-    height: 10%;
     justify-content: space-between;
     font-size: 1.5rem;
+    margin: 0 ;
+    margin-left: 1.3rem;
+    margin-right: 1.3rem;
+
+
+    
 }
 
 .info_video-main p {
-    font-size: 1rem;
+    font-size: 0.7rem;
     color: #9b9898;
 }
+.info_video-main h5{
+    font-size: 1.1rem;
 
+}
 .info_video-main button {
+    display: flex;
     text-decoration: none;
     border: none;
     background: red;
-    padding: 0.7rem;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    padding: 0.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.4rem;
+  border-radius: 0.3rem;
+  align-items: center;
+  justify-content: center;
+}
+.watch__trailer i {
+    background-color: transparent;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+.watch__trailer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .detalle_video-main {
@@ -94,13 +115,15 @@ main {
     display: flex;
 
     flex-direction: column;
-    gap: 2rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    margin-left: 1.3rem;
+    margin-right: 1.3rem;
 }
 
 .detalle_video-main .p {
-    font-size: 1rem;
-    color: #9b9898;
+    font-size: 0.8rem;
+   color: var(--color7)
 }
 
 .detalle_video-actor {
@@ -111,26 +134,27 @@ main {
 
 .detalle_video-actor > p {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .actor-list {
     display: flex;
     width: 100%;
-    overflow-x: auto;
-    gap: 1rem;
+
+    overflow-x: scroll;
+    gap: 0rem;
 }
 
 .actor-info {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    min-width: 200px;
+    gap: 0.5rem;
+   min-width: 11rem;
 }
 
 .actor-info img {
-    width: 3.5rem;
-    height: 3.5rem; 
+    width: 3rem;
+    height: 3rem; 
     border-radius: 50%;
     object-fit: cover;
 }
@@ -145,37 +169,41 @@ main {
 }
 .detalle_video-cinema p {
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1rem;
     align-self: flex-start;
-    margin-left: 0.8rem;
+   
 
 }
 
 
 .actor-name {
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
+
 
 .actor-role {
     color: #9b9898;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 .cinema-info {
     display: flex;
     width: 96%;
     align-items: center;
-    justify-content: center;
-    gap: 6rem;
+    justify-content: space-between;
+  
     background: #272727;   
     padding: 0.4rem;
-
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+     margin-bottom: 5rem;
     border: 1px solid transparent;
-    border-radius: 0.5rem;
+    border-radius: 0.7rem;
     cursor: pointer;
    
 }
+
 .cinema-info.active{
     border-color: red; /* Cambia el color del borde después del clic */
   
@@ -186,18 +214,24 @@ main {
 .cinema-info div{
     display: flex;
     flex-direction: column;
-    width: 50%;
+  
     gap: 0.4rem;
     background-color: #272727;
 }
 
-.cinema-info div p {
+.cinema-info div :nth-child(1){
     background-color: #272727;
+    font-size: 0.9rem;
 }
+.cinema-info div :nth-child(2){
+    background-color: #272727;
+    font-size: 0.7rem;
 
+
+}
 .cinema-info img {
-    width: 3.5rem;
-    height: 3.5rem; 
+    width: 3.3rem;
+    height: 3.3rem; 
     border-radius: 10%;
     object-fit: cover;
 }
@@ -223,12 +257,19 @@ footer  a button {
     border-radius: 0.5rem;
     
 }
+
+.unactive{
+    background-color: rgba(255, 0, 0, 0.445); /* Color más claro cuando está deshabilitado */
+    cursor: not-allowed;
+}
  /* Estilos del botón cuando está deshabilitado */
  #book-now:disabled {
     background-color: rgba(255, 0, 0, 0.445); /* Color más claro cuando está deshabilitado */
     cursor: not-allowed;
     /* Desactivar el puntero */
 }
+
+
 footer a{
     width: 92%;
     display: flex;

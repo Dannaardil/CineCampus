@@ -48,7 +48,7 @@ let proyecciones = new projectionsService
 //     'tipo': 'regular'
 //  }, 'efectivo' ))
  
-// console.log(await boletos.cancelAReservation(89))) //cancelar reserva
+// console.log(await boletos.cancelAReservation(41)) //cancelar reserva
 
 // --------------------------------------------------------------------------
 
@@ -60,6 +60,10 @@ let usuarios = new usersService
 // QUERY  #5.1 (Crear usuarios)
 // console.log(await usuarios.createAUser(9, 'David Romero', 'david@gmail.com', 'administrador'))
 
+
+// ----------------------------------------------------------------
+
+//QUERY #5.2 (consultar usuarios)
 // console.log(await usuarios.getUser(2))
 
 // ----------------------------------------------------------------
@@ -70,6 +74,11 @@ let usuarios = new usersService
 
 //QUERY #5.4(consultar usuarios filtrando por rol)
 // console.log(await usuarios.getUsersByRol('vip'))
+
+// ----------------------------------------------------------------
+
+
+//PAGOS --------------------
 
 let pagos = new payService
 

@@ -1,0 +1,281 @@
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+            @import url(variables.css);
+
+            * {
+                padding: 0;
+                margin: 0;
+                color: rgb(255, 255, 255);
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            }
+
+            .up {
+                background-color: var(--color3)
+            }
+
+            body {
+                background-color: var(--color1);
+               
+            }
+
+            header {
+                font-size: large;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding-top: 1rem;
+                margin-bottom: 1rem;
+            }
+           header h4{
+            color:var(--color9)
+
+           }
+
+            header :nth-child(1) {
+                font-size: 2rem;
+                color:var(--color9)
+
+            }
+            header :nth-child(3) {
+                font-size: 1.5rem;
+                color:var(--color9)
+
+            }
+
+            .movie {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-bottom: 2rem;
+
+                display: flex;
+                align-items: start;
+
+
+                gap: 1rem;
+            }
+
+            .movie__cover img {
+                width: 6.5em;
+                height: 9em;
+                border-radius: 1rem;
+            }
+
+            .movie__info {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem
+            }
+
+            .movie__info2 {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem
+            }
+
+            .movie__info2 :nth-child(1) {
+                font-size: 1.3em;
+                font-weight: 400;
+                color:var(--color6)
+            }
+
+            .movie__info2 :nth-child(2) {
+                font-size: 1em;
+                font-weight: 300;
+                color: var(--color9);
+
+
+            }
+
+            .movie__info3 {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+
+            }
+
+            .movie__info3 :nth-child(1) {
+
+                font-size: 1.3em;
+                font-weight: 400;
+            }
+
+            .movie__info3 :nth-child(2) {
+                color: var(--color9);
+
+                font-size: 1em;
+                font-weight: 300;
+
+            }
+
+            .ticket {
+                padding-top: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-bottom: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+            }
+
+            .order__title {
+                font-size: 0.8rem;
+                margin-bottom: 0.8rem;
+                margin-top: 0.6rem;
+
+
+            }
+
+            .ticket__info {
+                display: flex;
+                justify-content: space-between;
+
+
+            }
+            .ticket__info p{
+                color: var(--color9);
+
+
+            }
+            .ticket__info2 {
+                display: flex;
+                justify-content: space-between;
+
+
+            }
+            .ticket__info2 p{
+                color: var(--color9);
+
+                
+            }
+            .ticket__info3 {
+                display: flex;
+                justify-content: space-between;
+
+
+            }
+            .ticket__info3 p{
+                color: var(--color9);
+
+                
+            }
+
+            .divider {
+                width: 100%;
+                height: 1px;
+                background-color: var(--color9)
+            }
+
+            .payment {
+                padding-top: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem
+            }
+          
+
+            .payment__method {
+                display: flex;
+                padding: 1rem;
+                border-radius: 0.7rem;
+                background-color: var(--color4);
+             
+                align-items: center;
+                justify-content: space-between;
+             
+
+            }
+            .payment__method :nth-child(2){
+                margin-right: 1.5rem;
+            }
+          
+            .payment__method img{
+                width: 5rem;
+                border-radius: 0.5rem;
+                margin-right: 1rem;
+            }
+
+            .alert {
+                display: flex;
+                justify-content: space-between;
+
+                background-color: var(--color8);
+                padding: 0.7rem;
+                border-radius: 0.7rem;
+            }
+            .alert :nth-child(1){
+                color: var(--color7);
+            }
+            .alert :nth-child(2){
+                color: var(--color6);
+            }
+
+            .buy {
+                padding-top: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                display: flex;
+                justify-content: space-between;
+
+
+            }
+
+            .buy button {
+
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.2rem;
+
+                border-radius: 0.7rem;
+                background-color: var(--color6);
+                border: 0;
+
+            }
+            /* Hide the default checkbox */
+
+
+        /* Hide the default checkbox */
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom circular checkbox */
+.custom-checkbox .checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--color6);
+    display: inline-block;
+    margin-right: 10px;
+    display: flex;
+}
+
+/* Add a red dot in the middle when the checkbox is checked */
+.custom-checkbox input:checked + .checkmark::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background-color: red;
+    border-radius: 50%;
+  
+}
+
+

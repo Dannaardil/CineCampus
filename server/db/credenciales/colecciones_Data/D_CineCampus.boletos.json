@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "66a6ca5479ff5b5d5a887f7d"
+  },
+  "proyeccion_id": 1,
+  "usuario_id": 1,
+  "asiento": {
+    "fila": "C",
+    "numero": 1,
+    "tipo": "vip"
+  },
+  "precio_total": 25,
+  "descuento_aplicado": 0,
+  "fecha_compra": {
+    "$date": "2024-07-23T17:41:56.806Z"
+  },
+  "codigo": 123
+},
+{
+  "_id": {
+    "$oid": "66a6fae3da8382c6a4d4793b"
+  },
+  "proyeccion_id": 2,
+  "usuario_id": 2,
+  "asiento": {
+    "fila": "C",
+    "numero": 1,
+    "tipo": "vip"
+  },
+  "precio_total": 12.6,
+  "descuento_aplicado": 1.4000000000000001,
+  "fecha_compra": {
+    "$date": "2024-07-29T02:13:54.902Z"
+  },
+  "codigo": 694
+}]

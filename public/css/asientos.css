@@ -1,0 +1,473 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url(variables.css);
+
+* {
+    padding: 0;
+    margin: 0;
+    color: rgb(255, 255, 255);
+    background-color: var(--color1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+ 
+
+}
+
+/* CHOOSE SEAT */
+@media (max-width: 800px) {
+.choose__seat {
+    display: flex;
+    /* background-color: red;; */
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-top: 1rem;
+
+
+}
+
+.choose__seat i {
+    font-size: 2em;
+
+}
+
+/* ALL THE TEATHER MAIN SECTION */
+.teather {
+
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+}
+
+/* screen here :PP */
+
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: blue; */
+
+
+}
+
+.screen p {
+    font-size: small;
+    z-index: 999;
+    position: absolute;
+    top: 6.7em;
+
+}
+
+/* SEATS */
+
+
+.seats {
+    /* background-color: red; */
+    margin-top: 1em;
+    /* background-color: red; */
+
+
+}
+
+.group__seats_f {
+
+    gap: 0.5em;
+    /* background-color: yellow; */
+    /* border: 1px solid ; */
+    width: 100%;
+   display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+ 
+    
+
+ 
+  
+   
+
+}
+.group__seats_f div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:0.5rem;
+
+}
+.front__letter {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6em;
+    font-size: 0.7em;
+}
+
+.front__seat {
+    background-color: var(--color5);
+    /* bordfront__seatser: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    
+  
+    align-self: center;
+    border-radius: 0.3rem;
+}
+
+.front__seats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.A {
+    background-color: var(--color5);
+}
+
+.back__seat {
+    background-color: var(--color5);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem;
+}
+
+.group__seats {
+    gap: 0.5em;
+    /* background-color: yellow; */
+    /* border: 1px solid ; */
+    width: 100%;
+
+    margin-left: 1em;
+    margin-right: 1em;
+    
+   
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    margin-top: 3rem;
+
+}
+
+.group__seats div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.back__seats {
+    display: flex;
+    flex-direction: row;
+}
+
+.back__letter {
+    display: flex;
+    margin:0;
+    flex-direction: column;
+    margin-top: 3.4rem;
+    font-size: 0.7em;
+    
+    gap: 2.5em;
+    align-items: center;
+}
+
+
+
+/* convenciones */
+
+.conventions {
+
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    padding-top: 1.5rem;
+    
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+}
+
+.conventions :nth-child(1) {
+    color: var(--color4)
+}
+
+.conventions :nth-child(3) {
+    color: var(--color5)
+}
+
+.conventions :nth-child(5) {
+    color:    var(--color6);
+
+}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* background-color: pink; */
+    
+    overflow-x: scroll;
+   
+   gap:1rem;
+    font-size: 1em;
+}
+.days::-webkit-scrollbar {
+    display: none;
+}
+
+.day{
+  
+   display: flex;
+    width: 3.3rem;
+    height: 5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:0.5rem;
+    background-color: gray;
+    border-radius: 0.6rem;
+}
+.day :nth-child(1){
+    background-color: transparent;
+    font-size: smaller;
+}
+.day :nth-child(2){
+    background-color: transparent;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.dates{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    /* background-color: yellow; */
+
+ justify-content: center;
+}
+.times{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* background-color: pink; */
+
+    
+    overflow-x: scroll;
+   
+   gap:1rem;
+    font-size: 1em;
+}
+
+.times::-webkit-scrollbar {
+    display: none;
+}
+
+.time{
+    
+   display: flex;
+   width: 5.3rem;
+   height: 4rem;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap:0.2rem;
+   padding:0.2rem;
+   background-color: gray;
+   border-radius: 0.6rem;
+}
+.time :nth-child(1){
+    background-color: transparent;
+
+    font-size: medium;
+    font-weight: 500;
+}
+.time :nth-child(2){
+    background-color: transparent;
+    font-size: smaller;
+}
+
+/* FOOTER */
+
+.payment{
+    margin:1.5rem;
+    margin-bottom: 0;
+   
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.buy button{
+    font-size: 0.9em;
+    font-weight: bold;
+    padding-left:5em;
+    padding-right: 5em;
+    padding-top:1.1em;
+    padding-bottom: 1.1em;
+    border-radius: 0.5em;
+    border: 0;
+    background-color: var(--color6);
+}
+.price{
+    font-size: large;
+}
+.price :nth-child(2){
+font-weight: bold;
+}
+.available {
+    background-color: var(--color3);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem; /* Green */
+    cursor: pointer;
+}
+.selected {
+    background-color: var(--color6);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem; /* Green */
+    cursor: pointer;
+}
+
+.occupied {
+    background-color: var(--color5);
+    /* border: 1px solid ; */
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem;
+
+    cursor: not-allowed;
+}
+.seat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.row-letter {
+    margin-right: 10px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border: none;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+}
+
+.seat.vip {
+    background-color: #666;
+}
+
+.seat.selected {
+    background-color: #ff0000;
+}
+
+.date-button, .time-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.date-button.active, .time-button.active {
+    background-color: #ff0000;
+}
+
+.projection-type {
+    font-size: 0.8em;
+    color: #999;
+}
+.front__seat, .back__seat {
+    cursor: pointer;
+}
+
+.available {
+    background-color: #444; /* Dark gray for available seats */
+}
+
+.selected {
+    background-color: #ff0000; /* Red for selected seats */
+}
+
+.occupied {
+    background-color: #888; /* Light gray for occupied seats */
+    cursor: not-allowed;
+}
+.front__seat, .back__seat {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.3rem;
+    font-size: 0.8em;
+}
+.active{
+     
+  
+   background-color: var(--color6)
+  
+
+}
+
+.available {
+    background-color: var(--color3);
+}
+
+.selected {
+    background-color: var(--color6);
+}
+.loader {
+    border: 5px solid #121212;
+    border-top: 5px solid #ff4444;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    background-color: var(--color1);
+    border-radius: 2rem;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+   
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color1);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-text {
+    color: #ff4444;
+    background-color: transparent;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.loader__container{
+    background-color: transparent;
+
+}
+
+}

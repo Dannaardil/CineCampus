@@ -1,38 +1,53 @@
 
 
-### Proyecto: CineCampus
-
+#### Project: CineCampus
 
 CineCampus is a web application for a movie theater that allows users to browse movies, purchase tickets, and manage seating reservations. This project implements a backend API using Express.js and MongoDB, along with a frontend user interface.
 
 ## Project Structure
 
+#### Problem Statement
 
+CineCampus is an entertainment company specializing in offering a complete and personalized cinema experience. The company wishes to develop a web application that allows users to select movies, purchase tickets, and assign seats efficiently and comfortably. The application will also offer discount options for users with VIP cards and allow online purchases.
 
-#### Problemtica
+#### Objective
 
-CineCampus es una empresa de entretenimiento que se especializa en ofrecer una experiencia de cine completa y personalizada. La empresa desea desarrollar una aplicación web que permita a los usuarios seleccionar películas, comprar boletos y asignar asientos de manera eficiente y cómoda. La aplicación también ofrecerá opciones de descuento para usuarios con tarjeta VIP y permitirá realizar compras en línea.
+Develop a series of APIs for CineCampus's web application using MongoDB as the database. The APIs should manage movie selection, ticket purchases, seat assignment, and implementation of discounts for VIP cards, with support for different user roles.
 
-#### Objetivo
-
-Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.
-
-
-#### Estructura
+#### Structure
 ```
 public/
+├── css/
+│   ├── asientos.css
+│   ├── login.css
+│   ├── pagos.css
+│   ├── peliculas.css
+│   ├── style.css
+│   ├── ticket.css
+│   └── variables.css
+├── img/
+│   ├── barcode.png
+│   ├── campus.png
+│   ├── credit_card.png
+│   └── screen2.jpg
 ├── js/
 │   ├── module/
+│   │   ├── asientos.js
+│   │   ├── buyedTicket.js
+│   │   ├── home.js
+│   │   ├── pagos.js
+│   │   ├── peliculas_info.js
 │   │   └── ticket.js
-│   └── movieService.js
+│   ├── movieService.js
+│   └── ticket.js
 └── views/
-├── asientos.html
-├── boughtTicket.html
-├── home.html
-├── pagos.html
-├── peliculas.html
-├── ticket.html
-└── index.html
+    ├── asientos.html
+    ├── buyedTicket.html
+    ├── home.html
+    ├── pagos.html
+    ├── peliculas.html
+    ├── ticket.html
+    └── index.html
 server/
 ├── db/
 ├── module/
@@ -44,16 +59,17 @@ server/
 │   ├── testConnection.js
 │   └── usuarios.js
 └── routes/
-├── asientos.routes.js
-├── boletos.routes.js
-├── pagos.routes.js
-├── peliculas.routes.js
-└── usuarios.routes.js
+    ├── asientos.routes.js
+    ├── boletos.routes.js
+    ├── pagos.routes.js
+    ├── peliculas.routes.js
+    └── usuarios.routes.js
 .env
 .envTemplate
 .gitignore
 app.js
 main.js
+package-lock.json
 package.json
 README.md
 

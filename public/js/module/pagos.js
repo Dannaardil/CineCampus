@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update movie information
         document.querySelector('.movie__info2 p:first-child').textContent = movieDetails.titulo || 'Movie Title';
         document.querySelector('.movie__info2 p:last-child').textContent = movieDetails.genero || 'Genre';
-        document.querySelector('.movie__info3 p:first-child').textContent = movieDetails.director || 'Director';
+        document.querySelector('.movie__info3 p:first-child').textContent =  'CampusLands';
         document.querySelector('.movie__info3 p:last-child').textContent = new Date(selectedProjection.inicio).toLocaleDateString();
 
         const priceNumber = parseFloat(totalPrice.replace('$', ''));

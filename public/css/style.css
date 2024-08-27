@@ -319,7 +319,7 @@
         scroll-snap-align: center;
       
         flex: 0 0 auto;
-        width: 61%; /* Ajusta este valor según necesites */
-        margin: 0 5px; /* Reduce el margen entre las tarjetas */
+        width: 59%; /* Ajusta este valor según necesites */
+        margin: 0 1rem; /* Reduce el margen entre las tarjetas */
       }
 }

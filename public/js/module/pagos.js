@@ -3,6 +3,29 @@
 function generateRandomOrderNumber() {
     return Math.floor(100000 + Math.random() * 900000);
 }
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    let formattedDate = date.toLocaleDateString('en-US', options);
+    
+    // Add the ordinal suffix to the day
+    const day = date.getDate();
+    const suffix = getOrdinalSuffix(day);
+    formattedDate = formattedDate.replace(/(\d+)/, `$1${suffix}`);
+    
+    return formattedDate;
+}
+
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1:  return "st";
+        case 2:  return "nd";
+        case 3:  return "rd";
+        default: return "th";
+    }
+}
+
 
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
@@ -39,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.movie__info2 p:first-child').textContent = movieDetails.titulo || 'Movie Title';
         document.querySelector('.movie__info2 p:last-child').textContent = movieDetails.genero || 'Genre';
         document.querySelector('.movie__info3 p:first-child').textContent =  'CampusLands';
-        document.querySelector('.movie__info3 p:last-child').textContent = new Date(selectedProjection.inicio).toLocaleDateString();
+        document.querySelector('.movie__info3 p:last-child').textContent = formatDate(selectedProjection.inicio);
 
         const priceNumber = parseFloat(totalPrice.replace('$', ''));
         const serviceFee = (priceNumber * 0.05).toFixed(2);

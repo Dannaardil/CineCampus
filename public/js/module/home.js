@@ -87,21 +87,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup Bottom Navigation
   function setupBottomNav() {
     const navItems = document.querySelectorAll('.bottom-nav__item');
-  
+
     navItems.forEach(item => {
         item.addEventListener('click', (event) => {
             event.preventDefault();
-            
+
             navItems.forEach(navItem => navItem.classList.remove('active'));
             item.classList.add('active');
-            
-            if (item.querySelector('span').textContent === 'Browse') {
+
+            const itemText = item.querySelector('span').textContent;
+
+            if (itemText === 'Browse') {
                 document.getElementById('searchInput').focus();
                 window.scrollTo(0, 0);
+            } else if (itemText === 'Tickets') {
+                window.location.href = '/bTicket/';
             }
         });
     });
-  }
+}
   
   // Clear Containers
   function clearContainers() {

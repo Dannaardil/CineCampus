@@ -1,6 +1,10 @@
 // Dependencies
 const express = require('express');
 const usersService = require('../module/usuarios.js');
+const Connection = require('../db/connect/connect.js');
+const TicketService = require('../module/boletos.js');
+
+
 
 // Initialize Router
 const appUsers = express.Router();
@@ -68,6 +72,18 @@ appUsers.get('/config', async(req, res) => {
         MONGO_USER: process.env.MONGO_USER,
         // other variables...
     });
+});
+appUsers.post('/api/user-tickets', async (req, res) => {
+    try {
+        const { username } = req.body;
+        const ticketService = new TicketService();
+        const userTickets = await ticketService.getUserTickets(username);
+        
+        res.json(userTickets);
+    } catch (error) {
+        console.error('Error fetching user tickets:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 // Export Router

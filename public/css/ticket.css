@@ -199,3 +199,25 @@ header :nth-child(3) {
 .badCode {
     background-color: transparent;
 }
+
+.ticket-carousel-container {
+    margin: 0rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    border-radius: 1.3rem;
+height: 100%;
+    width: 100%;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+/* .ticket {
+    width: 300px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+   
+    overflow: hidden;
+    background-color: white;
+} */
+
+/* You may need to adjust other styles to fit the horizontal layout */

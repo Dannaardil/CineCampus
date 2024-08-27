@@ -325,6 +325,76 @@ async cancelAReservation({ id }) {
       throw error;
     }
   }
+
+
+    async getUserTickets(username) {
+        try {
+            const connection = new Connection();
+            const db = await connection.connect();
+            const boletos = db.collection('boletos');
+            const usuarios = db.collection('usuarios');
+
+            const user = await usuarios.findOne({ nombre: username });
+            if (!user) {
+                throw new Error('User not found');
+
+
+            }
+            console.log(user)
+
+            const userTickets = await boletos.aggregate([
+                { $match: { usuario_id: user.id } },
+                {
+                    $lookup: {
+                        from: 'proyecciones',
+                        localField: 'proyeccion_id',
+                        foreignField: 'id',
+                        as: 'proyeccion'
+                    }
+                },
+                { $unwind: '$proyeccion' },
+                {
+                    $lookup: {
+                        from: 'peliculas',
+                        localField: 'proyeccion.pelicula_id',
+                        foreignField: 'id',
+                        as: 'pelicula'
+                    }
+                },
+                { $unwind: '$pelicula' },
+                {
+                    $lookup: {
+                        from: 'salas',
+                        localField: 'proyeccion.sala_id',
+                        foreignField: 'numero',
+                        as: 'sala'
+                    }
+                },
+                { $unwind: '$sala' },
+                {
+                    $project: {
+                        _id: 1,
+                        codigo: 1,
+                        precio_total: 1,
+                        descuento_aplicado: 1,
+                        fecha_compra: 1,
+                        asiento: 1,
+                        'pelicula.titulo': 1,
+                        'pelicula.poster_url': 1,
+                        'proyeccion.inicio': 1,
+                        'proyeccion.fin': 1,
+                        'sala.numero': 1
+                    }
+                }
+            ]).toArray();
+            console.log(userTickets)
+
+            return userTickets;
+    } catch (error) {
+        console.error('Error fetching user tickets:', error);
+        throw error;
+    }
+}
   
 
 

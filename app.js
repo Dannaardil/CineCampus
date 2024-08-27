@@ -69,6 +69,10 @@ app.use('/', appTicket)
 
 app.use('/', appUsers)
 
+app.get('/bTicket/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/views/buyedTicket.html'));
+});
+
 app.get('/ticket/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/views/ticket.html'));
 });

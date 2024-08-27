@@ -4,6 +4,8 @@ class usersService {
     constructor() {
         this.connection = new Connection();
     }
+
+    
     /**
  * @description This function creates a new user in the database.
  * @param {string} id - The unique identifier for the user.
@@ -329,7 +331,12 @@ class usersService {
 
         }
         return ''
+
+        
     }
+
+    
+    
     async close() {
         await this.connection.close();
     }

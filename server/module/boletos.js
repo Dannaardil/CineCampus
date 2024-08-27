@@ -326,6 +326,13 @@ async cancelAReservation({ id }) {
     }
   }
 
+ /**
+  * @async
+  * @function getUserTickets
+  * @param {string} username - The username of the user whose tickets are to be retrieved.
+  * @returns {Promise<Array>} - A promise that resolves to an array of objects, each representing a movie ticket with detailed information about the projection, movie, and cinema hall.
+  * @throws {Error} - Throws an error if the user is not found in the database.
+  */
 
     async getUserTickets(username) {
         try {

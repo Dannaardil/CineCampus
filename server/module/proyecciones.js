@@ -5,7 +5,16 @@ class projectionsService {
     constructor() {
         this.connection = new Connection();
     }
-
+   /**
+ * Retrieves all available seats for a specific projection.
+ *
+ * @async
+ * @function getAvailableSeats
+ * @param {Object} options - The options object.
+ * @param {number} options.proyeccionId - The ID of the projection for which to check seat availability.
+ * @returns {Promise<Array>} - A promise that resolves to an array of available seats, each represented by an object with seat details.
+ * @throws {Error} - Throws an error if the projection or sala is not found, or if no seats are available.
+ */
     async getAvailableSeats({proyeccionId}) {
         try {
             const db = await this.connection.connect();
@@ -51,6 +60,17 @@ class projectionsService {
         }
     }
 
+/**
+ * Retrieves all seats for a specific projection.
+ *
+ * @async
+ * @function getAllSeats
+ * @param {Object} options - The options object.
+ * @param {number} options.proyeccionId - The ID of the projection for which to retrieve all seats.
+ * @returns {Promise<Array>} - A promise that resolves to an array of all seats, each represented by an object with seat details.
+ * @throws {Error} - Throws an error if the projection or sala is not found, or if no seats are available.
+ */
+
     async getAllSeats({proyeccionId}) {
         try {
             const db = await this.connection.connect();
@@ -86,7 +106,16 @@ class projectionsService {
             throw error;
         }
     }
-
+    /**
+ * Retrieves all seats with their availability status for all projections of a specific movie.
+ *
+ * @async
+ * @function getAllSeatsWithAvailability
+ * @param {Object} options - The options object.
+ * @param {number} options.movieId - The ID of the movie for which to retrieve seat availability.
+ * @returns {Promise<Array>} - A promise that resolves to an array of objects, each containing projection ID, sala ID, and seats with their availability status.
+ * @throws {Error} - Throws an error if no projections are found for the movie, or if there's an issue fetching seats or salas.
+ */
     async getAllSeatsWithAvailability({movieId}) {
         try {
             const db = await this.connection.connect();
@@ -148,6 +177,16 @@ class projectionsService {
             throw error;
         }
     }
+   /**
+ * Retrieves a projection by the movie ID.
+ *
+ * @async
+ * @function getProjectionById
+ * @param {Object} options - The options object.
+ * @param {number} options.movieId - The ID of the movie for which to retrieve the projection.
+ * @returns {Promise<Object|null>} - A promise that resolves to the projection object or null if not found.
+ * @throws {Error} - Throws an error if there's an issue retrieving the projection.
+ */
 
     async getProjectionById({movieId}) {
         try {
@@ -159,6 +198,16 @@ class projectionsService {
             throw error;
         }
     }
+    /**
+ * Retrieves all projections for a specific movie within the next year.
+ *
+ * @async
+ * @function getProjectionsForWeek
+ * @param {number} movieId - The ID of the movie for which to retrieve projections.
+ * @returns {Promise<Array>} - A promise that resolves to an array of projections for the next year.
+ * @throws {Error} - Throws an error if there's an issue retrieving projections.
+ */
+
     async getProjectionsForWeek(movieId) {
         try {
             const db = await this.connection.connect();
@@ -176,6 +225,16 @@ class projectionsService {
             throw error; // Rethrow the error so it can be caught in the route handler
         }
     }
+    /**
+ * Retrieves details for a specific movie.
+ *
+ * @async
+ * @function getMovieDetails
+ * @param {number} movieId - The ID of the movie for which to retrieve details.
+ * @returns {Promise<Object|null>} - A promise that resolves to the movie details object or null if not found.
+ * @throws {Error} - Throws an error if there's an issue retrieving movie details.
+ */
+
 
     async getMovieDetails(movieId) {
         try {
@@ -187,6 +246,16 @@ class projectionsService {
             throw error;
         }
     }
+
+    /**
+ * Retrieves details for a specific sala (theater).
+ *
+ * @async
+ * @function getSalaDetails
+ * @param {number} salaId - The ID of the sala for which to retrieve details.
+ * @returns {Promise<Object|null>} - A promise that resolves to the sala details object or null if not found.
+ * @throws {Error} - Throws an error if there's an issue retrieving sala details.
+ */
 
     async getSalaDetails(salaId) {
         try {

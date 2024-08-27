@@ -1,4 +1,13 @@
+
+
 ### Proyecto: CineCampus
+
+
+CineCampus is a web application for a movie theater that allows users to browse movies, purchase tickets, and manage seating reservations. This project implements a backend API using Express.js and MongoDB, along with a frontend user interface.
+
+## Project Structure
+
+
 
 #### Problemtica
 
@@ -8,390 +17,492 @@ CineCampus es una empresa de entretenimiento que se especializa en ofrecer una e
 
 Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.
 
-#### Requisitos Funcionales
 
-1. **Selección de Películas:**
-   - **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
-   - **API para Obtener Detalles de Película:** Permitir la consulta de información detallada sobre una película específica, incluyendo sinopsis.
-   
+#### Estructura
+```
+public/
+├── js/
+│   ├── module/
+│   │   └── ticket.js
+│   └── movieService.js
+└── views/
+├── asientos.html
+├── boughtTicket.html
+├── home.html
+├── pagos.html
+├── peliculas.html
+├── ticket.html
+└── index.html
+server/
+├── db/
+├── module/
+│   ├── boletos.js
+│   ├── pagos.js
+│   ├── peliculas.js
+│   ├── proyecciones.js
+│   ├── salas.js
+│   ├── testConnection.js
+│   └── usuarios.js
+└── routes/
+├── asientos.routes.js
+├── boletos.routes.js
+├── pagos.routes.js
+├── peliculas.routes.js
+└── usuarios.routes.js
+.env
+.envTemplate
+.gitignore
+app.js
+main.js
+package.json
+README.md
 
-      ## Descripción del Código
-      La  duncion `getAllMovies` permite obtener todas las películas disponibles verificando esto por medio de la fecha de estreno y retiro, así como los horarios de proyección  y muestra informacion completa de las peliculas.
+```
 
-      ## Parámetros
-      - No aplica. La clase no recibe parámetros directos en los métodos documentados.
 
-      #### Retorno
-      - (Array): Un arreglo de objetos que representan las películas disponibles, incluyendo detalles como título, fecha de estreno, fecha de retiro, sinopsis, género, clasificación, duración y horarios de proyección.
+## Features
 
-      #### Ejemplo de Uso
+- Browse available movies
+- Purchase tickets online
+- Select and reserve seats
+- Apply discounts for VIP users
+- Manage user roles (standard, VIP, admin)
+- Process online payments
+
+## Technologies Used
+
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Frontend: HTML, CSS, JavaScript
+- Additional libraries: Axios, Swiper
+
+## Setup and Installation
+
+1. Clone the repository: git clone https://github.com/Dannaardil/ExamenEncriptador.git
+
+2. Install dependencies: npm install
+
+3. Set up environment variables:
+- Copy `.envTemplate` to `.env`
+- Fill in the required environment variables
+
+4. Start the server: npm run app
+
+## API Documentation
+
+The API is organized into several route files, each handling different aspects of the application. Below is a summary of the available endpoints:
+
+### Seats Routes
+
+- `GET /seats/:projectionId`: Get available seats for a specific projection
+- `GET /seats/all/:projectionId`: Get all seats for a specific projection
+- `GET /seats/withAvailability/:movieId`: Get all seats with availability for a specific movie
+- `GET /api/seats/`: Get all available seats
+- `GET /api/projections/:movieId`: Get projections for a specific movie
+- `GET /api/projections/week/:movieId`: Get projections for a specific movie for the current week
+- `GET /api/sala/:salaId`: Get details of a specific theater room
+
+### Tickets Routes
+
+- `POST /setTicket`: Create a new ticket
+- `PATCH /cancel/:id`: Cancel a reservation
+
+### Payments Routes
+
+- `POST /payment`: Process a payment for a ticket
+
+### Movies Routes
+
+- `GET /v1`: Get all available movies
+- `GET /v2`: Get upcoming movies
+- `GET /:id`: Get details of a specific movie
+
+### Users Routes
+
+- `POST /users/create`: Create a new user
+- `GET /users/get/:username`: Get user by username
+- `GET /users/get/:id`: Get user by ID
+- `PATCH /users/update`: Update user information
+- `GET /users/getByRol/:rol`: Get users by role
+- `GET /config`: Get configuration information
+- `POST /api/user-tickets`: Get tickets for a specific user
+
+### Main Application Routes (app.js)
+
+- `GET /movies`: Serve the home page
+- `GET /movie/:id`: Serve the individual movie page
+- `GET /seat/:projectionId`: Serve the seat selection page
+- `GET /all/`: Serve the payments page
+- `GET /bTicket/`: Serve the bought ticket page
+- `GET /ticket/`: Serve the ticket information page
+
+For detailed information on request and response formats, please refer to the individual route files in the `server/routes/` directory.
+
+## User Roles
+
+- **Standard User**: Can browse movies and purchase tickets online
+- **VIP User**: Enjoys discounts on ticket purchases
+- **Admin**: Has full system management capabilities, including on-site ticket sales
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the ISC License.
+
+#### Functional Requirements
+
+1. **Movie Selection:**
+   - **API to List Movies:** Allow querying all available movies in the catalog, with details such as title, genre, duration, and showtimes.
+   - **API to Get Movie Details:** Allow querying detailed information about a specific movie, including synopsis.
+
+      ## Code Description
+      The `getAllMovies` function allows obtaining all available movies by checking their release and withdrawal dates, as well as showtimes, and displays complete information about the movies.
+
+      ## Parameters
+      - Not applicable. The class does not receive direct parameters in the documented methods.
+
+      #### Return
+      - (Array): An array of objects representing available movies, including details such as title, release date, withdrawal date, synopsis, genre, rating, duration, and showtimes.
+
+      #### Usage Example
       ```javascript
       console.log(await peliculas.getAllMovies())
-     
-       ## Credenciales
+
+       ## Credentials
 
          ```plaintext
-         usuario=usuario
-         contraseña=user123
+         user=usuario
+         password=user123
          ```
 
-   
-2. **Compra de Boletos:**
-   - **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
-  
+2. **Ticket Purchase:**
+   - **API to Purchase Tickets:** Allow the purchase of tickets for a specific movie, including the selection of date and time of the screening.
 
-      # Función `setTicket` 
+      # `setTicket` Function 
 
-      ## Descripción del Código
-      La función `setTicket` es un método asíncrono diseñado para gestionar las reservas de boletos para proyecciones de películas. Maneja la validación de disponibilidad de asientos, el estado del usuario, y procesa los pagos aplicando posibles descuentos para usuarios VIP.
+      ## Code Description
+      The `setTicket` function is an asynchronous method designed to manage ticket reservations for movie screenings. It handles seat availability validation, user status, and processes payments applying possible discounts for VIP users.
 
-      ## Parámetros
-      - `proyeccion_id` (String): El ID de la proyección de la película.
-      - `usuario_id` (String): El ID del usuario.
-      - `asiento` (Object): El objeto del asiento que contiene los detalles del mismo.
-      - `metodo_pago` (String): El método de pago.
+      ## Parameters
+      - `projection_id` (String): The ID of the movie screening.
+      - `user_id` (String): The user ID.
+      - `seat` (Object): The seat object containing seat details.
+      - `payment_method` (String): The payment method.
 
-      ## Retorno
-      - (String): Un mensaje indicando el resultado de la operación (éxito o error).
+      ## Return
+      - (String): A message indicating the result of the operation (success or error).
 
-      ## Ejemplo de Uso
+      ## Usage Example
       ```javascript
       console.log(await boletos.setTicket(2, 2, {
-         'fila': 'B',
-         'numero': 1,
-         'tipo': 'vip'
-      }, 'efectivo'))
-     
-  ## Credenciales
+         'row': 'B',
+         'number': 1,
+         'type': 'vip'
+      }, 'cash'))
+
+  ## Credentials
 
          ```plaintext
-         usuario=admin
-         contraseña=admin123
+         user=admin
+         password=admin123
          ```
- - **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+ - **API to Verify Seat Availability:** Allow querying the availability of seats in a room for a specific screening.
 
-  ## Ejemplo de Uso
+  ## Usage Example
       ```javascript
       console.log(await proyecciones.verifySeats(1, {
-         
-       fila:"C",
-       numero:2,
-       tipo:"vip"
+       row:"C",
+       number:2,
+       type:"vip"
        })) 
 
- 
-        
+3. **Seat Assignment:**
+   - **API to Reserve Seats:** Allow the selection and reservation of seats for a specific screening.
 
-3. **Asignación de Asientos:**
-   - **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
+      ## `bookATicket` Function
 
-      ## Función `bookATicket`
+      ## Code Description
+      The `bookATicket` function is an asynchronous method designed to manage ticket reservations for movie screenings. It handles seat availability validation and processes reservations applying possible discounts for VIP users.
 
-      ## Descripción del Código
-      La función `bookATicket` es un método asíncrono diseñado para gestionar la reserva de boletos para proyecciones de películas. Maneja la validación de disponibilidad de asientos, y procesa las reservas aplicando posibles descuentos para usuarios VIP.
+      ## Parameters
+      - `projection_id` (String): The ID of the movie screening.
+      - `user_id` (String): The user ID.
+      - `seat` (Object): The seat object containing seat details.
+      - `payment_method` (String): The payment method.
 
-      ## Parámetros
-      - `proyeccion_id` (String): El ID de la proyección de la película.
-      - `usuario_id` (String): El ID del usuario.
-      - `asiento` (Object): El objeto del asiento que contiene los detalles del mismo.
-      - `metodo_pago` (String): El método de pago.
+      ## Return
+      - (String): A message indicating the result of the operation (success or error).
 
-      ## Retorno
-      - (String): Un mensaje indicando el resultado de la operación (éxito o error).
+      ## Usage Example
 
-      ## Ejemplo de Uso
-      
       ```javascript
       console.log(await boletos.bookATicket(2, 2, {
-         'fila': 'A',
-         'numero': 2,
-         'tipo': 'regular'
-      }, 'efectivo'))
+         'row': 'A',
+         'number': 2,
+         'type': 'regular'
+      }, 'cash'))
 
-
-    ## Credenciales
+    ## Credentials
 
          ```plaintext
-         usuario=usuario
-         contraseña=user123
+         user=usuario
+         password=user123
          ```
 
-   - **API para Cancelar Reserva de Asientos:** Permitir la cancelación de una reserva de asiento ya realizada.
-    #  Función `cancelAReservation`
+   - **API to Cancel Seat Reservation:** Allow the cancellation of an already made seat reservation.
+    #  `cancelAReservation` Function
 
-      ## Descripción del Código
-      La función `cancelAReservation` es un método asíncrono diseñado para gestionar la cancelación de reservas de boletos para proyecciones de películas. Verifica la existencia del boleto, su estado actual y si es una reserva antes de proceder con la cancelación.
+      ## Code Description
+      The `cancelAReservation` function is an asynchronous method designed to manage the cancellation of ticket reservations for movie screenings. It verifies the existence of the ticket, its current status, and if it's a reservation before proceeding with the cancellation.
 
-      ## Parámetros
-      - `id` (Number): El ID del pago asociado con la reserva del boleto.
+      ## Parameters
+      - `id` (Number): The ID of the payment associated with the ticket reservation.
 
-      ## Retorno
-      - (String): Un mensaje indicando el resultado de la operación (éxito o error).
+      ## Return
+      - (String): A message indicating the result of the operation (success or error).
 
-      ## Ejemplo de Uso
+      ## Usage Example
       ```javascript
-      console.log(await boletos.cancelAReservation(41))`
-      
+      console.log(await boletos.cancelAReservation(41))
 
-      ## Credenciales
+      ## Credentials
 
          ```plaintext
-         usuario=usuario
-         contraseña=user123
+         user=usuario
+         password=user123
          ```
-     
 
+4. **Discounts and VIP Cards:**
+   - **API to Apply Discounts:** Allow the application of discounts on ticket purchases for users with VIP cards.
+   - **API to Verify VIP Card:** Allow verification of the validity of a VIP card during the purchase process.
 
-4. **Descuentos y Tarjetas VIP:**
-   - **API para Aplicar Descuentos:** Permitir la aplicación de descuentos en la compra de boletos para usuarios con tarjeta VIP.
-   - **API para Verificar Tarjeta VIP:** Permitir la verificación de la validez de una tarjeta VIP durante el proceso de compra.
+      #  Discounts and VIP Cards
 
-      #  Descuentos y Tarjetas VIP
+      ## Description
+      Query 4, which includes creating a function to apply discounts and verify the validity of a VIP card during the purchase process, is not carried out independently. This is because this functionality is already integrated into the existing `setTicket` function, which handles ticket purchases.
 
-      ## Descripción
-      La consulta 4, que incluye la creación de una funcion para aplicar descuentos y verificar la validez de una tarjeta VIP durante el proceso de compra, no se lleva a cabo de manera independiente. Esto se debe a que dicha funcionalidad ya está integrada en la función existente `setTicket`, que maneja la compra de boletos.
+      ## Existing Functionality in `setTicket`
+      The `setTicket` function already incorporates the necessary logic to apply discounts and verify the validity of VIP cards during the purchase process. Here's how these aspects are managed in `setTicket`:
 
-      ## Funcionalidad Existente en `setTicket`
-      La función `setTicket` ya incorpora la lógica necesaria para aplicar descuentos y verificar la validez de las tarjetas VIP durante el proceso de compra. A continuación, se describe cómo se gestionan estos aspectos en `setTicket`:
+      ### Discount Application
+      - The `setTicket` function checks if the user has the 'vip' role and if their VIP card is active.
+      - If both criteria are met, a 10% discount is applied to the ticket price.
+      - The applied discount is reflected in the total ticket price recorded in the database.
 
-      ### Aplicación de Descuentos
-      - La función `setTicket` verifica si el usuario tiene el rol de 'vip' y si su tarjeta VIP está activa.
-      - Si ambos criterios se cumplen, se aplica un descuento del 10% al precio del boleto.
-      - El descuento aplicado se refleja en el precio total del boleto registrado en la base de datos.
+      ### VIP Card Verification
+      - During user data validation, `setTicket` verifies the status of the VIP card.
+      - The function queries the `users` collection to determine if the VIP card is active.
+      - If the card is not active, the discount is not applied, and the user is notified.
 
-      ### Verificación de la Tarjeta VIP
-      - Durante la validación de los datos del usuario, `setTicket` verifica el estado de la tarjeta VIP.
-      - La función consulta la colección `usuarios` para determinar si la tarjeta VIP está activa.
-      - En caso de que la tarjeta no esté activa, el descuento no se aplica, y se notifica al usuario.
+5. - Defined Roles:
+     - **Administrator:** Has full permissions to manage the system, including selling tickets at the physical location. Administrators are not involved in online purchases made by users.
+            # Administrator Role Credentials
 
+         ## Description
+         The following credentials are used to access the administrator role in the MongoDB database. These credentials provide elevated permissions to perform administrative and database management operations.
+         The corresponding variables for username and password can be found in the .envTemplate file.
 
-5. - Roles Definidos:
-     - **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
-            # Credenciales del Rol Administrador
-
-         ## Descripción
-         Las siguientes credenciales son utilizadas para acceder al rol de administrador en la base de datos MongoDB. Estas credenciales proporcionan permisos elevados para realizar operaciones administrativas y de gestión de la base de datos.
-         en el .envTemplate se encuentran las variables correspondientes a usuario y contraseña
-
-         ## Credenciales
+         ## Credentials
 
          ```plaintext
-         usuario =administrador
-         contraseña=admin123
-         ``
-         
-       
+         user=administrador
+         password=admin123
+         ```
 
+     - **Standard User:** Can purchase tickets online without administrator intervention.
+     # Standard User Role Credentials
 
+      ## Description
+      The following credentials are used to access the standard user role in the MongoDB database. These credentials allow users to purchase tickets online without administrator intervention. The corresponding variables for username and password can be found in the .envTemplate file.
 
-     - **Usuario Estándar:** Puede comprar boletos en línea sin la intervención del administrador.
-     # Credenciales del Rol Usuario Estándar
-
-      ## Descripción
-      Las siguientes credenciales son utilizadas para acceder al rol de usuario estándar en la base de datos MongoDB. Estas credenciales permiten a los usuarios comprar boletos en línea sin la intervención del administrador. En el archivo `.envTemplate` se encuentran las variables correspondientes a usuario y contraseña.
-
-
-   
-      ## Credenciales
+      ## Credentials
 
       ```plaintext
-      usuario=usuario
-      contraseña=user123
+      user=usuario
+      password=user123
       ```
 
-
-
-
-
-     - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP. 
-         ## Credenciales
+     - **VIP User:** Can purchase tickets online with applicable discounts for VIP cardholders. 
+         ## Credentials
 
       ```plaintext
-      usuario=usuarioVip
-      contraseña=usuarioVip123
+      user=usuarioVip
+      password=usuarioVip123
       ```
- 
-      
-   - **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
 
-      # Función `createAUser`
+   - **API to Create User:** Allow the creation of new users in the system, assigning specific roles and privileges (standard user, VIP user, or administrator).
 
-      ## Descripción
-      La función `createAUser` se utiliza para crear un nuevo usuario en la base de datos MongoDB. Dependiendo del rol del usuario, puede generar una tarjeta VIP con un número único. La función verifica que el ID del usuario, el correo electrónico y el número de tarjeta VIP no existan ya en la base de datos antes de insertar el nuevo usuario.
+      # `createAUser` Function
 
-      ## Parámetros
+      ## Description
+      The `createAUser` function is used to create a new user in the MongoDB database. Depending on the user's role, it may generate a VIP card with a unique number. The function verifies that the user ID, email, and VIP card number do not already exist in the database before inserting the new user.
 
-      - **id** (number): El ID único del usuario.
-      - **nombre** (string): El nombre del usuario.
-      - **email** (string): El correo electrónico del usuario.
-      - **rol** (string): El rol del usuario, puede ser 'usuario', 'administrador' o 'vip'.
+      ## Parameters
 
-      ## Resultado
-      - La función no devuelve un valor directamente. Imprime mensajes en la consola indicando si el usuario se ha registrado correctamente o si ya existe.
+      - **id** (number): The unique user ID.
+      - **name** (string): The user's name.
+      - **email** (string): The user's email address.
+      - **role** (string): The user's role, can be 'usuario', 'administrador', or 'vip'.
 
-      ## Ejemplo de Uso
+      ## Result
+      - The function does not return a value directly. It prints messages to the console indicating whether the user has been registered successfully or if they already exist.
+
+      ## Usage Example
 
       ```javascript
-      // Crear un usuario VIP
+      // Create a VIP user
       console.log(await createAUser(4, 'Miguel Castro', 'miguel@gmail.com', 'vip'));
 
-      // Crear un usuario estándar
+      // Create a standard user
       console.log(await createAUser(5, 'Juan Pérez', 'juan@gmail.com', 'usuario'));
 
-      // Crear un administrador
+      // Create an administrator
       console.log(await createAUser(6, 'Ana López', 'ana@gmail.com', 'administrador'));
       ```
 
-       ## Credenciales
+       ## Credentials
 
          ```plaintext
-         usuario =administrador
-         contraseña=admin123
-         ``
-         
+         user=administrador
+         password=admin123
+         ```
 
+   - **API to Get User Details:** Allow querying detailed information about a user, including their role and VIP card status.
+     # Documentation for `getUser` Function
 
-   - **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
-     # Documentación de la Función `getUser`
+      ## Description
+      The `getUser` function is used to obtain information about a specific user from the MongoDB database using their ID. If the user exists, the function prints their information to the console. If not, it reports that the user does not exist.
 
-      ## Descripción
-      La función `getUser` se utiliza para obtener la información de un usuario específico de la base de datos MongoDB utilizando su ID. Si el usuario existe, la función imprime su información en la consola. Si no, informa que el usuario no existe.
+      ## Parameters
 
-      ## Parámetros
+      - **id** (number): The unique ID of the user to be searched for.
 
-      - **id** (number): El ID único del usuario que se desea buscar.
+      ## Result
+      - Prints messages to the console indicating whether the user exists and displays their information or indicates that the user does not exist.
 
-      ## Resultado
-      - Imprime mensajes en la consola indicando si el usuario existe y muestra su información o indica que el usuario no existe.
-
-      ## Ejemplo de Uso
+      ## Usage Example
 
       ```javascript
-      // Obtener la información de un usuario con ID 2
+      // Get information for a user with ID 2
       console.log(await getUser(2));
       ```
 
-       ## Credenciales
+       ## Credentials
 
          ```plaintext
-         usuario =administrador
-         contraseña=admin123
-         ``
-         
+         user=administrador
+         password=admin123
+         ```
 
-         
+   - **API to Update User Role:** Allow updating a user's role (for example, changing from standard user to VIP, or vice versa).
+      #  `updateUser` Function
 
+      ## Description
+      The `updateUser` function allows updating a user's role in the MongoDB database. It can change a user's role from standard to VIP, from VIP to administrator, or vice versa. If the role is changed to VIP, a new active VIP card is generated and assigned.
 
-   - **API para Actualizar Rol de Usuario:** Permitir la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
-      #  Función `updateUser`
+      ## Parameters
 
-      ## Descripción
-      La función `updateUser` permite actualizar el rol de un usuario en la base de datos MongoDB. Puede cambiar el rol de un usuario estándar a VIP, de VIP a administrador, o viceversa. Si el rol se cambia a VIP, se genera y asigna una nueva tarjeta VIP activa.
+      - **id** (number): The unique ID of the user to be updated.
+      - **role** (string): The new role for the user. Can be 'standard', 'vip', or 'administrator'.
 
-      ## Parámetros
+      ## Result
+      - The function does not return a value directly. It prints messages to the console indicating whether the user has been updated successfully or if the user does not exist.
 
-      - **id** (number): El ID único del usuario que se desea actualizar.
-      - **rol** (string): El nuevo rol del usuario. Puede ser 'estándar', 'vip' o 'administrador'.
-
-      ## Resultado
-      - La función no devuelve un valor directamente. Imprime mensajes en la consola indicando si el usuario se ha actualizado correctamente o si el usuario no existe.
-
-      ## Ejemplo de Uso
+      ## Usage Example
 
       ```javascript
       // console.log(await usuarios.updateUser(7, 'Henry Boada', 'vip')) // 
 
          ```
 
-      ## Credenciales
+      ## Credentials
 
          ```plaintext
-         usuario =administrador
-         contraseña=admin123
-         ``
-         
+         user=administrador
+         password=admin123
+         ```
 
+   - **API to List Users:** Allow querying all users in the system, with the ability to filter by role (VIP, standard, or administrator).
+      #  `getUsersByRol` Function
 
+      ## Description
+      The `getUsersByRol` function is used to obtain a list of users who have a specific role in the MongoDB database. This function prints to the console all users that match the provided role.
 
-   - **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
-      #  Función getUsersByRol`
+      ## Parameters
 
-      ## Descripción
-      La función `getUsersByRol` se utiliza para obtener una lista de usuarios que tienen un rol específico en la base de datos MongoDB. Esta función imprime en la consola todos los usuarios que coinciden con el rol proporcionado.
+      - **role** (string): The role of the users to be searched for. Can be 'standard', 'vip', or 'administrator'.
 
-      ## Parámetros
+      ## Result
+      - The function does not return a value directly. It prints to the console a list of users who have the specified role.
 
-      - **rol** (string): El rol de los usuarios que se desean buscar. Puede ser 'estándar', 'vip' o 'administrador'.
-
-      ## Resultado
-      - La función no devuelve un valor directamente. Imprime en la consola una lista de usuarios que tienen el rol especificado.
-
-      ## Ejemplo de Uso
+      ## Usage Example
 
       ```javascript
-      // Obtener una lista de usuarios con el rol 'vip'
+      // Get a list of users with the 'vip' role
       console.log(await getUsersByRol('vip'));
 
-      // Obtener una lista de usuarios con el rol 'administrador'
-      console.log(await getUsersByRol('administrador'));```
+      // Get a list of users with the 'administrator' role
+      console.log(await getUsersByRol('administrator'));```
 
-       ## Credenciales
+       ## Credentials
 
          ```plaintext
-         usuario =administrador
-         contraseña=admin123
-         ``
-         
+         user=administrador
+         password=admin123
+         ```
 
 
-6. **Compras en Línea:**
-   - **API para Procesar Pagos:** Permitir el procesamiento de pagos en línea para la compra de boletos.
-      - **API para Confirmación de Compra:** Enviar confirmación de la compra y los detalles del boleto al usuario.
-      #  Función `payOnline`
+6. **Online Purchases:**
+   - **API to Process Payments:** Allow the processing of online payments for ticket purchases.
+      - **API for Purchase Confirmation:** Send purchase confirmation and ticket details to the user.
+      #  `payOnline` Function
 
-   ## Descripción
-   La función `payOnline` permite el procesamiento de pagos en línea para la compra de boletos de proyecciones. Además, envía la confirmación de la compra y los detalles del boleto al usuario.
+   ## Description
+   The `payOnline` function allows the processing of online payments for ticket purchases for screenings. Additionally, it sends the purchase confirmation and ticket details to the user.
 
-   ## Parámetros
+   ## Parameters
 
-   - **proyeccion_id** (number): El ID de la proyección para la cual se desea comprar el boleto.
-   - **usuario_id** (number): El ID del usuario que realiza la compra.
-   - **asiento** (object): Un objeto que representa el asiento seleccionado, con propiedades `fila`, `numero` y `tipo`.
-   - **metodo_pago** (string): El método de pago utilizado para la compra (por ejemplo, 'tarjeta').
+   - **projection_id** (number): The ID of the projection for which the ticket is being purchased.
+   - **user_id** (number): The ID of the user making the purchase.
+   - **seat** (object): An object representing the selected seat, with properties `row`, `number`, and `type`.
+   - **payment_method** (string): The payment method used for the purchase (for example, 'card').
 
-   ## Resultado
-   - La función no devuelve un valor directamente. Imprime en la consola mensajes sobre el estado del pago y la compra del boleto, así como la información del boleto y del pago realizado.
+   ## Result
+   - The function does not return a value directly. It prints messages to the console about the payment status and ticket purchase, as well as information about the ticket and the payment made.
 
-   ## Ejemplo de Uso
+   ## Usage Example
 
    ```javascript
-   // Realizar el pago en línea para una proyección con ID 2, usuario con ID 2, asiento especificado y método de pago 'tarjeta'
-   console.log(await payOnline(2, 2, { 'fila': 'B', 'numero': 2, 'tipo': 'vip' }, 'tarjeta'));```
+   // Process an online payment for a projection with ID 2, user with ID 2, specified seat, and 'card' payment method
+   console.log(await payOnline(2, 2, { 'row': 'B', 'number': 2, 'type': 'vip' }, 'card'));
 
-   ## Credenciales
+   ## Credentials
 
             ```plaintext
             usuario=usuario
             contraseña=user123
             ```
 
-#### Requisitos Técnicos
+#### Technical Requirements
 
-- **Base de Datos:** Utilizar MongoDB para el almacenamiento de datos relacionados con películas, boletos, asientos, usuarios y roles.
-- **Autenticación:** Implementar autenticación segura para el acceso a las APIs, utilizando roles de usuario para determinar los permisos y accesos (por ejemplo, usuarios VIP y usuarios estándar).
-- **Autorización de Roles:** Asegurar que las APIs y las operaciones disponibles estén adecuadamente restringidas según el rol del usuario (por ejemplo, aplicar descuentos solo a usuarios VIP).
-- **Escalabilidad:** Las APIs deben estar diseñadas para manejar un gran volumen de solicitudes concurrentes y escalar según sea necesario.
-- **Documentación:** Proveer una documentación clara y completa para cada API, describiendo los endpoints, parámetros, y respuestas esperadas.
+- **Database:** Use MongoDB for storing data related to movies, tickets, seats, users, and roles.
+- **Authentication:** Implement secure authentication for API access, using user roles to determine permissions and access (for example, VIP users and standard users).
+- **Role Authorization:** Ensure that APIs and available operations are appropriately restricted according to the user's role (for example, apply discounts only to VIP users).
+- **Scalability:** The APIs should be designed to handle a large volume of concurrent requests and scale as needed.
+- **Documentation:** Provide clear and complete documentation for each API, describing the endpoints, parameters, and expected responses.
 
-#### Entregables
+#### Deliverables
 
-1. **Código Fuente:** Repositorio en GitHub con el código de las APIs desarrolladas.
-2. **Documentación de API:** Documento con la descripción detallada de cada API, incluyendo ejemplos de uso y formato de datos.
-3. **Esquema de Base de Datos:** Diseño del esquema de MongoDB utilizado para almacenar la información.
+1. **Source Code:** GitHub repository with the code of the developed APIs.
+2. **API Documentation:** Document with detailed description of each API, including usage examples and data format.
+3. **Database Schema:** Design of the MongoDB schema used to store the information.
 
-#### Evaluación
+#### Evaluation
 
-- **Funcionalidad:** Cumplimiento de los requisitos funcionales establecidos.
-- **Eficiencia:** Desempeño y tiempo de respuesta de las APIs.
-- **Seguridad:** Implementación adecuada de medidas de seguridad, autenticación y autorización de roles.
-- **Documentación:** Claridad y exhaustividad de la documentación proporcionada.
+- **Functionality:** Fulfillment of established functional requirements.
+- **Efficiency:** Performance and response time of the APIs.
+- **Security:** Proper implementation of security measures, authentication, and role authorization.
+- **Documentation:** Clarity and thoroughness of the provided documentation.

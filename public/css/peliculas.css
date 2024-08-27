@@ -144,6 +144,10 @@ main {
     overflow-x: scroll;
     gap: 0rem;
 }
+.actor-list::-webkit-scrollbar {
+    display: none;
+}
+
 
 .actor-info {
     display: flex;

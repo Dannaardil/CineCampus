@@ -1,11 +1,31 @@
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    let formattedDate = date.toLocaleDateString('en-US', options);
+    
+    // Add the ordinal suffix to the day
+    const day = date.getDate();
+    const suffix = getOrdinalSuffix(day);
+    formattedDate = formattedDate.replace(/(\d+)/, `$1${suffix}`);
+    
+    return formattedDate;
+}
+
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1:  return "st";
+        case 2:  return "nd";
+        case 3:  return "rd";
+        default: return "th";
+    }
+}
+
 function formatTime(timeString) {
     const date = new Date(timeString);
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 || 12; // Convert 24h to 12h format
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    return `${formattedHours}:${formattedMinutes} ${ampm}`;
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,8 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update date and time
         const projectionDate = new Date(selectedProjection.inicio);
-        document.getElementById('movieDate').textContent = projectionDate.toLocaleDateString();
+        document.getElementById('movieDate').textContent = formatDate(projectionDate);
         document.getElementById('movieTime').textContent = formatTime(projectionDate)
+      
 
         // Update seat information
         document.getElementById('seatInfo').textContent = selectedSeats.map(seat => seat.id).join(', ');

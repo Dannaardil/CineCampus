@@ -157,7 +157,7 @@ header :nth-child(3) {
 }
 
 .info1 {
-    gap: 6rem;
+    gap: 1rem;
 }
 
 .info2 {
@@ -207,9 +207,14 @@ header :nth-child(3) {
     flex-direction: row;
     border-radius: 1.3rem;
 height: 100%;
-    width: 100%;
+    width: 90%;
     overflow-x: scroll;
     scroll-behavior: smooth;
+   
+}
+
+.ticket-carousel-container::-webkit-scrollbar {
+    display: none;
 }
 
 /* .ticket {

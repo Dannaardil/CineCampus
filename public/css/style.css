@@ -123,6 +123,10 @@
         overflow: scroll;
         margin-top: 1rem;
     }
+    .movie__carrusel::-webkit-scrollbar {
+        display: none;
+    }
+    
 
     .movie__carrusel div {
         display: flex;

@@ -213,6 +213,10 @@
    gap:1rem;
     font-size: 1em;
 }
+.days::-webkit-scrollbar {
+    display: none;
+}
+
 .day{
   
    display: flex;
@@ -254,6 +258,11 @@
    gap:1rem;
     font-size: 1em;
 }
+
+.times::-webkit-scrollbar {
+    display: none;
+}
+
 .time{
     
    display: flex;
